@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/movies', [MovieController::class, 'index'])->name('movies');
+    Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
+    Route::patch('/movies', [MovieController::class, 'update'])->name('movies.update');
+    Route::delete('/movies', [MovieController::class, 'destroy'])->name('movies.destroy');
+
 });
 
 require __DIR__.'/auth.php';
