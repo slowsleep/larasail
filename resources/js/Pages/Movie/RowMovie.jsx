@@ -30,7 +30,7 @@ export default function RowMovie ({movie}) {
         setIdEdit(false);
         patch(route('movies.update', data), {
             preserveScroll: true,
-            only: ['movie'],
+            only: ['movie', 'action'],
         });
     }
 
