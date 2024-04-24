@@ -36,7 +36,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                         {!idEdit ?
                             <p>{item.value}</p>
                             :
-                            <input className={"bg-transparent " + (item.type == "number" ? "w-20" : "")} type={item.type} name={item.name} value={item.value} onChange={item.onChange} />
+                            <input className={"bg-transparent " + (item.type == "number" ? "w-20" : "")} type={item.type} name={item.name} value={item.value} onChange={item.onChange} {...item} />
                         }
                     </td>
                 }
