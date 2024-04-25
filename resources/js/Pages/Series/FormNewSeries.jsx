@@ -32,7 +32,8 @@ export default function FormNewSeries({id, data, setData, post, ...props}) {
             name: "season",
             required: true,
             value: data.season,
-            onChange: (e) => setData('season', Number(e.target.value))
+            min: 1,
+            onChange: (e) => setData('season', e.target.value)
         },
         {
             label: "Серия",
@@ -40,7 +41,8 @@ export default function FormNewSeries({id, data, setData, post, ...props}) {
             name: "episode",
             required: true,
             value: data.episode,
-            onChange: (e) => setData('episode', Number(e.target.value))
+            min: 1,
+            onChange: (e) => setData('episode', e.target.value)
         },
         {
             label: "Комментарий",

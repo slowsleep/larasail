@@ -24,8 +24,8 @@ class SeriesController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'season' => 'integer',
-            'episode' => 'integer',
+            'season' => 'integer|min:1',
+            'episode' => 'integer|min:1',
             'comment' => 'string|nullable|max:255',
             'finished' => 'boolean',
             'abandoned' => 'boolean',
@@ -57,8 +57,8 @@ class SeriesController extends Controller
         $request->validate([
             'id' => 'required|integer',
             'title' => 'required|string|max:255',
-            'season' => 'integer',
-            'episode' => 'integer',
+            'season' => 'integer|min:1',
+            'episode' => 'integer|min:1',
             'comment' => 'string|nullable|max:255',
             'finished' => 'boolean',
             'abandoned' => 'boolean',
