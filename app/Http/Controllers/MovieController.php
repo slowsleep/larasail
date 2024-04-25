@@ -27,7 +27,7 @@ class MovieController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'part' => 'integer|nullable',
+            'part' => 'integer|nullable|min:1',
             'comment' => 'string|nullable|max:255',
             'finished' => 'boolean',
             'abandoned' => 'boolean',
@@ -58,7 +58,7 @@ class MovieController extends Controller
         $request->validate([
             'id' => 'required|integer',
             'title' => 'required|string|max:255',
-            'part' => 'integer|nullable',
+            'part' => 'integer|nullable|min:1',
             'comment' => 'string|nullable|max:255',
             'finished' => 'boolean',
             'abandoned' => 'boolean',

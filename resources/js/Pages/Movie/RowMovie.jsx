@@ -1,7 +1,11 @@
 import { useForm } from '@inertiajs/react';
 import ModelRow from '@/Components/ModelRow';
+import { useState } from 'react';
 
 export default function RowMovie ({movie}) {
+
+    const [partError, setPartError] = useState(false);
+
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: movie.id,
         title: movie.title,
@@ -24,6 +28,10 @@ export default function RowMovie ({movie}) {
         });
     }
 
+    const handleCancle = () => {
+        setPartError(false);
+    }
+
     const inputList = [
         {
             value: data.title,
@@ -35,7 +43,16 @@ export default function RowMovie ({movie}) {
             value: data.part,
             type: "number",
             name: "part",
-            onChange: (e) => setData('part', e.target.value),
+            min: 1,
+            onChange: (e) => {
+                setData('part', e.target.value);
+                if (e.target.value > 1) {
+                    setPartError(false);
+                } else {
+                    setPartError(true);
+                }
+            },
+            error: partError,
         },
         {
             value: data.comment ? data.comment : "",
@@ -48,7 +65,7 @@ export default function RowMovie ({movie}) {
             type: "checkbox",
             name: "finished",
             onChange: (e) => setData('finished', e.target.checked),
-            disabled: data.abandoned
+            disabled: data.abandoned,
         },
         {
             value: data.abandoned,
@@ -61,12 +78,12 @@ export default function RowMovie ({movie}) {
                 } else {
                     setData('abandoned', e.target.checked)
                 }
-            }
+            },
         }
 
     ]
 
     return (
-        <ModelRow className="odd:bg-cyan-900 even:bg-cyan-800" inputs={inputList} data={data} setData={setData} modelItem={movie} modelName="фильм" onSave={handleSave} onDestroy={handleDestroy} reset={reset} />
+        <ModelRow className="odd:bg-cyan-900 even:bg-cyan-800" inputs={inputList} data={data} setData={setData} modelItem={movie} modelName="фильм" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} reset={reset} />
     )
 }

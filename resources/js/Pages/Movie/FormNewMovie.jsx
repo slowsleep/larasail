@@ -32,7 +32,8 @@ export default function FormNewMovie ({id, data, setData, post, ...props}) {
             type: "number",
             name: "part",
             value: data.part,
-            onChange: (e) => setData('part', Number(e.target.value))
+            min: 1,
+            onChange: (e) => setData('part', e.target.value)
         },
         {
             label: "Комментарий",
