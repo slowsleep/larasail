@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function ModelRow({className, inputs, data, setData, modelItem, modelName, onSave, onDestroy, onCancle, reset, ...props}) {
+export default function ModelRow({className, inputs, data, setData, modelItem, modelName, onSave, onDestroy, onCancle, ...props}) {
     const [isEdit, setIsEdit] = useState(false);
     const [isFormError, setIsFormError] = useState(false);
 
@@ -29,7 +29,6 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
 
     const handleCancel = () => {
         setIsEdit(false);
-        reset();
         onCancle();
     }
 

@@ -33,6 +33,7 @@ export default function RowSeries({singleSeries}) {
     const handleCancle = () => {
         setSeasonError(false);
         setEpisodeError(false);
+        reset();
     }
 
     const inputList = [
@@ -102,6 +103,6 @@ export default function RowSeries({singleSeries}) {
     ]
 
     return (
-        <ModelRow className="odd:bg-pink-950 even:bg-pink-800" inputs={inputList} data={data} setData={setData} modelItem={singleSeries} modelName="сериал" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} reset={reset} />
+        <ModelRow className="odd:bg-pink-950 even:bg-pink-800" inputs={inputList} data={data} setData={setData} modelItem={singleSeries} modelName="сериал" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
     )
 }

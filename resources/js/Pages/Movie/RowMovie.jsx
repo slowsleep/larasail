@@ -30,6 +30,7 @@ export default function RowMovie ({movie}) {
 
     const handleCancle = () => {
         setPartError(false);
+        reset();
     }
 
     const inputList = [
@@ -84,6 +85,6 @@ export default function RowMovie ({movie}) {
     ]
 
     return (
-        <ModelRow className="odd:bg-cyan-900 even:bg-cyan-800" inputs={inputList} data={data} setData={setData} modelItem={movie} modelName="фильм" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} reset={reset} />
+        <ModelRow className="odd:bg-cyan-900 even:bg-cyan-800" inputs={inputList} data={data} setData={setData} modelItem={movie} modelName="фильм" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
     )
 }
