@@ -46,7 +46,7 @@ export default function RowMovie ({movie}) {
             min: 1,
             onChange: (e) => {
                 setData('part', e.target.value);
-                if (e.target.value > 1) {
+                if (e.target.value > 0) {
                     setPartError(false);
                 } else {
                     setPartError(true);
