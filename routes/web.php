@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\GameController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -45,6 +46,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/series', [SeriesController::class, 'store'])->name('series.store');
     Route::patch('/series', [SeriesController::class, 'update'])->name('series.update');
     Route::delete('/series', [SeriesController::class, 'destroy'])->name('series.destroy');
+
+    Route::get('/games', [GameController::class, 'index'])->name('games');
+    Route::post('/games', [GameController::class, 'store'])->name('games.store');
+    Route::patch('/games', [GameController::class, 'update'])->name('games.update');
+    Route::delete('/games', [GameController::class, 'destroy'])->name('games.destroy');
 });
 
 require __DIR__.'/auth.php';
