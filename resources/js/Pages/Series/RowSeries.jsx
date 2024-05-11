@@ -41,6 +41,8 @@ export default function RowSeries({singleSeries}) {
             value: data.title,
             type: "text",
             name: "title",
+            maxlength: "255",
+            title: "Максимальная длина 255 символов",
             onChange: (e) => setData('title', e.target.value),
         },
         {
@@ -77,6 +79,8 @@ export default function RowSeries({singleSeries}) {
             value: data.comment ? data.comment : "",
             type: "text",
             name: "comment",
+            maxlength: "255",
+            title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value),
         },
         {
