@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function RowSeries({singleSeries}) {
 
+    const [titleError, setTitleError] = useState(false);
     const [seasonError, setSeasonError] = useState(false);
     const [episodeError, setEpisodeError] = useState(false);
 
@@ -31,6 +32,7 @@ export default function RowSeries({singleSeries}) {
     }
 
     const handleCancle = () => {
+        setTitleError(false);
         setSeasonError(false);
         setEpisodeError(false);
         reset();
@@ -43,7 +45,15 @@ export default function RowSeries({singleSeries}) {
             name: "title",
             maxlength: "255",
             title: "Максимальная длина 255 символов",
-            onChange: (e) => setData('title', e.target.value),
+            onChange: (e) => {
+                setData('title', e.target.value);
+                if ((e.target.value).length > 0) {
+                    setTitleError(false);
+                } else {
+                    setTitleError(true);
+                }
+            },
+            error: titleError,
         },
         {
             value: data.season,

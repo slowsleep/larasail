@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 export default function RowMovie ({movie}) {
 
+    const [titleError, setTitleError] = useState(false);
     const [partError, setPartError] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
@@ -29,6 +30,7 @@ export default function RowMovie ({movie}) {
     }
 
     const handleCancle = () => {
+        setTitleError(false);
         setPartError(false);
         reset();
     }
@@ -40,7 +42,15 @@ export default function RowMovie ({movie}) {
             name: "title",
             maxlength: "255",
             title: "Максимальная длина 255 символов",
-            onChange: (e) => setData('title', e.target.value),
+            onChange: (e) => {
+                setData('title', e.target.value);
+                if ((e.target.value).length > 0) {
+                    setTitleError(false);
+                } else {
+                    setTitleError(true);
+                }
+            },
+            error: titleError,
         },
         {
             value: data.part,
