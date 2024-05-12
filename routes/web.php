@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\BookController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,6 +52,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/games', [GameController::class, 'store'])->name('games.store');
     Route::patch('/games', [GameController::class, 'update'])->name('games.update');
     Route::delete('/games', [GameController::class, 'destroy'])->name('games.destroy');
+
+    Route::get('/books', [BookController::class, 'index'])->name('books');
+    Route::post('/books', [BookController::class, 'store'])->name('books.store');
+    Route::patch('/books', [BookController::class, 'update'])->name('books.update');
+    Route::delete('/books', [BookController::class, 'destroy'])->name('books.destroy');
 });
 
 require __DIR__.'/auth.php';
