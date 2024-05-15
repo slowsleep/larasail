@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\GameController;
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/profile', [AvatarController::class, 'update'])->name('avatar.update');
+    Route::delete('/profile', [AvatarController::class, 'destroy'])->name('avatar.destroy');
 
     Route::get('/movies', [MovieController::class, 'index'])->name('movies');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
