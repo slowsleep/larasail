@@ -16,7 +16,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                    <img src="assets/img/ww-logo.png" className="w-1/3" />
                                 </Link>
                             </div>
 
@@ -44,6 +44,9 @@ export default function Authenticated({ user, header, children }) {
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
+                                        <div className="overflow-hidden content-center" style={{width: "50px", height: "50px"}}>
+                                            <img className='w-full' src={ user.avatar ? '/storage/avatars/1/' + user.avatar : '/assets/img/default.png'} alt='user avatar' />
+                                        </div>
                                             <button
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
