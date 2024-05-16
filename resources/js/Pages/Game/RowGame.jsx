@@ -31,7 +31,6 @@ export default function RowGame({game}) {
 
     const handleCancle = () => {
         setTitleError(false);
-        setPartError(false);
         reset();
     }
 
