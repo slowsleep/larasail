@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
@@ -16,7 +15,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <img src="assets/img/ww-logo.png" className="w-1/3" />
+                                    <img src="/assets/img/ww-logo.png" className="w-1/3" />
                                 </Link>
                             </div>
 
@@ -70,7 +69,8 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.show', user.name)}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}>Setting</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>
