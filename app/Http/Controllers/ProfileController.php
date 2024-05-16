@@ -10,11 +10,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
+
+    public function show($name): Response
+    {
+        $user = User::where('name', $name)->first();
+        return Inertia::render('Profile/Profile', ['user' => $user]);
+    }
     /**
-     * Display the user's profile form.
+     * Display the user's profile edit form.
      */
     public function edit(Request $request): Response
     {
