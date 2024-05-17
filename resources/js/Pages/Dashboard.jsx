@@ -34,7 +34,7 @@ export default function Dashboard({ auth }) {
                                     книги
                                 </div>
                             </Link>
-                            <Link className="flex-1 p-2 border-2 border-emerald-600 bg-emerald-600/20 hover:bg-emerald-600/40 text-white text-center cursor-pointer">
+                            <Link className="flex-1 p-2 border-2 border-emerald-600 bg-emerald-600/20 hover:bg-emerald-600/40 text-white text-center cursor-pointer" href={route('mangas')}>
                                 <div>
                                     манга
                                 </div>

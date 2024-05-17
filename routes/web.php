@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\MangaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -62,6 +63,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
     Route::patch('/books', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books', [BookController::class, 'destroy'])->name('books.destroy');
+
+    Route::get('/mangas', [MangaController::class, 'index'])->name('mangas');
+    Route::post('/mangas', [MangaController::class, 'store'])->name('mangas.store');
+    Route::patch('/mangas', [MangaController::class, 'update'])->name('mangas.update');
+    Route::delete('/mangas', [MangaController::class, 'destroy'])->name('mangas.destroy');
 });
 
 require __DIR__.'/auth.php';

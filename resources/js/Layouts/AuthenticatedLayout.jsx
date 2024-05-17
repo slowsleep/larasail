@@ -35,6 +35,9 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('books')} active={route().current('books')}>
                                     Книги
                                 </NavLink>
+                                <NavLink href={route('mangas')} active={route().current('mangas')}>
+                                    Манга
+                                </NavLink>
                             </div>
                         </div>
 
