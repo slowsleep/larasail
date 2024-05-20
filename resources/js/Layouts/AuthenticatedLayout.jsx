@@ -73,6 +73,8 @@ export default function Authenticated({ user, header, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.show', user.name)}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('buddies')}>Buddies</Dropdown.Link>
+                                        <Dropdown.Link href="#">Messages</Dropdown.Link>
                                         <Dropdown.Link href={route('profile.edit')}>Setting</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
@@ -123,6 +125,8 @@ export default function Authenticated({ user, header, children }) {
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.show', user.name)}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('buddies')}>Buddies</ResponsiveNavLink>
+                            <ResponsiveNavLink href="#">Messages</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>Settings</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out

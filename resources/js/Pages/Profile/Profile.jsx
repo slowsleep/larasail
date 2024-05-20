@@ -1,7 +1,93 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 export default function Profile({ auth, user = false }) {
+
+    const [csrfToken, setCsrfToken] = useState('');
+
+    const {data, setData} = useForm({
+        followed_id: user ? user.id : null,
+        status: 'none',
+    });
+
+    useEffect(() => {
+        if (user) {
+            setData('followed_id', user.id);
+            updateStatus();
+        }
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        setCsrfToken(token);
+    }, []);
+
+    const follow = (e) => {
+        e.preventDefault();
+         const fetchData = async () => {
+            try {
+                const response = await fetch(route('buddies.follow'), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-CSRF-Token": csrfToken
+                    },
+                    body: JSON.stringify({followed_id: data.followed_id}),
+                })
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                updateStatus();
+            } catch (error) {
+                console.error('Error /profile follow:', error);
+            }
+        };
+        fetchData();
+    }
+
+    const unfollow = (e) => {
+        e.preventDefault();
+        const fetchData = async () => {
+            try {
+                const response = await fetch(route('buddies.unfollow'), {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-CSRF-Token": csrfToken
+                    },
+                    body: JSON.stringify({followed_id: data.followed_id}),
+                })
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                updateStatus();
+            } catch (error) {
+                console.error('Error /profile unfollow:', error);
+            }
+        };
+        fetchData();
+    }
+
+    async function updateStatus () {
+        try {
+            const response = await fetch('/buddies/check?' + new URLSearchParams({
+                follower_id: auth.user.id,
+                followed_id: data.followed_id,
+            }))
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            setData('status', result.status);
+        } catch (error) {
+            console.error('Error /profile updateStatus:', error);
+        }
+    };
 
   return (
     <AuthenticatedLayout
@@ -12,19 +98,44 @@ export default function Profile({ auth, user = false }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg text-white" >
-
-                        {user  ?
-
+                    <div className="flex p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg text-white justify-between" >
+                        {user ?
                             <>
-                                <p>{user.name}</p>
-                                <div className="overflow-hidden content-center" style={{width: "200px", height: "200px"}}>
-                                    <img className='w-full' src={ user.avatar ? '/storage/avatars/1/' + user.avatar : '/assets/img/default.png'} alt='user avatar' />
+                                <div className="overflow-hidden content-center w-4/12" style={{width: "200px", height: "200px"}}>
+                                    <img src={ user.avatar ? '/storage/avatars/1/' + user.avatar : '/assets/img/default.png'} alt='user avatar' />
+                                </div>
+                                <div className='w-9/12 relative'>
+                                    <div>
+                                        <p>name: {user.name}</p>
+                                        <p>bio: ???</p>
+                                    </div>
+                                {auth.user.id !== user.id ?
+                                        <div className="flex py-2 justify-between ml-auto items-end absolute bottom-0 right-0">
+                                            <p className="self-center mr-3">
+                                                {data.status === "friends" ?
+                                                    "Вы друзья"
+                                                : data.status === "none" ?
+                                                    "Вы не подписаны"
+                                                : data.status === "following" ?
+                                                    "Вы подписаны"
+                                                : data.status === "followed" ?
+                                                    "На вас подписаны"
+                                                : null
+                                                }
+                                            </p>
+
+                                            {data.status === 'none' || data.status === 'followed' ?
+                                                <button className="p-2 rounded bg-cyan-600" onClick={follow}>подписаться</button>
+                                            : data.status === 'following' || data.status === 'friends' ?
+                                                <button className="p-2 rounded bg-red-600" onClick={unfollow}>отписаться</button>
+                                            : null
+                                            }
+                                        </div>
+                                : null}
                                 </div>
                             </>
                             :
                             <p>такой пользователь не найден</p>
-
                         }
                     </div>
                 </div>

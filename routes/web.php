@@ -7,6 +7,8 @@ use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MangaController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\BuddiesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,6 +45,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/profile', [AvatarController::class, 'update'])->name('avatar.update');
     Route::delete('/profile', [AvatarController::class, 'destroy'])->name('avatar.destroy');
+
+    Route::get('/buddies', [BuddiesController::class, 'index'])->name('buddies');
+    Route::get('/buddies/search', [BuddiesController::class, 'search'])->name('buddies.search');
+    Route::post('/buddies', [FollowController::class, 'insert'])->name('buddies.follow');
+    Route::delete('/buddies', [FollowController::class, 'destroy'])->name('buddies.unfollow');
+    Route::get('/buddies/check', [FollowController::class, 'checkStatus'])->name('buddies.check');
 
     Route::get('/movies', [MovieController::class, 'index'])->name('movies');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
