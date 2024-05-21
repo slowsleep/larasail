@@ -42,4 +42,11 @@ class BuddiesController extends Controller
 
         return Inertia::render('Buddies/Buddies', ['buddies' => $buddies]);
     }
+
+    public function followed() {
+        $buddies = User::whereIn('id', Follow::whereNot('follower_id', auth()->user()->id)->where('followed_id', auth()->user()->id)->pluck('follower_id'))
+            ->get();
+
+        return Inertia::render('Buddies/Buddies', ['buddies' => $buddies]);
+    }
 }

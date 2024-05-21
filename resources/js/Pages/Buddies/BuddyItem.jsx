@@ -41,7 +41,7 @@ export default function BuddyItem({auth, buddy}) {
     const unfollow = (followed_id) => {
         const fetchData = async () => {
             try {
-                const response = await fetch(route('profile.unfollow'), {
+                const response = await fetch(route('buddies.unfollow'), {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -92,8 +92,10 @@ export default function BuddyItem({auth, buddy}) {
     };
 
   return (
-    <div className="flex justify-between border-b border-gray-200">
-        <p><a href={route('profile.show', buddy.name)} className="text-white hover:pointer">{buddy.name}</a></p>
+    <div className={"flex p-1 justify-between border border-violet-600 " + (relationships === "friends" || relationships === "following" ? "bg-violet-600/20" : "bg-violet-300/20")}>
+        <p className="text-lg">
+            <a href={route('profile.show', buddy.name)} className={"hover:pointer " + (relationships === "friends" || relationships === "following" ? "text-emerald-300" : "text-gray-300")}>{buddy.name}</a>
+        </p>
         <div>
             {relationships === "followed" || relationships === "none" ?
                 <button className="p-1 rounded bg-cyan-600 hover:bg-cyan-800" onClick={() => follow(buddy.id)}>подписаться</button>

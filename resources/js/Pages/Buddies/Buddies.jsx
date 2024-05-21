@@ -1,5 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from '@inertiajs/react';
+import NavLink from '@/Components/NavLink';
 import BuddyItem from "./BuddyItem";
 
 export default function Buddies({auth, buddies}) {
@@ -19,7 +20,24 @@ export default function Buddies({auth, buddies}) {
   return (
     <AuthenticatedLayout
         user={auth.user}
-        header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Buddies</h2>}
+        header={
+            <div className="flex items-center">
+                <NavLink
+                    href={route('buddies')}
+                    active={route().current('buddies')}
+                    className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mr-5"
+                >
+                    Друзья
+                </NavLink>
+                <NavLink
+                    href={route('buddies.followed')}
+                    active={route().current('buddies.followed')}
+                    className="font-semibold text-lg text-gray-700 dark:text-gray-400 leading-tight"
+                >
+                    Подписчики
+                </NavLink>
+            </div>
+        }
     >
         <Head title="Buddies" />
 

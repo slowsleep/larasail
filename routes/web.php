@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/buddies', [FollowController::class, 'insert'])->name('buddies.follow');
     Route::delete('/buddies', [FollowController::class, 'destroy'])->name('buddies.unfollow');
     Route::get('/buddies/check', [FollowController::class, 'checkStatus'])->name('buddies.check');
+    Route::get('/buddies/followed', [BuddiesController::class, 'followed'])->name('buddies.followed');
 
     Route::get('/movies', [MovieController::class, 'index'])->name('movies');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
