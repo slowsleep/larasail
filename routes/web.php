@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MovieController;
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/profile', [AvatarController::class, 'update'])->name('avatar.update');
     Route::delete('/profile', [AvatarController::class, 'destroy'])->name('avatar.destroy');
+    Route::get('/profile/{name}/activity', [ActivityLogController::class, 'get'])->name('profile.activity');
 
     Route::get('/buddies', [BuddiesController::class, 'index'])->name('buddies');
     Route::get('/buddies/search', [BuddiesController::class, 'search'])->name('buddies.search');

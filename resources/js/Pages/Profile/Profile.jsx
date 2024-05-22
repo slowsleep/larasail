@@ -1,10 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
+import TableActivity from '@/Components/TableActivity';
 
-export default function Profile({ auth, user = false }) {
+export default function Profile({ auth, user = false}) {
 
     const [csrfToken, setCsrfToken] = useState('');
+
+    const [activity, setActivity] = useState([]);
 
     const {data, setData} = useForm({
         followed_id: user ? user.id : null,
@@ -18,7 +21,28 @@ export default function Profile({ auth, user = false }) {
         }
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         setCsrfToken(token);
+        getActivity();
     }, []);
+
+    function getActivity() {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/profile/' + user.name + '/activity?' + new URLSearchParams({
+                    user_id: user.id,
+                }));
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                setActivity(result.activity);
+            } catch (error) {
+                console.error('Error /profile getActivity:', error);
+            }
+        };
+        fetchData();
+    }
 
     const follow = (e) => {
         e.preventDefault();
@@ -138,6 +162,13 @@ export default function Profile({ auth, user = false }) {
                             <p>такой пользователь не найден</p>
                         }
                     </div>
+
+                    {user ?
+                        <div className="flex flex-col p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg text-white">
+                            <h1 className="mb-2 text-xl">Activity</h1>
+                            <TableActivity activity={activity} />
+                        </div>
+                    : null}
                 </div>
             </div>
     </AuthenticatedLayout>
