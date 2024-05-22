@@ -3,36 +3,20 @@ import { useEffect, useState } from "react";
 export default function TableActivity({activity}) {
 
     const [dates, setDates] = useState([]);
-    const [squares, setSquares] = useState([]);
     const [color, setColor] = useState('emerald');
 
+    const defaultColors = ['stone', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const paletteHints = [
-        {
-            num: '4',
-            title: '1-5',
-        },
-        {
-            num: '6',
-            title: '6-10',
-        },
-        {
-            num: '7',
-            title: '11-25',
-        },
-        {
-            num: '8',
-            title: '26-50',
-        },
-        {
-            num: '9',
-            title: '50+',
-        },
+        { num: '4', title: '1-5' },
+        { num: '6', title: '6-10' },
+        { num: '7', title: '11-25' },
+        { num: '8', title: '26-50' },
+        { num: '9', title: '50+' },
     ];
 
     useEffect(() => {
         generateDates();
-        setSquares(renderSquares());
     }, [activity]);
 
     const isSameDay = (d1, d2) => d1.setHours(0, 0, 0, 0) === d2.setHours(0, 0, 0, 0);
@@ -94,6 +78,13 @@ export default function TableActivity({activity}) {
         return squares;
     }
 
+    const changeColor = (e) => {
+        e.preventDefault();
+        var formData = new FormData(e.target);
+        let color = Object.fromEntries(formData).colors;
+        setColor(color);
+    }
+
     return (
         <div>
             <div className="flex">
@@ -104,7 +95,7 @@ export default function TableActivity({activity}) {
                                 <div key={day} className="w-10 h-4 m-1 text-sm">{day}</div>
                             ))}
                         </div>
-                        {squares}
+                        {renderSquares()}
                     </div>
                     <div className="flex flex-row self-end items-center mt-2 text-xs text-gray-400">
                         <p>~ less</p>
@@ -112,6 +103,20 @@ export default function TableActivity({activity}) {
                             <Square key={num} className={`w-3.5 h-3.5 bg-${color}-${num}00 cursor-auto hover:border-gray-500`} title={title} />
                         ))}
                         <p>more ~</p>
+                    </div>
+                    <div className="flex mt-3 flex-col">
+                        <p>switch color:</p>
+                        <form onSubmit={changeColor}>
+                            <fieldset id="colors" className="flex flex-row">
+                                {defaultColors.map((color) => (
+                                    <label key={color} className="content-center">
+                                        <div className={`w-4 h-4 m-1 border rounded bg-${color}-600`} title={color}></div>
+                                        <input className="m-1" type="radio" name="colors" value={color} required />
+                                    </label>
+                                ))}
+                            </fieldset>
+                            <button type="submit" className="p-2 rounded bg-cyan-600 hover:bg-cyan-800">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
