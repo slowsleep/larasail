@@ -7,6 +7,7 @@ export default function TableActivity({activity}) {
 
     const defaultColors = ['stone', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const paletteHints = [
         { num: '4', title: '1-5' },
         { num: '6', title: '6-10' },
@@ -85,6 +86,20 @@ export default function TableActivity({activity}) {
         setColor(color);
     }
 
+    const renderMonthsRow = () => {
+        let lastDateMonth = dates[0]?.date.getMonth();
+        let curDateMonth = dates[dates.length - 1]?.date.getMonth();
+        let months = [];
+
+        for (; lastDateMonth <= curDateMonth; lastDateMonth++) {
+            months.push(
+                <p key={lastDateMonth}>{monthList[lastDateMonth]}</p>
+            )
+        }
+
+        return months;
+    }
+
     return (
         <div>
             <div className="flex">
@@ -96,6 +111,9 @@ export default function TableActivity({activity}) {
                             ))}
                         </div>
                         {renderSquares()}
+                    </div>
+                    <div className="flex flex-row ml-12 items-center mt-2 text-sm justify-around">
+                        {renderMonthsRow()}
                     </div>
                     <div className="flex flex-row self-end items-center mt-2 text-xs text-gray-400">
                         <p>~ less</p>
