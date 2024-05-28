@@ -10,6 +10,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\MangaController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\BuddiesController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -54,6 +56,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/buddies', [FollowController::class, 'destroy'])->name('buddies.unfollow');
     Route::get('/buddies/check', [FollowController::class, 'checkStatus'])->name('buddies.check');
     Route::get('/buddies/followed', [BuddiesController::class, 'followed'])->name('buddies.followed');
+
+    Route::get('/chats', [ChatController::class, 'index'])->name('chats');
+    Route::get('/chats/{name}', [ChatController::class, 'show'])->name('chats.show');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
     Route::get('/movies', [MovieController::class, 'index'])->name('movies');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
