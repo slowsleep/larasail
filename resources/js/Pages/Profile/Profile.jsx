@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import TableActivity from '@/Components/TableActivity';
 
@@ -134,6 +134,10 @@ export default function Profile({ auth, user = false}) {
                                         <p>bio: ???</p>
                                     </div>
                                 {auth.user.id !== user.id ?
+                                    <>
+                                        <div className="flex py-2 justify-between ml-auto items-end absolute bottom-0">
+                                            <Link href={route('chats.show', user.name)}><button className="p-2 rounded bg-emerald-600 hover:bg-emerald-700">В диалог</button></Link>
+                                        </div>
                                         <div className="flex py-2 justify-between ml-auto items-end absolute bottom-0 right-0">
                                             <p className="self-center mr-3">
                                                 {data.status === "friends" ?
@@ -149,12 +153,13 @@ export default function Profile({ auth, user = false}) {
                                             </p>
 
                                             {data.status === 'none' || data.status === 'followed' ?
-                                                <button className="p-2 rounded bg-cyan-600" onClick={follow}>подписаться</button>
+                                                <button className="p-2 rounded bg-cyan-600 hover:bg-cyan-700" onClick={follow}>подписаться</button>
                                             : data.status === 'following' || data.status === 'friends' ?
-                                                <button className="p-2 rounded bg-red-600" onClick={unfollow}>отписаться</button>
+                                                <button className="p-2 rounded bg-red-600 hover:bg-red-700" onClick={unfollow}>отписаться</button>
                                             : null
                                             }
                                         </div>
+                                    </>
                                 : null}
                                 </div>
                             </>
