@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Message;
+use App\Events\MessageSent;
 
 class MessageController extends Controller
 {
@@ -22,6 +23,8 @@ class MessageController extends Controller
 
         $message->save();
         $message->load('user');
+
+        broadcast(new MessageSent($message))->toOthers();
 
         return response()->json(['status' => 'ok', 'message' => $message]);
     }
