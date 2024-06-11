@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function ChatWindow({ auth, chat }) {
 
     const [messages, setMessages] = useState(chat.messages);
     const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        const channel = window.Echo.private(`chat.${chat.id}`);
+        channel.listen('MessageSent', (e) => {
+            setMessages([...messages, e.message]);
+        });
+
+        return () => {
+            channel.stopListening('MessageSent');
+        };
+    }, [messages]);
 
     const handleSendMessage = (e) => {
         e.preventDefault();
