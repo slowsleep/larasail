@@ -115,6 +115,21 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('movies')} active={route().current('movies')}>
+                            Фильмы
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('series')} active={route().current('series')}>
+                            Сериалы
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('games')} active={route().current('games')}>
+                            Игры
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('books')} active={route().current('books')}>
+                            Книги
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('mangas')} active={route().current('mangas')}>
+                            Манга
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
