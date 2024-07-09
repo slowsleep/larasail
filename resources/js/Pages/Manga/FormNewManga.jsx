@@ -37,7 +37,7 @@ export default function FormNewManga({id, data, setData, post}) {
             required: true,
             title: "Минимальное значение 1",
             onChange: (e) => setData('volume', e.target.value),
-            classname: "w-full"
+            classname: "lg:w-full"
         },
         {
             label: "Глава",
@@ -48,7 +48,7 @@ export default function FormNewManga({id, data, setData, post}) {
             required: true,
             title: "Минимальное значение 1",
             onChange: (e) => setData('chapter', e.target.value),
-            classname: "w-full"
+            classname: "lg:w-full"
         },
         {
             label: "Жанр",
