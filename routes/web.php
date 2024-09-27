@@ -57,8 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/buddies/check', [FollowController::class, 'checkStatus'])->name('buddies.check');
     Route::get('/buddies/followed', [BuddiesController::class, 'followed'])->name('buddies.followed');
 
-    Route::get('/chats', [ChatController::class, 'index'])->name('chats');
-    Route::get('/chats/{name}', [ChatController::class, 'show'])->name('chats.show');
+    Route::resource('chats', ChatController::class)->only(['index', 'show']);
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
     Route::get('/movies', [MovieController::class, 'index'])->name('movies');
