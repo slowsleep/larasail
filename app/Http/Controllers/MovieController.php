@@ -90,6 +90,6 @@ class MovieController extends Controller
             'data' => null,
         ]);
 
-        return Redirect::route('movies');
+        return Redirect::route('movies.index');
     }
 }

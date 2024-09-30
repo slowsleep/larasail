@@ -14,7 +14,7 @@ export default function Dashboard({ auth }) {
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
                         <div className="px-6 py-6 flex gap-x-8">
-                            <Link href={route('movies')} className="flex-1 p-2 border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 text-white text-center cursor-pointer">
+                            <Link href={route('movies.index')} className="flex-1 p-2 border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 text-white text-center cursor-pointer">
                                 <div>
                                     фильмы
                                 </div>

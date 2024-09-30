@@ -60,10 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('chats', ChatController::class)->only(['index', 'show']);
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
-    Route::get('/movies', [MovieController::class, 'index'])->name('movies');
-    Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
-    Route::patch('/movies', [MovieController::class, 'update'])->name('movies.update');
-    Route::delete('/movies', [MovieController::class, 'destroy'])->name('movies.destroy');
+    Route::resource('movies', MovieController::class)->only(['index', 'store', 'update', 'destroy']);
 
     Route::get('/series', [SeriesController::class, 'index'])->name('series');
     Route::post('/series', [SeriesController::class, 'store'])->name('series.store');
