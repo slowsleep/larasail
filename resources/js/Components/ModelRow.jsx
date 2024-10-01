@@ -67,19 +67,19 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                 {!isEdit ?
                     <>
                         <button className="hover:brightness-50 w-10 flex justify-center" onClick={handleEdit}>
-                            <img src="assets/img/blue-pen.svg" alt="edit" title="edit" />
+                            <img src="/assets/img/blue-pen.svg" alt="edit" title="edit" />
                         </button>
                         <button className="hover:brightness-50 w-10 flex justify-center" onClick={() => {handleDestroy(modelItem.id)}}>
-                            <img src="assets/img/red-trash.svg" alt="delete" title="delete" />
+                            <img src="/assets/img/red-trash.svg" alt="delete" title="delete" />
                         </button>
                     </>
                 :
                     <>
                         <button className="hover:brightness-50 w-10 flex justify-center" onClick={() => {handleSave()}}>
-                            <img src="assets/img/save.svg" alt="save" title="save" />
+                            <img src="/assets/img/save.svg" alt="save" title="save" />
                         </button>
                         <button className="hover:brightness-50 w-10 flex justify-center" onClick={() => {handleCancel()}}>
-                            <img src="assets/img/cancel.svg" alt="cancel" title="cancel" />
+                            <img src="/assets/img/cancel.svg" alt="cancel" title="cancel" />
                         </button>
                     </>
                 }
