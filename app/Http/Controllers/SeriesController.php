@@ -90,6 +90,6 @@ class SeriesController extends Controller
             'data' => null,
         ]);
 
-        return Redirect::route('series');
+        return Redirect::route('series.index');
     }
 }

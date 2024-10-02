@@ -62,10 +62,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('movies', MovieController::class)->only(['index', 'store', 'update', 'destroy']);
 
-    Route::get('/series', [SeriesController::class, 'index'])->name('series');
-    Route::post('/series', [SeriesController::class, 'store'])->name('series.store');
-    Route::patch('/series', [SeriesController::class, 'update'])->name('series.update');
-    Route::delete('/series', [SeriesController::class, 'destroy'])->name('series.destroy');
+    Route::resource('series', SeriesController::class)->only(['index', 'store', 'update', 'destroy']);
 
     Route::get('/games', [GameController::class, 'index'])->name('games');
     Route::post('/games', [GameController::class, 'store'])->name('games.store');

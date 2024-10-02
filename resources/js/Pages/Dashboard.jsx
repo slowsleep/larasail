@@ -19,7 +19,7 @@ export default function Dashboard({ auth }) {
                                     фильмы
                                 </div>
                             </Link>
-                            <Link className="flex-1 p-2 border-2 border-pink-400 bg-pink-400/20 hover:bg-pink-400/40 text-white text-center cursor-pointer" href={route('series')}>
+                            <Link className="flex-1 p-2 border-2 border-pink-400 bg-pink-400/20 hover:bg-pink-400/40 text-white text-center cursor-pointer" href={route('series.index')}>
                                 <div>
                                     сериалы
                                 </div>
