@@ -24,7 +24,7 @@ export default function Dashboard({ auth }) {
                                     сериалы
                                 </div>
                             </Link>
-                            <Link className="flex-1 p-2 border-2 border-violet-600 bg-violet-600/20 hover:bg-violet-600/40 text-white text-center cursor-pointer" href={route('games')}>
+                            <Link className="flex-1 p-2 border-2 border-violet-600 bg-violet-600/20 hover:bg-violet-600/40 text-white text-center cursor-pointer" href={route('games.index')}>
                                 <div>
                                     игры
                                 </div>

@@ -29,7 +29,7 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('series.index')} active={route().current('series.index')}>
                                     Сериалы
                                 </NavLink>
-                                <NavLink href={route('games')} active={route().current('games')}>
+                                <NavLink href={route('games.index')} active={route().current('games.index')}>
                                     Игры
                                 </NavLink>
                                 <NavLink href={route('books')} active={route().current('books')}>
@@ -121,7 +121,7 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('series.index')} active={route().current('series.index')}>
                             Сериалы
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('games')} active={route().current('games')}>
+                        <ResponsiveNavLink href={route('games.index')} active={route().current('games.index')}>
                             Игры
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('books')} active={route().current('books')}>

@@ -91,6 +91,6 @@ class GameController extends Controller
             'data' => null,
         ]);
 
-        return Redirect::route('games');
+        return Redirect::route('games.index');
     }
 }
