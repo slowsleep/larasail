@@ -29,7 +29,7 @@ export default function Dashboard({ auth }) {
                                     игры
                                 </div>
                             </Link>
-                            <Link className="flex-1 p-2 border-2 border-amber-800 bg-amber-800/20 hover:bg-amber-800/40 text-white text-center cursor-pointer" href={route('books')}>
+                            <Link className="flex-1 p-2 border-2 border-amber-800 bg-amber-800/20 hover:bg-amber-800/40 text-white text-center cursor-pointer" href={route('books.index')}>
                                 <div>
                                     книги
                                 </div>

@@ -66,10 +66,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('games', GameController::class)->only(['index', 'store', 'update', 'destroy']);
 
-    Route::get('/books', [BookController::class, 'index'])->name('books');
-    Route::post('/books', [BookController::class, 'store'])->name('books.store');
-    Route::patch('/books', [BookController::class, 'update'])->name('books.update');
-    Route::delete('/books', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::resource('books', BookController::class)->only(['index', 'store', 'update', 'destroy']);
 
     Route::get('/mangas', [MangaController::class, 'index'])->name('mangas');
     Route::post('/mangas', [MangaController::class, 'store'])->name('mangas.store');

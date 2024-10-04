@@ -94,6 +94,6 @@ class BookController extends Controller
             'data' => null,
         ]);
 
-        return Redirect::route('books');
+        return Redirect::route('books.index');
     }
 }
