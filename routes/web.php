@@ -68,10 +68,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('books', BookController::class)->only(['index', 'store', 'update', 'destroy']);
 
-    Route::get('/mangas', [MangaController::class, 'index'])->name('mangas');
-    Route::post('/mangas', [MangaController::class, 'store'])->name('mangas.store');
-    Route::patch('/mangas', [MangaController::class, 'update'])->name('mangas.update');
-    Route::delete('/mangas', [MangaController::class, 'destroy'])->name('mangas.destroy');
+    Route::resource('mangas', MangaController::class)->only(['index', 'store', 'update', 'destroy']);
 });
 
 require __DIR__.'/auth.php';

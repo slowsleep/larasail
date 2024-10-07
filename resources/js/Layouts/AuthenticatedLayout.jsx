@@ -35,7 +35,7 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('books.index')} active={route().current('books.index')}>
                                     Книги
                                 </NavLink>
-                                <NavLink href={route('mangas')} active={route().current('mangas')}>
+                                <NavLink href={route('mangas.index')} active={route().current('mangas.index')}>
                                     Манга
                                 </NavLink>
                             </div>
@@ -127,7 +127,7 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('books.index')} active={route().current('books.index')}>
                             Книги
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('mangas')} active={route().current('mangas')}>
+                        <ResponsiveNavLink href={route('mangas.index')} active={route().current('mangas.index')}>
                             Манга
                         </ResponsiveNavLink>
                     </div>

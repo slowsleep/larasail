@@ -90,6 +90,6 @@ class MangaController extends Controller
             'data' => null,
         ]);
 
-        return Redirect::route('mangas');
+        return Redirect::route('mangas.index');
     }
 }
