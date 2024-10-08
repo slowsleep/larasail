@@ -39,6 +39,11 @@ export default function Dashboard({ auth }) {
                                     манга
                                 </div>
                             </Link>
+                            <Link className="flex-1 p-2 border-2 border-teal-600 bg-teal-600/20 hover:bg-teal-600/40 text-white text-center cursor-pointer" href={route('anime.index')}>
+                                <div>
+                                    аниме
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

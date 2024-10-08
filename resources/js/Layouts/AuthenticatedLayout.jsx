@@ -38,6 +38,9 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('mangas.index')} active={route().current('mangas.index')}>
                                     Манга
                                 </NavLink>
+                                <NavLink href={route('anime.index')} active={route().current('anime.index')}>
+                                    Аниме
+                                </NavLink>
                             </div>
                         </div>
 
@@ -129,6 +132,9 @@ export default function Authenticated({ user, header, children }) {
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('mangas.index')} active={route().current('mangas.index')}>
                             Манга
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('anime.index')} active={route().current('anime.index')}>
+                            Аниме
                         </ResponsiveNavLink>
                     </div>
 

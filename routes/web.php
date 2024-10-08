@@ -1,17 +1,20 @@
 <?php
 
-use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AvatarController;
-use App\Http\Controllers\MovieController;
-use App\Http\Controllers\SeriesController;
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\MangaController;
-use App\Http\Controllers\FollowController;
-use App\Http\Controllers\BuddiesController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ {
+    ActivityLogController,
+    AnimeController,
+    ProfileController,
+    AvatarController,
+    MovieController,
+    SeriesController,
+    GameController,
+    BookController,
+    MangaController,
+    FollowController,
+    BuddiesController,
+    MessageController,
+    ChatController
+};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -69,6 +72,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('books', BookController::class)->only(['index', 'store', 'update', 'destroy']);
 
     Route::resource('mangas', MangaController::class)->only(['index', 'store', 'update', 'destroy']);
+
+    Route::resource('anime', AnimeController::class)->only(['index', 'store', 'update', 'destroy']);
 });
 
 require __DIR__.'/auth.php';
