@@ -18,5 +18,17 @@ and then start the command
 
 `./vendor/bin/sail up`
 
+Create all tables
+
+`sail php artisan migrate`
+
+Build front
+
+`sail npm run build`
+
+Start reverb
+
+`sail php artisan reverb:start --host="0.0.0.0" --port=8080`
+
 Laravel app will launch at http://localhost:80 , http://0.0.0.0:80
-And adminer: http://localhost:8080 , http://0.0.0.0:8080
+And adminer: http://localhost:8081 , http://0.0.0.0:8081
