@@ -17,6 +17,27 @@ export default function ChatWindow({ auth, chat }) {
         };
     }, [messages]);
 
+    // Message scrolling to the newest message
+    useEffect(() => {
+        let messages = document.querySelector('.messages');
+        let timer;
+        let isPaused = false;
+
+        window.addEventListener('wheel', function(){
+            isPaused = true;
+            clearTimeout(timer);
+            timer = window.setTimeout(function(){
+                isPaused = false;
+            }, 1000);
+        })
+
+        window.setInterval(function(){
+            if(!isPaused && messages) {
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }, 500);
+    })
+
     const handleSendMessage = (e) => {
         e.preventDefault();
 
