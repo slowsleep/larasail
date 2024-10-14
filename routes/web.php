@@ -43,7 +43,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['auth', 'web']],function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile/{name}', [ProfileController::class, 'show'])->name('profile.show');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/buddies/check', [FollowController::class, 'checkStatus'])->name('buddies.check');
     Route::get('/buddies/followed', [BuddiesController::class, 'followed'])->name('buddies.followed');
 
-    Route::resource('chats', ChatController::class)->only(['index', 'show']);
+    Route::resource('chats', ChatController::class)->only(['index', 'show', 'destroy']);
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
     Route::resource('movies', MovieController::class)->only(['index', 'store', 'update', 'destroy']);

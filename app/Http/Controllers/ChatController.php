@@ -17,7 +17,7 @@ class ChatController extends Controller
             })
             ->get();
 
-        return Inertia::render('Chats/Chats', ['chats' => $chats]);
+        return Inertia::render('Chats/Chats', ['chats' => $chats, 'error' => session('error')]);
     }
 
     public function show(string $name)
@@ -47,5 +47,24 @@ class ChatController extends Controller
                 ->get();
 
         return Inertia::render('Chats/Chats', ['chats' => $chats, 'chat' => $chat]);
+    }
+
+    public function destroy($id)
+    {
+        $chat = Chat::find($id);
+
+        if (!$chat) {
+            return redirect()->route('chats.index')->with('error', 'Чат не найден');
+        }
+
+        $user = auth()->user();
+        $userInChat = $chat->users()->where('user_id', $user->id)->first();
+
+        if (!$userInChat) {
+            return redirect()->route('chats.index')->with('error', 'У вас нет прав на удаление чата');
+        }
+
+        $chat->delete();
+        return redirect()->route('chats.index');
     }
 }

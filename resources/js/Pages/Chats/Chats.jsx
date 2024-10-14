@@ -1,9 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import ChatWindow from './ChatWindow';
 import ChatList from './ChatList';
+import { useEffect } from 'react';
 
 export default function Chats({ auth, chats, chat }) {
+
+    const { error } = usePage().props;
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -13,6 +17,11 @@ export default function Chats({ auth, chats, chat }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 h-screen">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col gap-y-4 h-full">
+                        {error ? (
+                            <div className="border-1 border-red-600 p-1">
+                                <p className="text-red text-sm">{error}</p>
+                            </div>
+                        ) : null}
                         <div className="flex flex-row gap-x-4 h-full">
                             <div className="flex flex-col w-1/3 bg-gray-400 p-2">
                                 <ChatList chats={chats} auth={auth}/>

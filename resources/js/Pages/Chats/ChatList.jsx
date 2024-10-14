@@ -1,6 +1,12 @@
 import NavLink from '@/Components/NavLink';
+import { router } from '@inertiajs/react';
 
 export default function ChatList({auth, chats}) {
+
+    function deleteChat(e) {
+        e.preventDefault();
+        router.delete(`/chats/${e.target.chat_id.value}`);
+    }
 
     return (
         <div className="container mx-auto p-4 h-full overflow-y-auto">
@@ -19,7 +25,10 @@ export default function ChatList({auth, chats}) {
                                     >
                                         {chat.name}
                                     </NavLink>
-                                    <a className="text-red-500 hover:underline cursor-pointer" >x</a>
+                                    <form onSubmit={deleteChat}>
+                                        <input type="hidden" name="chat_id" value={chat.id}/>
+                                        <button type="submit" className="text-red-500 hover:underline cursor-pointer" >x</button>
+                                    </form>
                                 </div>
                             </li>
                         );
