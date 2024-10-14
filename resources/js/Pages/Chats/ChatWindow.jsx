@@ -19,7 +19,7 @@ export default function ChatWindow({ auth, chat }) {
 
     // Message scrolling to the newest message
     useEffect(() => {
-        let messages = document.querySelector('.messages');
+        let messagesBox = document.querySelector('.messages');
         let timer;
         let isPaused = false;
 
@@ -32,11 +32,11 @@ export default function ChatWindow({ auth, chat }) {
         })
 
         window.setInterval(function(){
-            if(!isPaused && messages) {
-                messages.scrollTop = messages.scrollHeight;
+            if(!isPaused && messagesBox) {
+                messagesBox.scrollTop = messagesBox.scrollHeight;
             }
         }, 500);
-    })
+    }, []);
 
     const handleSendMessage = (e) => {
         e.preventDefault();
@@ -90,7 +90,7 @@ export default function ChatWindow({ auth, chat }) {
                             rows="1"
                             placeholder="Введите сообщение"
                             onKeyDown={keyDownFunction}
-                            spellcheck="true"
+                            spellCheck="true"
                             maxLength={4096}
                             required
                         />
