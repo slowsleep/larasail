@@ -25,7 +25,7 @@ export default function FormNewMovie ({id, data, setData, post, ...props}) {
             name:"title",
             required: true,
             value: data.title,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange:(e) => setData('title', e.target.value)
         },
@@ -42,7 +42,7 @@ export default function FormNewMovie ({id, data, setData, post, ...props}) {
             type: "text",
             name: "comment",
             value: data.comment,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value)
         },
