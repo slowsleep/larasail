@@ -128,17 +128,17 @@ export default function Profile({ auth, user = false}) {
                                 <div className="overflow-hidden content-center w-4/12" style={{width: "200px", height: "200px"}}>
                                     <img src={ user.avatar ? '/storage/avatars/1/' + user.avatar : '/assets/img/default.png'} alt='user avatar' />
                                 </div>
-                                <div className='w-9/12 relative'>
+                                <div className='w-9/12 relative flex flex-col justify-between'>
                                     <div>
                                         <p>name: {user.name}</p>
                                         <p>bio: ???</p>
                                     </div>
                                 {auth.user.id !== user.id ?
-                                    <>
-                                        <div className="flex py-2 justify-between ml-auto items-end absolute bottom-0">
+                                    <div className='flex flex-col sm:flex-row justify-between items-end'>
+                                        <div className="flex py-2">
                                             <Link href={route('chats.show', user.name)}><button className="p-2 rounded bg-emerald-600 hover:bg-emerald-700">В диалог</button></Link>
                                         </div>
-                                        <div className="flex py-2 justify-between ml-auto items-end absolute bottom-0 right-0">
+                                        <div className="flex py-2">
                                             <p className="self-center mr-3">
                                                 {data.status === "friends" ?
                                                     "Вы друзья"
@@ -159,7 +159,7 @@ export default function Profile({ auth, user = false}) {
                                             : null
                                             }
                                         </div>
-                                    </>
+                                    </div>
                                 : null}
                                 </div>
                             </>
