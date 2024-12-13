@@ -46,23 +46,24 @@ export default function Movies({ auth, movies, movie, action }) {
 
                         <div className="flex-1 p-2 border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 text-white text-center cursor-pointer" onClick={hideForm}>фильмы</div>
 
-                        <table className="border-separate border-spacing-2 border border-slate-500">
-                            <thead>
-                                <tr className="bg-slate-700">
-                                    <th className="text-start">Название</th>
-                                    <th>Часть</th>
-                                    <th>Комментарий</th>
-                                    <th>Завершен</th>
-                                    <th>Заброшен</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {movies.map((movie) => (
-                                    <RowMovie key={movie.id} movie={movie} />
-                                ))}
-                            </tbody>
-                        </table>
-
+                        <div className="overflow-x-auto">
+                            <table className="border-separate border-spacing-2 border border-slate-500">
+                                <thead>
+                                    <tr className="bg-slate-700">
+                                        <th className="text-start">Название</th>
+                                        <th>Часть</th>
+                                        <th>Комментарий</th>
+                                        <th>Завершен</th>
+                                        <th>Заброшен</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {movies.map((movie) => (
+                                        <RowMovie key={movie.id} movie={movie} />
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

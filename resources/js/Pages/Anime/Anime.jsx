@@ -50,27 +50,28 @@ export default function Anime({auth, animeList, anime, action}) {
 
                     <div className="flex-1 p-2 border-2 border-teal-400 bg-teal-400/20 hover:bg-teal-400/40 text-white text-center cursor-pointer" onClick={hideForm}>аниме</div>
 
-                    <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                        <thead>
-                            <tr className="bg-slate-700">
-                                <th className="text-start">Название</th>
-                                <th>Сезон</th>
-                                <th>Серия</th>
-                                <th>Жанр</th>
-                                <th>Издатель</th>
-                                <th>Перевод</th>
-                                <th>Комментарий</th>
-                                <th>Завершен</th>
-                                <th>Заброшен</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {animeList.map((anime) => (
-                                <RowAnime key={anime.id} anime={anime} />
-                            ))}
-                        </tbody>
-                    </table>
-
+                    <div className="overflow-x-auto">
+                        <table className="border-separate border-spacing-2 border border-slate-500 w-full">
+                            <thead>
+                                <tr className="bg-slate-700">
+                                    <th className="text-start">Название</th>
+                                    <th>Сезон</th>
+                                    <th>Серия</th>
+                                    <th>Жанр</th>
+                                    <th>Издатель</th>
+                                    <th>Перевод</th>
+                                    <th>Комментарий</th>
+                                    <th>Завершен</th>
+                                    <th>Заброшен</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {animeList.map((anime) => (
+                                    <RowAnime key={anime.id} anime={anime} />
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

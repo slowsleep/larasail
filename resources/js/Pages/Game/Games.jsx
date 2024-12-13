@@ -48,25 +48,26 @@ export default function Games({auth, games, game, action}) {
 
                         <div className="flex-1 p-2 border-2 border-violet-400 bg-violet-400/20 hover:bg-violet-400/40 text-white text-center cursor-pointer" onClick={hideForm}>игры</div>
 
-                        <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                            <thead>
-                                <tr className="bg-slate-700">
-                                    <th className="text-start">Название</th>
-                                    <th>Жанр</th>
-                                    <th>Разработчик</th>
-                                    <th>Издатель</th>
-                                    <th>Комментарий</th>
-                                    <th>Завершен</th>
-                                    <th>Заброшен</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {games.map((game) => (
-                                    <RowGame key={game.id} game={game} />
-                                ))}
-                            </tbody>
-                        </table>
-
+                        <div className="overflow-x-auto">
+                            <table className="border-separate border-spacing-2 border border-slate-500 w-full">
+                                <thead>
+                                    <tr className="bg-slate-700">
+                                        <th className="text-start">Название</th>
+                                        <th>Жанр</th>
+                                        <th>Разработчик</th>
+                                        <th>Издатель</th>
+                                        <th>Комментарий</th>
+                                        <th>Завершен</th>
+                                        <th>Заброшен</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {games.map((game) => (
+                                        <RowGame key={game.id} game={game} />
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

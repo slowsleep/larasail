@@ -49,26 +49,27 @@ export default function Manga({auth, mangas, manga, action}) {
 
                     <div className="flex-1 p-2 border-2 border-emerald-400 bg-emerald-400/20 hover:bg-emerald-400/40 text-white text-center cursor-pointer" onClick={hideForm}>манга</div>
 
-                    <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                        <thead>
-                            <tr className="bg-slate-700">
-                                <th className="text-start">Название</th>
-                                <th>Том</th>
-                                <th>Глава</th>
-                                <th>Жанр</th>
-                                <th>Создатели</th>
-                                <th>Комментарий</th>
-                                <th>Завершен</th>
-                                <th>Заброшен</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {mangas.map((manga) => (
-                                <RowManga key={manga.id} manga={manga} />
-                            ))}
-                        </tbody>
-                    </table>
-
+                    <div className="overflow-x-auto">
+                        <table className="border-separate border-spacing-2 border border-slate-500 w-full">
+                            <thead>
+                                <tr className="bg-slate-700">
+                                    <th className="text-start">Название</th>
+                                    <th>Том</th>
+                                    <th>Глава</th>
+                                    <th>Жанр</th>
+                                    <th>Создатели</th>
+                                    <th>Комментарий</th>
+                                    <th>Завершен</th>
+                                    <th>Заброшен</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {mangas.map((manga) => (
+                                    <RowManga key={manga.id} manga={manga} />
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -101,7 +101,7 @@ export default function TableActivity({activity}) {
     }
 
     return (
-        <div>
+        <div className="overflow-x-auto">
             <div className="flex">
                 <div className="flex flex-col">
                     <div className="flex flex-row">
