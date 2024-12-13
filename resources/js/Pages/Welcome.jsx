@@ -4,49 +4,56 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:left-0 text-start p-6">
-                    <h1 className="text-white">WatchWizard</h1>
-                    {/* <img src="assets/img/watch-wizard.png" className="w-1/3" /> */}
-                </div>
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-                    {auth.user ? (
-                        <Link
-                            href={route('dashboard')}
-                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                        >
-                            Dashboard
-                        </Link>
-                    ) : (
-                        <>
+            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white ">
+                <div className="flex flex-row justify-between">
+                    <div className="sm:fixed sm:top-0 sm:left-0 text-start p-6">
+                        <h1 className="text-xl font-semibold text-gray-400">WatchWizard</h1>
+                    </div>
+                    <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+                        {auth.user ? (
                             <Link
-                                href={route('login')}
+                                href={route('dashboard')}
                                 className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
-                                Log in
+                                Dashboard
                             </Link>
+                        ) : (
+                            <>
+                                <Link
+                                    href={route('login')}
+                                    className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >
+                                    Log in
+                                </Link>
 
-                            <Link
-                                href={route('register')}
-                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Register
-                            </Link>
-                        </>
-                    )}
+                                <Link
+                                    href={route('register')}
+                                    className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >
+                                    Register
+                                </Link>
+                            </>
+                        )}
+                    </div>
                 </div>
 
                 <div className="max-w-7xl mx-auto p-6 lg:p-8">
                     <div className="flex justify-center">
                         <img src="assets/img/watch-wizard.png" className="w-1/2 border-2 border-violet-400  rounded-lg shadow-violet-400/40 shadow-2xl" />
                     </div>
-                    <div className="flex justify-center">
-                        <img src="assets/img/dev.gif" />
+                    <div className="mt-8 bg-gray-800/60 overflow-hidden shadow-sm sm:rounded-lg">
+
+                        <p className="m-4 text-md text-gray-400">WatchWizard - сайт помощник для ослеживания контента, который вы прошли, проходите или будете проходить, будь то сериалы, фильмы, игры, аниме, манга или книги.</p>
+                        <p className="m-4 text-md text-gray-400">В профиле есть таблица активности, отслеживающая вашу активность на сайте.</p>
+                        <p className="m-4 text-md text-gray-400">Добавлена возможность общения с другими пользователями и система подписок друг на друга.</p>
+                        <p className="m-4 text-lg text-green-400">Входите с систему и сделайте свою жизнь проще, без отслеживания просмотренных фильмов в заметках или избранных сообщениях в социальных сетях.</p>
+                        <div className="flex justify-center">
+                            <img src="assets/img/dev.gif" />
+                        </div>
                     </div>
 
                     <div className="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
                         <div className="text-center text-sm sm:text-start">&nbsp;</div>
-
                         <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0">
                             Laravel v{laravelVersion} (PHP v{phpVersion})
                         </div>
