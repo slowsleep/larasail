@@ -48,7 +48,7 @@ export default function Series({ auth, series, singleSeries, action }) {
                         <div className="flex-1 p-2 border-2 border-pink-400 bg-pink-400/20 hover:bg-pink-400/40 text-white text-center cursor-pointer" onClick={hideForm}>сериалы</div>
 
                         <div className="overflow-x-auto">
-                            <table className="border-separate border-spacing-2 border border-slate-500">
+                            <table className="border-separate border-spacing-2 border border-slate-500 w-full">
                                 <thead>
                                     <tr className="bg-slate-700">
                                         <th className="text-start">Название</th>
