@@ -22,9 +22,16 @@ Create all tables
 
 `sail php artisan migrate`
 
+Generate key
+
+`sail php artisan key:generate`
+
 Build front
 
 `sail npm run build`
+
+Install reverb and generate push id
+`php artisan reverb:install`
 
 Start reverb
 
