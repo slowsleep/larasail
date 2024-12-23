@@ -40,7 +40,7 @@ export default function RowMovie ({movie}) {
             value: data.title,
             type: "text",
             name: "title",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => {
                 setData('title', e.target.value);
@@ -53,7 +53,7 @@ export default function RowMovie ({movie}) {
             error: titleError,
         },
         {
-            value: data.part,
+            value: data.part ? data.part : "",
             type: "number",
             name: "part",
             min: 1,
@@ -71,7 +71,7 @@ export default function RowMovie ({movie}) {
             value: data.comment ? data.comment : "",
             type: "text",
             name: "comment",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value),
         },
@@ -99,6 +99,16 @@ export default function RowMovie ({movie}) {
     ]
 
     return (
-        <ModelRow className="odd:bg-cyan-900 even:bg-cyan-800" inputs={inputList} data={data} setData={setData} modelItem={movie} modelName="фильм" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
+        <ModelRow
+            className="odd:bg-cyan-900 even:bg-cyan-800"
+            inputs={inputList}
+            data={data}
+            setData={setData}
+            modelItem={movie}
+            modelName={{en: "movies", ru: "фильм"}}
+            onSave={handleSave}
+            onDestroy={handleDestroy}
+            onCancle={handleCancle}
+        />
     )
 }
