@@ -43,7 +43,7 @@ export default function RowSeries({singleSeries}) {
             value: data.title,
             type: "text",
             name: "title",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => {
                 setData('title', e.target.value);
@@ -89,7 +89,7 @@ export default function RowSeries({singleSeries}) {
             value: data.comment ? data.comment : "",
             type: "text",
             name: "comment",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value),
         },
@@ -117,6 +117,16 @@ export default function RowSeries({singleSeries}) {
     ]
 
     return (
-        <ModelRow className="odd:bg-pink-950 even:bg-pink-800" inputs={inputList} data={data} setData={setData} modelItem={singleSeries} modelName="сериал" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
+        <ModelRow
+            className="odd:bg-pink-950 even:bg-pink-800"
+            inputs={inputList}
+            data={data}
+            setData={setData}
+            modelItem={singleSeries}
+            modelName={{en: "series", ru: "сериал"}}
+            onSave={handleSave}
+            onDestroy={handleDestroy}
+            onCancle={handleCancle}
+        />
     )
 }

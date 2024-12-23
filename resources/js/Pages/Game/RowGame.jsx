@@ -39,7 +39,7 @@ export default function RowGame({game}) {
             value: data.title,
             type: "text",
             name: "title",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => {
                 setData('title', e.target.value);
@@ -55,7 +55,7 @@ export default function RowGame({game}) {
             value: data.genre,
             type: "text",
             name: "genre",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
         },
@@ -63,7 +63,7 @@ export default function RowGame({game}) {
             value: data.developer,
             type: "text",
             name: "developer",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('developer', e.target.value),
         },
@@ -71,7 +71,7 @@ export default function RowGame({game}) {
             value: data.publisher,
             type: "text",
             name: "publisher",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('publisher', e.target.value),
         },
@@ -79,7 +79,7 @@ export default function RowGame({game}) {
             value: data.comment ? data.comment : "",
             type: "text",
             name: "comment",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value),
         },
@@ -107,6 +107,16 @@ export default function RowGame({game}) {
     ]
 
     return (
-        <ModelRow className="odd:bg-violet-900 even:bg-violet-800" inputs={inputList} data={data} setData={setData} modelItem={game} modelName="игру" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
+        <ModelRow
+            className="odd:bg-violet-900 even:bg-violet-800"
+            inputs={inputList}
+            data={data}
+            setData={setData}
+            modelItem={game}
+            modelName={{en: "games", ru: "игру"}}
+            onSave={handleSave}
+            onDestroy={handleDestroy}
+            onCancle={handleCancle}
+        />
     )
 }

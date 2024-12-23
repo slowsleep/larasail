@@ -44,7 +44,7 @@ export default function RowManga({ manga }) {
             value: data.title,
             type: "text",
             name: "title",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => {
                 setData('title', e.target.value);
@@ -92,7 +92,7 @@ export default function RowManga({ manga }) {
             value: data.genre,
             type: "text",
             name: "genre",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
         },
@@ -100,7 +100,7 @@ export default function RowManga({ manga }) {
             value: data.creators,
             type: "text",
             name: "creators",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('creators', e.target.value),
         },
@@ -108,7 +108,7 @@ export default function RowManga({ manga }) {
             value: data.comment ? data.comment : "",
             type: "text",
             name: "comment",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value),
         },
@@ -136,6 +136,16 @@ export default function RowManga({ manga }) {
     ]
 
     return (
-        <ModelRow className="odd:bg-emerald-900 even:bg-emerald-800" inputs={inputList} data={data} setData={setData} modelItem={manga} modelName="мангу" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
+        <ModelRow
+            className="odd:bg-emerald-900 even:bg-emerald-800"
+            inputs={inputList}
+            data={data}
+            setData={setData}
+            modelItem={manga}
+            modelName={{en: "manga", ru: "мангу"}}
+            onSave={handleSave}
+            onDestroy={handleDestroy}
+            onCancle={handleCancle}
+        />
     )
 }

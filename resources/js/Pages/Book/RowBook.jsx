@@ -43,7 +43,7 @@ export default function RowBook({book}) {
             value: data.title,
             type: "text",
             name: "title",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             required: true,
             onChange: (e) => {
@@ -61,7 +61,7 @@ export default function RowBook({book}) {
             value: data.author,
             type: "text",
             name: "author",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             required: true,
             onChange: (e) => {
@@ -78,7 +78,7 @@ export default function RowBook({book}) {
             value: data.publisher,
             type: "text",
             name: "publisher",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('publisher', e.target.value),
         },
@@ -92,7 +92,7 @@ export default function RowBook({book}) {
             value: data.genre,
             type: "text",
             name: "genre",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
         },
@@ -100,7 +100,7 @@ export default function RowBook({book}) {
             value: data.comment ? data.comment : "",
             type: "text",
             name: "comment",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value),
         },
@@ -128,6 +128,16 @@ export default function RowBook({book}) {
     ]
 
     return (
-        <ModelRow className="odd:bg-amber-900 even:bg-amber-800" inputs={inputList} data={data} setData={setData} modelItem={book} modelName="книгу" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
+        <ModelRow
+            className="odd:bg-amber-900 even:bg-amber-800"
+            inputs={inputList}
+            data={data}
+            setData={setData}
+            modelItem={book}
+            modelName={{en: "books", ru: "книгу"}}
+            onSave={handleSave}
+            onDestroy={handleDestroy}
+            onCancle={handleCancle}
+        />
     )
 }
