@@ -1,8 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import FormNewManga from './FormNewManga';
 import RowManga from './RowManga';
+import ShowingTableCol from '@/Components/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable';
 
 export default function Manga({auth, mangas, manga, action}) {
     const { data, setData, post } = useForm({
@@ -15,6 +17,7 @@ export default function Manga({auth, mangas, manga, action}) {
         finished: false,
         abandoned: false,
     });
+    const tableRef = useRef(null);
 
     const hideForm = () => {
         document.querySelector("#form-manga").classList.toggle("hidden");
@@ -49,26 +52,30 @@ export default function Manga({auth, mangas, manga, action}) {
 
                     <div className="flex-1 p-2 border-2 border-emerald-400 bg-emerald-400/20 hover:bg-emerald-400/40 text-white text-center cursor-pointer" onClick={hideForm}>манга</div>
 
+                    <ShowingTableCol
+                        model="manga"
+                        columns={[
+                            {label: 'volume', column: 1},
+                            {label: 'chapter', column: 2},
+                            {label: 'genre', column: 3},
+                            {label: 'creators', column: 4},
+                            {label: 'comment', column: 5},
+                            {label: 'finished', column: 6},
+                            {label: 'abandoned', column: 7}
+                        ]}
+                        tableRef={tableRef}
+                    />
+
                     <div className="overflow-x-auto">
-                        <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                            <thead>
-                                <tr className="bg-slate-700">
-                                    <th className="text-start">Название</th>
-                                    <th>Том</th>
-                                    <th>Глава</th>
-                                    <th>Жанр</th>
-                                    <th>Создатели</th>
-                                    <th>Комментарий</th>
-                                    <th>Завершен</th>
-                                    <th>Заброшен</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {mangas.map((manga) => (
-                                    <RowManga key={manga.id} manga={manga} />
-                                ))}
-                            </tbody>
-                        </table>
+                        <ModelTable
+                            model="manga"
+                            columns={["title", "volume", "chapter", "genre", "creators", "comment", "finished", "abandoned"]}
+                            ref={tableRef}
+                        >
+                            {mangas.map((manga) => (
+                                <RowManga key={manga.id} manga={manga} />
+                            ))}
+                        </ModelTable>
                     </div>
                 </div>
             </div>

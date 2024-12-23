@@ -1,8 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import FormNewGame from './FormNewGame';
 import RowGame from './RowGame';
+import ShowingTableCol from '@/Components/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable';
 
 export default function Games({auth, games, game, action}) {
     const { data, setData, post } = useForm({
@@ -14,6 +16,7 @@ export default function Games({auth, games, game, action}) {
         finished: false,
         abandoned: false,
     });
+    const tableRef = useRef(null);
 
     const hideForm = () => {
         document.querySelector("#form-game").classList.toggle("hidden");
@@ -48,25 +51,29 @@ export default function Games({auth, games, game, action}) {
 
                         <div className="flex-1 p-2 border-2 border-violet-400 bg-violet-400/20 hover:bg-violet-400/40 text-white text-center cursor-pointer" onClick={hideForm}>игры</div>
 
+                        <ShowingTableCol
+                            model="games"
+                            columns={[
+                                {label: 'genre', column: 1},
+                                {label: 'developer', column: 2},
+                                {label: 'publisher', column: 3},
+                                {label: 'comment', column: 4},
+                                {label: 'finished', column: 5},
+                                {label: 'abandoned', column: 6}
+                            ]}
+                            tableRef={tableRef}
+                        />
+
                         <div className="overflow-x-auto">
-                            <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                                <thead>
-                                    <tr className="bg-slate-700">
-                                        <th className="text-start">Название</th>
-                                        <th>Жанр</th>
-                                        <th>Разработчик</th>
-                                        <th>Издатель</th>
-                                        <th>Комментарий</th>
-                                        <th>Завершен</th>
-                                        <th>Заброшен</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {games.map((game) => (
-                                        <RowGame key={game.id} game={game} />
-                                    ))}
-                                </tbody>
-                            </table>
+                            <ModelTable
+                                model="games"
+                                columns={["title", "genre", "developer", "publisher", "comment", "finished", "abandoned"]}
+                                ref={tableRef}
+                            >
+                                {games.map((game) => (
+                                    <RowGame key={game.id} game={game} />
+                                ))}
+                            </ModelTable>
                         </div>
                     </div>
                 </div>

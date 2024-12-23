@@ -1,8 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import FormNewAnime from './FormNewAnime';
 import RowAnime from './RowAnime';
+import ShowingTableCol from '@/Components/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable';
 
 export default function Anime({auth, animeList, anime, action}) {
     const { data, setData, post } = useForm({
@@ -16,6 +18,7 @@ export default function Anime({auth, animeList, anime, action}) {
         finished: false,
         abandoned: false,
     });
+    const tableRef = useRef(null);
 
     const hideForm = () => {
         document.querySelector("#form-anime").classList.toggle("hidden");
@@ -50,27 +53,31 @@ export default function Anime({auth, animeList, anime, action}) {
 
                     <div className="flex-1 p-2 border-2 border-teal-400 bg-teal-400/20 hover:bg-teal-400/40 text-white text-center cursor-pointer" onClick={hideForm}>аниме</div>
 
+                    <ShowingTableCol
+                        model="anime"
+                        columns={[
+                            {label: 'season', column: 1},
+                            {label: 'episode', column: 2},
+                            {label: 'genre', column: 3},
+                            {label: 'publisher', column: 4},
+                            {label: 'translator', column: 5},
+                            {label: 'comment', column: 6},
+                            {label: 'finished', column: 7},
+                            {label: 'abandoned', column: 8}
+                        ]}
+                        tableRef={tableRef}
+                    />
+
                     <div className="overflow-x-auto">
-                        <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                            <thead>
-                                <tr className="bg-slate-700">
-                                    <th className="text-start">Название</th>
-                                    <th>Сезон</th>
-                                    <th>Серия</th>
-                                    <th>Жанр</th>
-                                    <th>Издатель</th>
-                                    <th>Перевод</th>
-                                    <th>Комментарий</th>
-                                    <th>Завершен</th>
-                                    <th>Заброшен</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {animeList.map((anime) => (
-                                    <RowAnime key={anime.id} anime={anime} />
-                                ))}
-                            </tbody>
-                        </table>
+                        <ModelTable
+                            model="anime"
+                            columns={["title", "season", "episode", "genre", "publisher", "translator", "comment", "finished", "abandoned"]}
+                            ref={tableRef}
+                        >
+                            {animeList.map((anime) => (
+                                <RowAnime key={anime.id} anime={anime} />
+                            ))}
+                        </ModelTable>
                     </div>
                 </div>
             </div>

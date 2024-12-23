@@ -1,8 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import RowMovie from './RowMovie';
 import FormNewMovie from './FormNewMovie';
+import ShowingTableCol from '@/Components/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable';
 
 export default function Movies({ auth, movies, movie, action }) {
     const { data, setData, post } = useForm({
@@ -12,6 +14,7 @@ export default function Movies({ auth, movies, movie, action }) {
         finished: false,
         abandoned: false,
     });
+    const tableRef = useRef(null);
 
     const hideForm = () => {
         document.querySelector("#form-movie").classList.toggle("hidden");
@@ -46,23 +49,27 @@ export default function Movies({ auth, movies, movie, action }) {
 
                         <div className="flex-1 p-2 border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 text-white text-center cursor-pointer" onClick={hideForm}>фильмы</div>
 
+                        <ShowingTableCol
+                            model="movies"
+                            columns={[
+                                {label: 'part', column: 1},
+                                {label: 'comment', column: 2},
+                                {label: 'finished', column: 3},
+                                {label: 'abandoned', column: 4}
+                            ]}
+                            tableRef={tableRef}
+                        />
+
                         <div className="overflow-x-auto">
-                            <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                                <thead>
-                                    <tr className="bg-slate-700">
-                                        <th className="text-start">Название</th>
-                                        <th>Часть</th>
-                                        <th>Комментарий</th>
-                                        <th>Завершен</th>
-                                        <th>Заброшен</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {movies.map((movie) => (
-                                        <RowMovie key={movie.id} movie={movie} />
-                                    ))}
-                                </tbody>
-                            </table>
+                            <ModelTable
+                                model="movies"
+                                columns={['title', 'part', 'comment', 'finished', 'abandoned']}
+                                ref={tableRef}
+                            >
+                                {movies.map((movie) => (
+                                    <RowMovie key={movie.id} movie={movie} />
+                                ))}
+                            </ModelTable>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import FormNewSeries from './FormNewSeries';
 import RowSeries from './RowSeries';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import ShowingTableCol from '@/Components/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable';
 
 export default function Series({ auth, series, singleSeries, action }) {
     const { data, setData, post } = useForm({
@@ -13,6 +15,7 @@ export default function Series({ auth, series, singleSeries, action }) {
         finished: false,
         abandoned: false,
     });
+    const tableRef = useRef(null);
 
     const hideForm = () => {
         document.querySelector("#form-series").classList.toggle("hidden");
@@ -47,24 +50,28 @@ export default function Series({ auth, series, singleSeries, action }) {
 
                         <div className="flex-1 p-2 border-2 border-pink-400 bg-pink-400/20 hover:bg-pink-400/40 text-white text-center cursor-pointer" onClick={hideForm}>сериалы</div>
 
+                        <ShowingTableCol
+                            model="series"
+                            columns={[
+                                {label: 'season', column: 1},
+                                {label: 'episode', column: 2},
+                                {label: 'comment', column: 3},
+                                {label: 'finished', column: 4},
+                                {label: 'abandoned', column: 5}
+                            ]}
+                            tableRef={tableRef}
+                        />
+
                         <div className="overflow-x-auto">
-                            <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                                <thead>
-                                    <tr className="bg-slate-700">
-                                        <th className="text-start">Название</th>
-                                        <th>Сезон</th>
-                                        <th>Серия</th>
-                                        <th>Комментарий</th>
-                                        <th>Завершен</th>
-                                        <th>Заброшен</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {series.map((singleSeries) => (
-                                        <RowSeries key={singleSeries.id} singleSeries={singleSeries} />
-                                    ))}
-                                </tbody>
-                            </table>
+                            <ModelTable
+                                model="series"
+                                columns={["title", "season", "episode", "comment", "finished", "abandoned"]}
+                                ref={tableRef}
+                            >
+                                {series.map((singleSeries) => (
+                                    <RowSeries key={singleSeries.id} singleSeries={singleSeries} />
+                                ))}
+                            </ModelTable>
                         </div>
                     </div>
                 </div>

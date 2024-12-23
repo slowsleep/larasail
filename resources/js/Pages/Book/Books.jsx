@@ -1,8 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import FormNewBook from './FormNewBook';
 import RowBook from './RowBook';
+import ShowingTableCol from '@/Components/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable';
+
 export default function Books({auth, books, book, action}) {
     const { data, setData, post } = useForm({
         title: '',
@@ -14,6 +17,7 @@ export default function Books({auth, books, book, action}) {
         finished: false,
         abandoned: false,
     });
+    const tableRef = useRef(null);
 
     const hideForm = () => {
         document.querySelector("#form-book").classList.toggle("hidden");
@@ -48,26 +52,30 @@ export default function Books({auth, books, book, action}) {
 
                     <div className="flex-1 p-2 border-2 border-amber-400 bg-amber-400/20 hover:bg-amber-400/40 text-white text-center cursor-pointer" onClick={hideForm}>книги</div>
 
+                    <ShowingTableCol
+                        model="books"
+                        columns={[
+                            {label: 'author', column: 1},
+                            {label: 'publisher', column: 2},
+                            {label: 'publication_date', column: 3},
+                            {label: 'genre', column: 4},
+                            {label: 'comment', column: 5},
+                            {label: 'finished', column: 6},
+                            {label: 'abandoned', column: 7}
+                        ]}
+                        tableRef={tableRef}
+                    />
+
                     <div className="overflow-x-auto">
-                        <table className="border-separate border-spacing-2 border border-slate-500 w-full">
-                            <thead>
-                                <tr className="bg-slate-700">
-                                    <th className="text-start">Название</th>
-                                    <th>Автор</th>
-                                    <th>Издатель</th>
-                                    <th>Дата публикации</th>
-                                    <th>Жанр</th>
-                                    <th>Комментарий</th>
-                                    <th>Завершен</th>
-                                    <th>Заброшен</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {books.map((book) => (
-                                    <RowBook key={book.id} book={book} />
-                                ))}
-                            </tbody>
-                        </table>
+                        <ModelTable
+                            model="books"
+                            columns={["title", "author", "publisher", "publication_date", "genre", "comment", "finished", "abandoned"]}
+                            ref={tableRef}
+                        >
+                            {books.map((book) => (
+                                <RowBook key={book.id} book={book} />
+                            ))}
+                        </ModelTable>
                     </div>
                 </div>
             </div>
