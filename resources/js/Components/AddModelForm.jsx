@@ -6,7 +6,7 @@ export default function AddModelForm({id, listInputs, ...props}) {
                 <div className={"flex flex-1 lg:flex-col flex-row items-center justify-between float-left w-full " + (item.type == "checkbox" || item.type == "number" ? "items-center" : "")} key={item.name}>
                     <label>{item.label}</label>
                     <input
-                        className={(item.type == "checkbox" ? "m-1" : "text-black") + " " + (item.type == "number" ? "w-20" : item.type == "text" ? "w-full" : "") + (item.classname ? " " + item.classname : "")}
+                        className={(item.type == "checkbox" ? "m-1" : "text-black") + " " + (item.type == "number" ? "w-20" : item.type == "text" ? "w-full" : "") + (item.className ? " " + item.className : "")}
                         {...item}
                     />
                  </div>
