@@ -23,7 +23,7 @@ export default function FormNewAnime({id, data, setData, post, ...props}) {
             name:"title",
             required: true,
             value: data.title,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange:(e) => setData('title', e.target.value)
         },
@@ -50,37 +50,37 @@ export default function FormNewAnime({id, data, setData, post, ...props}) {
             type: "text",
             name: "genre",
             value: data.genre,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
-            classname: "w-full"
+            className: "w-full"
         },
         {
             label: "Издатель",
             type: "text",
             name: "publisher",
             value: data.publisher,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('publisher', e.target.value),
-            classname: "w-full"
+            className: "w-full"
         },
         {
             label: "Перевод",
             type: "text",
             name: "translator",
             value: data.translator,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('translator', e.target.value),
-            classname: "w-full"
+            className: "w-full"
         },
         {
             label: "Комментарий",
             type: "text",
             name: "comment",
             value: data.comment,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value)
         },
