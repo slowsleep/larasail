@@ -46,7 +46,7 @@ export default function RowAnime({anime}) {
             value: data.title,
             type: "text",
             name: "title",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => {
                 setData('title', e.target.value);
@@ -92,7 +92,7 @@ export default function RowAnime({anime}) {
             value: data.genre ? data.genre : "",
             type: "text",
             name: "genre",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
         },
@@ -100,7 +100,7 @@ export default function RowAnime({anime}) {
             value: data.publisher ? data.publisher : "",
             type: "text",
             name: "publisher",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('publisher', e.target.value),
         },
@@ -108,7 +108,7 @@ export default function RowAnime({anime}) {
             value: data.translator ? data.translator : "",
             type: "text",
             name: "translator",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('translator', e.target.value),
         },
@@ -116,7 +116,7 @@ export default function RowAnime({anime}) {
             value: data.comment ? data.comment : "",
             type: "text",
             name: "comment",
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value),
         },
@@ -144,6 +144,16 @@ export default function RowAnime({anime}) {
     ]
 
     return (
-        <ModelRow className="odd:bg-teal-950 even:bg-teal-800" inputs={inputList} data={data} setData={setData} modelItem={anime} modelName="аниме" onSave={handleSave} onDestroy={handleDestroy} onCancle={handleCancle} />
+        <ModelRow
+            className="odd:bg-teal-950 even:bg-teal-800"
+            inputs={inputList}
+            data={data}
+            setData={setData}
+            modelItem={anime}
+            modelName={{ru: "аниме", en: "anime"}}
+            onSave={handleSave}
+            onDestroy={handleDestroy}
+            onCancle={handleCancle}
+        />
     )
 }
