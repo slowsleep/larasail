@@ -52,32 +52,6 @@ class SeriesController extends Controller
         return Inertia::render('Series/Series', ['singleSeries' => $singleSeries, 'action' => 'create']);
     }
 
-    public function update(Request $request): Response
-    {
-        $request->validate([
-            'id' => 'required|integer',
-            'title' => 'required|string|max:255',
-            'season' => 'integer|min:1',
-            'episode' => 'integer|min:1',
-            'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
-        ]);
-
-        $singleSeries = Series::findOrFail($request->id);
-        $singleSeries->update($request->all());
-
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Series',
-            'model_id' => $singleSeries->id,
-            'data' => $singleSeries->title,
-        ]);
-
-        return Inertia::render('Series/Series', ['singleSeries' => $singleSeries, 'action' => 'update']);
-    }
-
     public function destroy(Request $request): RedirectResponse
     {
         Series::destroy($request->id);

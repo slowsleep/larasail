@@ -53,31 +53,6 @@ class MovieController extends Controller
         return Inertia::render('Movie/Movies', ['movie' => $movie, 'action' => 'create']);
     }
 
-    public function update(Request $request): Response
-    {
-        $request->validate([
-            'id' => 'required|integer',
-            'title' => 'required|string|max:255',
-            'part' => 'integer|nullable|min:1',
-            'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
-        ]);
-
-        $movie = Movie::findOrFail($request->id);
-        $movie->update($request->all());
-
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Movie',
-            'model_id' => $movie->id,
-            'data' => $movie->title,
-        ]);
-
-        return Inertia::render('Movie/Movies', ['movie' => $movie, 'action' => 'update']);
-    }
-
     public function destroy(Request $request): RedirectResponse
     {
         Movie::destroy($request->id);

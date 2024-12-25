@@ -53,32 +53,6 @@ class MangaController extends Controller
         return Inertia::render('Manga/Manga', ['manga' => $manga, 'action' => 'create']);
     }
 
-    public function update(Request $request) {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'volume' => 'required|integer|min:1',
-            'chapter' => 'required|integer|min:1',
-            'genre' => 'string|nullable|max:255',
-            'creators' => 'string|nullable|max:255',
-            'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
-        ]);
-
-        $manga = Manga::findOrFail($request->id);
-        $manga->update($request->all());
-
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Manga',
-            'model_id' => $manga->id,
-            'data' => $manga->title,
-        ]);
-
-        return Inertia::render('Manga/Manga', ['manga' => $manga, 'action' => 'update']);
-    }
-
     public function destroy(Request $request): RedirectResponse{
         Manga::destroy($request->id);
 

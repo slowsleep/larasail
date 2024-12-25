@@ -63,17 +63,14 @@ Route::group(['middleware' => ['auth', 'web']],function () {
     Route::resource('chats', ChatController::class)->only(['index', 'show', 'destroy']);
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
-    Route::resource('movies', MovieController::class)->only(['index', 'store', 'update', 'destroy']);
 
-    Route::resource('series', SeriesController::class)->only(['index', 'store', 'update', 'destroy']);
-
-    Route::resource('games', GameController::class)->only(['index', 'store', 'update', 'destroy']);
-
-    Route::resource('books', BookController::class)->only(['index', 'store', 'update', 'destroy']);
-
-    Route::resource('mangas', MangaController::class)->only(['index', 'store', 'update', 'destroy']);
-
-    Route::resource('anime', AnimeController::class)->only(['index', 'store', 'update', 'destroy']);
+    // 'update' goes to the api
+    Route::resource('movies', MovieController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('series', SeriesController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('games', GameController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('books', BookController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('mangas', MangaController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('anime', AnimeController::class)->only(['index', 'store', 'destroy']);
 });
 
 require __DIR__.'/auth.php';

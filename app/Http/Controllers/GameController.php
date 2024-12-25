@@ -53,32 +53,6 @@ class GameController extends Controller
         return Inertia::render('Game/Games', ['game' => $game, 'action' => 'create']);
     }
 
-    public function update(Request $request): Response
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'genre' => 'string|nullable|max:255',
-            'developer' => 'string|nullable|max:255',
-            'publisher' => 'string|nullable|max:255',
-            'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
-        ]);
-
-        $game = Game::findOrFail($request->id);
-        $game->update($request->all());
-
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Game',
-            'model_id' => $game->id,
-            'data' => $game->title,
-        ]);
-
-        return Inertia::render('Game/Games', ['game' => $game, 'action' => 'update']);
-    }
-
     public function destroy(Request $request): RedirectResponse
     {
         Game::destroy($request->id);

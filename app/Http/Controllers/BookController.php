@@ -55,33 +55,6 @@ class BookController extends Controller
         return Inertia::render('Book/Books', ['book' => $book, 'action' => 'create']);
     }
 
-    public function update(Request $request): Response
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'publisher' => 'string|nullable|max:255',
-            'publication_date' => 'date|nullable',
-            'genre' => 'string|nullable|max:255',
-            'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
-        ]);
-
-        $book = Book::findOrFail($request->id);
-        $book->update($request->all());
-
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Game',
-            'model_id' => $book->id,
-            'data' => $book->title,
-        ]);
-
-        return Inertia::render('Book/Books', ['book' => $book, 'action' => 'update']);
-    }
-
     public function destroy(Request $request): RedirectResponse
     {
         Book::destroy($request->id);
