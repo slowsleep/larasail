@@ -1,6 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import ModelRow from '@/Components/ModelRow';
 import { useState } from 'react';
+import axios from "axios";
 
 export default function RowGame({game}) {
     const [titleError, setTitleError] = useState(false);
@@ -23,10 +24,7 @@ export default function RowGame({game}) {
     }
 
     const handleSave = () =>  {
-        patch(route('games.update', data), {
-            preserveScroll: true,
-            only: ['game', 'action'],
-        });
+        axios.patch(route('api.games.update'), data);
     }
 
     const handleCancle = () => {
@@ -108,7 +106,7 @@ export default function RowGame({game}) {
 
     return (
         <ModelRow
-            className="odd:bg-violet-900 even:bg-violet-800"
+            className="odd:bg-violet-900/40 even:bg-violet-800/40"
             inputs={inputList}
             data={data}
             setData={setData}

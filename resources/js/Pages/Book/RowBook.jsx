@@ -1,6 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import ModelRow from '@/Components/ModelRow';
 import { useState } from 'react';
+import axios from "axios";
 
 export default function RowBook({book}) {
     const [titleError, setTitleError] = useState(false);
@@ -26,10 +27,7 @@ export default function RowBook({book}) {
     }
 
     const handleSave = () =>  {
-        patch(route('books.update', data), {
-            preserveScroll: true,
-            only: ['book', 'action'],
-        });
+        axios.patch(route('api.books.update'), data);
     }
 
     const handleCancle = () => {
@@ -129,7 +127,7 @@ export default function RowBook({book}) {
 
     return (
         <ModelRow
-            className="odd:bg-amber-900 even:bg-amber-800"
+            className="odd:bg-amber-900/40 even:bg-amber-800/40"
             inputs={inputList}
             data={data}
             setData={setData}

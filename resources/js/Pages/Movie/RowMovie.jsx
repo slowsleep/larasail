@@ -1,11 +1,14 @@
 import { useForm } from '@inertiajs/react';
 import ModelRow from '@/Components/ModelRow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from "axios";
 
 export default function RowMovie ({movie}) {
 
     const [titleError, setTitleError] = useState(false);
     const [partError, setPartError] = useState(false);
+
+    const [isNumberEdit, setIsNumberEdit] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: movie.id,
@@ -23,10 +26,7 @@ export default function RowMovie ({movie}) {
     }
 
     const handleSave = () =>  {
-        patch(route('movies.update', data), {
-            preserveScroll: true,
-            only: ['movie', 'action'],
-        });
+        axios.patch(route('api.movies.update'), data);
     }
 
     const handleCancle = () => {
@@ -34,6 +34,28 @@ export default function RowMovie ({movie}) {
         setPartError(false);
         reset();
     }
+
+    const partIncrement = () => {
+        setData('part', Number(data.part) + 1);
+        setIsNumberEdit(true);
+    }
+
+    const partDecrement = () => {
+        if (data.part - 1 > 0) {
+            setData('part', Number(data.part) - 1);
+            setIsNumberEdit(true);
+        } else if (data.part - 1 == 0) {
+            setData('part', null);
+            setIsNumberEdit(true);
+        }
+    }
+
+    useEffect(() => {
+        if (isNumberEdit) {
+            handleSave();
+            setIsNumberEdit(false);
+        }
+    }, [data.part])
 
     const inputList = [
         {
@@ -56,16 +78,23 @@ export default function RowMovie ({movie}) {
             value: data.part ? data.part : "",
             type: "number",
             name: "part",
-            min: 1,
+            min: 0,
             onChange: (e) => {
                 setData('part', e.target.value);
-                if (e.target.value > 0) {
+
+                if (e.target.value >= 0) {
                     setPartError(false);
                 } else {
                     setPartError(true);
                 }
+
+                if (e.target.value == 0) {
+                    setData('part', null);
+                }
             },
             error: partError,
+            onIncrement: partIncrement,
+            onDecrement: partDecrement,
         },
         {
             value: data.comment ? data.comment : "",
@@ -100,7 +129,7 @@ export default function RowMovie ({movie}) {
 
     return (
         <ModelRow
-            className="odd:bg-cyan-900 even:bg-cyan-800"
+            className="odd:bg-cyan-900/40 even:bg-cyan-800/40"
             inputs={inputList}
             data={data}
             setData={setData}

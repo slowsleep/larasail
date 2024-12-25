@@ -1,12 +1,15 @@
 import ModelRow from "@/Components/ModelRow";
 import { useForm } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function RowSeries({singleSeries}) {
 
     const [titleError, setTitleError] = useState(false);
     const [seasonError, setSeasonError] = useState(false);
     const [episodeError, setEpisodeError] = useState(false);
+
+    const [isNumberEdit, setIsNumberEdit] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: singleSeries.id,
@@ -25,10 +28,7 @@ export default function RowSeries({singleSeries}) {
     }
 
     const handleSave = () =>  {
-        patch(route('series.update', data), {
-            preserveScroll: true,
-            only: ['singleSeries', 'action'],
-        });
+        axios.patch(route('api.series.update'), data);
     }
 
     const handleCancle = () => {
@@ -37,6 +37,37 @@ export default function RowSeries({singleSeries}) {
         setEpisodeError(false);
         reset();
     }
+
+    const seasonIncrement = () => {
+        setData('season', Number(data.season) + 1);
+        setIsNumberEdit(true);
+    }
+
+    const seasonDecrement = () => {
+        if (data.season - 1 > 0) {
+            setData('season', Number(data.season) - 1);
+            setIsNumberEdit(true);
+        }
+    }
+
+    const episodeIncrement = () => {
+        setData('episode', Number(data.episode) + 1);
+        setIsNumberEdit(true);
+    }
+
+    const episodeDecrement = () => {
+        if (data.episode - 1 > 0) {
+            setData('episode', Number(data.episode) - 1);
+            setIsNumberEdit(true);
+        }
+    }
+
+    useEffect(() => {
+        if (isNumberEdit) {
+            handleSave();
+            setIsNumberEdit(false);
+        }
+    }, [data.season, data.episode])
 
     const inputList = [
         {
@@ -69,6 +100,8 @@ export default function RowSeries({singleSeries}) {
             },
             min: 1,
             error: seasonError,
+            onIncrement: seasonIncrement,
+            onDecrement: seasonDecrement,
         },
         {
             value: data.episode,
@@ -84,6 +117,8 @@ export default function RowSeries({singleSeries}) {
             },
             min: 1,
             error: episodeError,
+            onIncrement: episodeIncrement,
+            onDecrement: episodeDecrement,
         },
         {
             value: data.comment ? data.comment : "",
@@ -118,7 +153,7 @@ export default function RowSeries({singleSeries}) {
 
     return (
         <ModelRow
-            className="odd:bg-pink-950 even:bg-pink-800"
+            className="odd:bg-pink-950/40 even:bg-pink-800/40"
             inputs={inputList}
             data={data}
             setData={setData}

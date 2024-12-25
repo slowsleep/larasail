@@ -1,12 +1,15 @@
 import ModelRow from "@/Components/ModelRow";
 import { useForm } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function RowAnime({anime}) {
 
     const [titleError, setTitleError] = useState(false);
     const [seasonError, setSeasonError] = useState(false);
     const [episodeError, setEpisodeError] = useState(false);
+
+    const [isNumberEdit, setIsNumberEdit] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: anime.id,
@@ -28,10 +31,7 @@ export default function RowAnime({anime}) {
     }
 
     const handleSave = () =>  {
-        patch(route('anime.update', data), {
-            preserveScroll: true,
-            only: ['anime', 'action'],
-        });
+        axios.patch(route('api.anime.update'), data);
     }
 
     const handleCancle = () => {
@@ -40,6 +40,37 @@ export default function RowAnime({anime}) {
         setEpisodeError(false);
         reset();
     }
+
+    const seasonIncrement = () => {
+        setData('season', Number(data.season) + 1);
+        setIsNumberEdit(true);
+    }
+
+    const seasonDecrement = () => {
+        if (data.season - 1 > 0) {
+            setData('season', Number(data.season) - 1);
+            setIsNumberEdit(true);
+        }
+    }
+
+    const episodeIncrement = () => {
+        setData('episode', Number(data.episode) + 1);
+        setIsNumberEdit(true);
+    }
+
+    const episodeDecrement = () => {
+        if (data.episode - 1 > 0) {
+            setData('episode', Number(data.episode) - 1);
+            setIsNumberEdit(true);
+        }
+    }
+
+    useEffect(() => {
+        if (isNumberEdit) {
+            handleSave();
+            setIsNumberEdit(false);
+        }
+    }, [data.season, data.episode])
 
     const inputList = [
         {
@@ -72,6 +103,8 @@ export default function RowAnime({anime}) {
             },
             min: 1,
             error: seasonError,
+            onIncrement: seasonIncrement,
+            onDecrement: seasonDecrement,
         },
         {
             value: data.episode,
@@ -87,6 +120,8 @@ export default function RowAnime({anime}) {
             },
             min: 1,
             error: episodeError,
+            onIncrement: episodeIncrement,
+            onDecrement: episodeDecrement,
         },
         {
             value: data.genre ? data.genre : "",
@@ -145,7 +180,7 @@ export default function RowAnime({anime}) {
 
     return (
         <ModelRow
-            className="odd:bg-teal-950 even:bg-teal-800"
+            className="odd:bg-teal-950/40 even:bg-teal-800/40"
             inputs={inputList}
             data={data}
             setData={setData}

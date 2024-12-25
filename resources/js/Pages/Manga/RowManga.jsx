@@ -1,11 +1,14 @@
 import { useForm } from '@inertiajs/react';
 import ModelRow from '@/Components/ModelRow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from "axios";
 
 export default function RowManga({ manga }) {
     const [titleError, setTitleError] = useState(false);
     const [volumeError, setVolumeError] = useState(false);
     const [chapterError, setChapterError] = useState(false);
+
+    const [isNumberEdit, setIsNumberEdit] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: manga.id,
@@ -26,10 +29,7 @@ export default function RowManga({ manga }) {
     }
 
     const handleSave = () =>  {
-        patch(route('mangas.update', data), {
-            preserveScroll: true,
-            only: ['manga', 'action'],
-        });
+        axios.patch(route('api.mangas.update'), data);
     }
 
     const handleCancle = () => {
@@ -38,6 +38,37 @@ export default function RowManga({ manga }) {
         setChapterError(false);
         reset();
     }
+
+    const volumeIncrement = () => {
+        setData('volume', Number(data.volume) + 1);
+        setIsNumberEdit(true);
+    }
+
+    const volumeDecrement = () => {
+        if (data.volume - 1 > 0) {
+            setData('volume', Number(data.volume) - 1);
+            setIsNumberEdit(true);
+        }
+    }
+
+    const chapterIncrement = () => {
+        setData('chapter', Number(data.chapter) + 1);
+        setIsNumberEdit(true);
+    }
+
+    const chapterDecrement = () => {
+        if (data.chapter - 1 > 0) {
+            setData('chapter', Number(data.chapter) - 1);
+            setIsNumberEdit(true);
+        }
+    }
+
+    useEffect(() => {
+        if (isNumberEdit) {
+            handleSave();
+            setIsNumberEdit(false);
+        }
+    }, [data.volume, data.chapter])
 
     const inputList = [
         {
@@ -71,6 +102,8 @@ export default function RowManga({ manga }) {
                 }
             },
             error: volumeError,
+            onIncrement: volumeIncrement,
+            onDecrement: volumeDecrement,
         },
         {
             value: data.chapter,
@@ -87,6 +120,8 @@ export default function RowManga({ manga }) {
                 }
             },
             error: chapterError,
+            onIncrement: chapterIncrement,
+            onDecrement: chapterDecrement,
         },
         {
             value: data.genre,
@@ -137,7 +172,7 @@ export default function RowManga({ manga }) {
 
     return (
         <ModelRow
-            className="odd:bg-emerald-900 even:bg-emerald-800"
+            className="odd:bg-emerald-900/40 even:bg-emerald-800/40"
             inputs={inputList}
             data={data}
             setData={setData}
