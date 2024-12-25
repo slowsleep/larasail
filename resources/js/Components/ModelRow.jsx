@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 /**
- * @param {object} modelName ru - в единственном числе, en - как в БД
+ * @param {object} modelName ru - в единственном числе, винительном падеже; en - как в БД
  */
 export default function ModelRow({className, inputs, data, setData, modelItem, modelName, onSave, onDestroy, onCancle, ...props}) {
     const [isEdit, setIsEdit] = useState(false);
@@ -45,10 +45,15 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
     const handleEdit = () => {
         setIsEdit(true);
     }
-
+    
     return (
-        <tr className={className + " " + (data.abandoned ? "brightness-50 grayscale" : "")} {...props}>
+        <tr className={className + " " + (data.abandoned ? "brightness-50 grayscale" : "")
+            + (data.finished ? " -hue-rotate-30" : "")
+            }
+            {...props}
+        >
             {inputs.map((item) => {
+                const { error, onIncrement, onDecrement, ...filteredItem } = item;
                 let isHidden = false;
 
                 if (modelTableCols && modelTableCols.length > 0) {
@@ -64,15 +69,78 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                             <input className="bg-transparent" type="checkbox" name={item.name} checked={item.value} onChange={item.onChange} disabled={item.disabled} />
                         }
                     </td>
-                } else {
-                    const { error, ...filteredItem } = item;
-                    return <td className={"text-white" + (!isEdit ? " p-2" : "") + (item.className ? " " + item.className : "") + (isHidden ? " hidden" : "")} key={item.name}>
+                } else if (item.type == "number" && item.value > 0) {
+                    return <td
+                        className={
+                            "text-white" +
+                            (!isEdit ? " p-2" : "") +
+                            (item.className ? " " + item.className : "") +
+                            (isHidden ? " hidden" : "")
+                        }
+                        key={item.name}
+                    >
                         {!isEdit ?
-                            <p className="w-full break-words">{item.value}</p>
+                            <div className="flex flex-row">
+                                <p className="w-full break-words">
+                                    {item.value}
+                                </p>
+                                {!data.finished && !data.abandoned ?
+                                    <div className="flex flex-row">
+                                        <button
+                                            className="text-green-500 hover:scale-150"
+                                            onClick={onIncrement}
+                                            >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                            </svg>
+                                        </button>
+                                        /
+                                        <button
+                                            className="text-red-500 hover:scale-150"
+                                            onClick={onDecrement}
+                                            >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                : ""}
+                            </div>
                             :
                             <input
                                 {...filteredItem}
-                                className={"bg-transparent w-full" + (error && isFormError ? " border-red-500" : "")}
+                                className={
+                                    "bg-transparent w-full" +
+                                    (error && isFormError
+                                        ? " border-red-500"
+                                        : "")
+                                }
+                            />
+                        }
+                    </td>
+                } else {
+                    return <td
+                        className={
+                            "text-white" +
+                            (!isEdit ? " p-2" : "") +
+                            (item.className ? " " + item.className : "") +
+                            (isHidden ? " hidden" : "")
+                        }
+                        key={item.name}
+                    >
+                        {!isEdit ?
+                            <p className="w-full break-words">
+                                {item.value}
+                            </p>
+                            :
+                            <input
+                                {...filteredItem}
+                                className={
+                                    "bg-transparent w-full" +
+                                    (error && isFormError
+                                        ? " border-red-500"
+                                        : "")
+                                }
                             />
                         }
                     </td>
