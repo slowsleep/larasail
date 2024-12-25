@@ -23,23 +23,23 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
-                                <NavLink href={route('movies.index')} active={route().current('movies.index')}>
-                                    Фильмы
+                                <NavLink href={route('anime.index')} active={route().current('anime.index')}>
+                                    Аниме
                                 </NavLink>
                                 <NavLink href={route('series.index')} active={route().current('series.index')}>
                                     Сериалы
                                 </NavLink>
-                                <NavLink href={route('games.index')} active={route().current('games.index')}>
-                                    Игры
-                                </NavLink>
-                                <NavLink href={route('books.index')} active={route().current('books.index')}>
-                                    Книги
+                                <NavLink href={route('movies.index')} active={route().current('movies.index')}>
+                                    Фильмы
                                 </NavLink>
                                 <NavLink href={route('mangas.index')} active={route().current('mangas.index')}>
                                     Манга
                                 </NavLink>
-                                <NavLink href={route('anime.index')} active={route().current('anime.index')}>
-                                    Аниме
+                                <NavLink href={route('books.index')} active={route().current('books.index')}>
+                                    Книги
+                                </NavLink>
+                                <NavLink href={route('games.index')} active={route().current('games.index')}>
+                                    Игры
                                 </NavLink>
                             </div>
                         </div>
@@ -118,23 +118,23 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('movies.index')} active={route().current('movies.index')}>
-                            Фильмы
+                        <ResponsiveNavLink href={route('anime.index')} active={route().current('anime.index')}>
+                            Аниме
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('series.index')} active={route().current('series.index')}>
                             Сериалы
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('games.index')} active={route().current('games.index')}>
-                            Игры
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('books.index')} active={route().current('books.index')}>
-                            Книги
+                        <ResponsiveNavLink href={route('movies.index')} active={route().current('movies.index')}>
+                            Фильмы
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('mangas.index')} active={route().current('mangas.index')}>
                             Манга
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('anime.index')} active={route().current('anime.index')}>
-                            Аниме
+                        <ResponsiveNavLink href={route('books.index')} active={route().current('books.index')}>
+                            Книги
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('games.index')} active={route().current('games.index')}>
+                            Игры
                         </ResponsiveNavLink>
                     </div>
 
