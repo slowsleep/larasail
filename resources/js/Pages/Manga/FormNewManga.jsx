@@ -24,7 +24,7 @@ export default function FormNewManga({id, data, setData, post}) {
             name:"title",
             required: true,
             value: data.title,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange:(e) => setData('title', e.target.value)
         },
@@ -55,7 +55,7 @@ export default function FormNewManga({id, data, setData, post}) {
             type: "text",
             name: "genre",
             value: data.genre,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
             classname: "w-full"
@@ -65,7 +65,7 @@ export default function FormNewManga({id, data, setData, post}) {
             type: "text",
             name: "creators",
             value: data.creators,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('creators', e.target.value),
             classname: "w-full"
@@ -75,7 +75,7 @@ export default function FormNewManga({id, data, setData, post}) {
             type: "text",
             name: "comment",
             value: data.comment,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value)
         },

@@ -24,7 +24,7 @@ export default function FormNewGame({id, data, setData, post, ...props}) {
             name:"title",
             required: true,
             value: data.title,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange:(e) => setData('title', e.target.value)
         },
@@ -33,7 +33,7 @@ export default function FormNewGame({id, data, setData, post, ...props}) {
             type: "text",
             name: "genre",
             value: data.genre,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
             classname: "w-full"
@@ -43,7 +43,7 @@ export default function FormNewGame({id, data, setData, post, ...props}) {
             type: "text",
             name: "developer",
             value: data.developer,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('developer', e.target.value),
             classname: "w-full"
@@ -53,7 +53,7 @@ export default function FormNewGame({id, data, setData, post, ...props}) {
             type: "text",
             name: "publisher",
             value: data.publisher,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('publisher', e.target.value),
             classname: "w-full"
@@ -63,7 +63,7 @@ export default function FormNewGame({id, data, setData, post, ...props}) {
             type: "text",
             name: "comment",
             value: data.comment,
-            maxlength: "255",
+            maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('comment', e.target.value)
         },
