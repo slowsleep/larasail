@@ -27,7 +27,7 @@ const ModelTable = forwardRef((props, ref) => {
             ref={ref}
         >
             <thead>
-                <tr className="bg-slate-700">
+                <tr className="dark:bg-slate-700 bg-slate-200">
                     {columns.map((col, i) => (
                         <th key={i} className={i == 0 ? 'text-start' : ''}>{col}</th>
                     ))}

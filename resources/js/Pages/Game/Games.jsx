@@ -49,7 +49,7 @@ export default function Games({auth, games, game, action}) {
 
                         <FormNewGame id="form-game" data={data} setData={setData} post={post} />
 
-                        <div className="flex-1 p-2 border-2 border-violet-400 bg-violet-400/20 hover:bg-violet-400/40 text-white text-center cursor-pointer" onClick={hideForm}>игры</div>
+                        <div className="flex-1 p-2 border-2 border-violet-400 bg-violet-400/20 hover:bg-violet-400/40 dark:text-white text-center cursor-pointer" onClick={hideForm}>игры</div>
 
                         <ShowingTableCol
                             model="games"

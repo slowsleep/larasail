@@ -7,7 +7,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white ">
                 <div className="flex flex-row justify-between">
                     <div className="sm:fixed sm:top-0 sm:left-0 text-start p-6">
-                        <h1 className="text-xl font-semibold text-gray-400">WatchWizard</h1>
+                        <h1 className="text-xl font-semibold dark:text-gray-400">WatchWizard</h1>
                     </div>
                     <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                         {auth.user ? (
@@ -41,11 +41,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="flex justify-center">
                         <img src="assets/img/watch-wizard.png" className="w-1/2 border-2 border-violet-400  rounded-lg shadow-violet-400/40 shadow-2xl" />
                     </div>
-                    <div className="mt-8 bg-gray-800/60 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="mt-8 dark:bg-gray-800/60 bg-gray-50 overflow-hidden shadow-sm sm:rounded-lg">
 
-                        <p className="m-4 text-md text-gray-400">WatchWizard - сайт помощник для ослеживания контента, который вы прошли, проходите или будете проходить, будь то сериалы, фильмы, игры, аниме, манга или книги.</p>
-                        <p className="m-4 text-md text-gray-400">В профиле есть таблица активности, отслеживающая вашу активность на сайте.</p>
-                        <p className="m-4 text-md text-gray-400">Добавлена возможность общения с другими пользователями и система подписок друг на друга.</p>
+                        <p className="m-4 text-md dark:text-gray-400">WatchWizard - сайт помощник для ослеживания контента, который вы прошли, проходите или будете проходить, будь то сериалы, фильмы, игры, аниме, манга или книги.</p>
+                        <p className="m-4 text-md dark:text-gray-400">В профиле есть таблица активности, отслеживающая вашу активность на сайте.</p>
+                        <p className="m-4 text-md dark:text-gray-400">Добавлена возможность общения с другими пользователями и система подписок друг на друга.</p>
                         <p className="m-4 text-lg text-green-400">Входите с систему и сделайте свою жизнь проще, без отслеживания просмотренных фильмов в заметках или избранных сообщениях в социальных сетях.</p>
                         <div className="flex justify-center">
                             <img src="assets/img/dev.gif" />

@@ -51,7 +51,7 @@ export default function Anime({auth, animeList, anime, action}) {
 
                     <FormNewAnime id="form-anime" data={data} setData={setData} post={post} />
 
-                    <div className="flex-1 p-2 border-2 border-teal-400 bg-teal-400/20 hover:bg-teal-400/40 text-white text-center cursor-pointer" onClick={hideForm}>аниме</div>
+                    <div className="flex-1 p-2 border-2 border-teal-400 bg-teal-400/20 hover:bg-teal-400/40 dark:text-white text-center cursor-pointer" onClick={hideForm}>аниме</div>
 
                     <ShowingTableCol
                         model="anime"

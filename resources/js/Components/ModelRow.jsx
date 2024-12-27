@@ -45,7 +45,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
     const handleEdit = () => {
         setIsEdit(true);
     }
-    
+
     return (
         <tr className={className + " " + (data.abandoned ? "brightness-50 grayscale" : "")
             + (data.finished ? " -hue-rotate-30" : "")
@@ -72,7 +72,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                 } else if (item.type == "number" && item.value > 0) {
                     return <td
                         className={
-                            "text-white" +
+                            "dark:text-white" +
                             (!isEdit ? " p-2" : "") +
                             (item.className ? " " + item.className : "") +
                             (isHidden ? " hidden" : "")
@@ -121,7 +121,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                 } else {
                     return <td
                         className={
-                            "text-white" +
+                            "dark:text-white" +
                             (!isEdit ? " p-2" : "") +
                             (item.className ? " " + item.className : "") +
                             (isHidden ? " hidden" : "")

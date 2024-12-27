@@ -50,7 +50,7 @@ export default function Manga({auth, mangas, manga, action}) {
 
                     <FormNewManga id="form-manga" data={data} setData={setData} post={post} />
 
-                    <div className="flex-1 p-2 border-2 border-emerald-400 bg-emerald-400/20 hover:bg-emerald-400/40 text-white text-center cursor-pointer" onClick={hideForm}>манга</div>
+                    <div className="flex-1 p-2 border-2 border-emerald-400 bg-emerald-400/20 hover:bg-emerald-400/40 dark:text-white text-center cursor-pointer" onClick={hideForm}>манга</div>
 
                     <ShowingTableCol
                         model="manga"
