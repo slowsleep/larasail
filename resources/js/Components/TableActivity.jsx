@@ -71,7 +71,7 @@ export default function TableActivity({activity}) {
             squares.push(
                 <div key={i} className="flex flex-col">
                     {week.map(({date, activity}, index) => (
-                        <Square key={index} title={getFormattedDate(date) + (activity?.length ? ` (${activity.length})` : "")} className={activity?.length ? `bg-${color}-${colorOpacity(activity.length)}00` : false} />
+                        <Square key={index} title={getFormattedDate(date) + (activity?.length ? ` (${activity.length})` : "")} className={activity?.length ? `bg-${color}-${colorOpacity(activity.length)}00` : 'bg-white dark:bg-gray-800'} />
                     ))}
                 </div>
             );
