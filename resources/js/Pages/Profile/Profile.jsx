@@ -122,7 +122,7 @@ export default function Profile({ auth, user = false}) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="flex p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg text-white justify-between" >
+                    <div className="flex p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg dark:text-white justify-between" >
                         {user ?
                             <>
                                 <div className="overflow-hidden content-center w-4/12" style={{width: "200px", height: "200px"}}>
@@ -169,7 +169,7 @@ export default function Profile({ auth, user = false}) {
                     </div>
 
                     {user ?
-                        <div className="flex flex-col p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg text-white">
+                        <div className="flex flex-col p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg dark:text-white">
                             <h1 className="mb-2 text-xl">Activity</h1>
                             <TableActivity activity={activity} />
                         </div>
