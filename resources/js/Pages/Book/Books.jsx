@@ -1,12 +1,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FormNewBook from './FormNewBook';
 import RowBook from './RowBook';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
+import ModelTableSorting from '@/Components/ModelTableSorting';
 
 export default function Books({auth, books, book, action}) {
+    const [booksItems, setBooksItems] = useState(books);
+
     const { data, setData, post } = useForm({
         title: '',
         author: '',
@@ -25,18 +28,30 @@ export default function Books({auth, books, book, action}) {
 
     useEffect(() => {
         if (book) {
+            let newBooksItems;
             if (action == "create") {
-                books.push(book);
+                newBooksItems = [...booksItems, book];
             } else if (action == "update") {
-                books = books.map((item) => {
+                newBooksItems = booksItems.map((item) => {
                     if (item.id == book.id) {
                         return {...item, ...book};
                     }
                     return item;
                 });
+
             }
+            setBooksItems(newBooksItems);
         }
     }, [book, action]);
+
+    const updateSortedBooksItems = (sortedBooks) => {
+        setBooksItems(sortedBooks);
+    }
+
+    const handleDestroyBook = (id) => {
+        let newBooksItems = booksItems.filter(item => item.id != id);
+        setBooksItems(newBooksItems);
+    }
 
     return (
         <AuthenticatedLayout
@@ -66,14 +81,20 @@ export default function Books({auth, books, book, action}) {
                         tableRef={tableRef}
                     />
 
+                    <ModelTableSorting
+                        model="books"
+                        columns={['title', 'status', 'created_at']}
+                        updateTableItems={updateSortedBooksItems}
+                    />
+
                     <div className="overflow-x-auto">
                         <ModelTable
                             model="books"
                             columns={["title", "author", "publisher", "publication_date", "genre", "comment", "finished", "abandoned"]}
                             ref={tableRef}
                         >
-                            {books.map((book) => (
-                                <RowBook key={book.id} book={book} />
+                            {booksItems.map((book) => (
+                                <RowBook key={book.id} book={book} onDelete={handleDestroyBook} />
                             ))}
                         </ModelTable>
                     </div>

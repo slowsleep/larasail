@@ -1,12 +1,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FormNewGame from './FormNewGame';
 import RowGame from './RowGame';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
+import ModelTableSorting from '@/Components/ModelTableSorting';
 
 export default function Games({auth, games, game, action}) {
+    const [gamesItems, setGamesItems] = useState(games);
+
     const { data, setData, post } = useForm({
         title: '',
         genre: '',
@@ -24,18 +27,30 @@ export default function Games({auth, games, game, action}) {
 
     useEffect(() => {
         if (game) {
+            let newGamesItems;
             if (action == "create") {
-                games.push(game);
+                newGamesItems = [...gamesItems, game];
             } else if (action == "update") {
-                games = games.map((item) => {
+                newGamesItems = gamesItems.map((item) => {
                     if (item.id == game.id) {
                         return {...item, ...game};
                     }
                     return item;
                 });
+
             }
+            setGamesItems(newGamesItems);
         }
     }, [game, action]);
+
+    const updateSortedGamesItems = (sortedGames) => {
+        setGamesItems(sortedGames);
+    }
+
+    const handleDestroyGame = (id) => {
+        let newGamesItems = gamesItems.filter(item => item.id != id);
+        setGamesItems(newGamesItems);
+    }
 
     return (
         <AuthenticatedLayout
@@ -64,14 +79,20 @@ export default function Games({auth, games, game, action}) {
                             tableRef={tableRef}
                         />
 
+                        <ModelTableSorting
+                            model="games"
+                            columns={['title', 'status', 'created_at']}
+                            updateTableItems={updateSortedGamesItems}
+                        />
+
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="games"
                                 columns={["title", "genre", "developer", "publisher", "comment", "finished", "abandoned"]}
                                 ref={tableRef}
                             >
-                                {games.map((game) => (
-                                    <RowGame key={game.id} game={game} />
+                                {gamesItems.map((game) => (
+                                    <RowGame key={game.id} game={game} onDelete={handleDestroyGame} />
                                 ))}
                             </ModelTable>
                         </div>

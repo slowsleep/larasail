@@ -1,12 +1,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import RowMovie from './RowMovie';
 import FormNewMovie from './FormNewMovie';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
+import ModelTableSorting from '@/Components/ModelTableSorting';
 
 export default function Movies({ auth, movies, movie, action }) {
+    const [moviesItems, setMoviesItems] = useState(movies);
+
     const { data, setData, post } = useForm({
         title: '',
         part: '',
@@ -22,18 +25,30 @@ export default function Movies({ auth, movies, movie, action }) {
 
     useEffect(() => {
         if (movie) {
+            let newMoviesItems;
             if (action == "create") {
-                movies.push(movie);
+                newMoviesItems = [...moviesItems, movie];
             } else if (action == "update") {
-                movies = movies.map((item) => {
+                newMoviesItems = moviesItems.map((item) => {
                     if (item.id == movie.id) {
                         return {...item, ...movie};
                     }
                     return item;
                 });
+
             }
+            setMoviesItems(newMoviesItems);
         }
     }, [movie, action]);
+
+    const updateSortedMoviesItems = (sortedMovies) => {
+        setMoviesItems(sortedMovies);
+    }
+
+    const handleDestroyMovie = (id) => {
+        let newMoviesItems = moviesItems.filter(item => item.id != id);
+        setMoviesItems(newMoviesItems);
+    }
 
     return (
         <AuthenticatedLayout
@@ -60,14 +75,20 @@ export default function Movies({ auth, movies, movie, action }) {
                             tableRef={tableRef}
                         />
 
+                        <ModelTableSorting
+                            model="movies"
+                            columns={['title', 'status', 'created_at']}
+                            updateTableItems={updateSortedMoviesItems}
+                        />
+
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="movies"
                                 columns={['title', 'part', 'comment', 'finished', 'abandoned']}
                                 ref={tableRef}
                             >
-                                {movies.map((movie) => (
-                                    <RowMovie key={movie.id} movie={movie} />
+                                {moviesItems.map((movie) => (
+                                    <RowMovie key={movie.id} movie={movie} onDelete={handleDestroyMovie} />
                                 ))}
                             </ModelTable>
                         </div>

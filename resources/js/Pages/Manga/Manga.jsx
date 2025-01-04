@@ -1,12 +1,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FormNewManga from './FormNewManga';
 import RowManga from './RowManga';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
+import ModelTableSorting from '@/Components/ModelTableSorting';
 
 export default function Manga({auth, mangas, manga, action}) {
+    const [mangasItems, setMangasItems] = useState(mangas);
+
     const { data, setData, post } = useForm({
         title: '',
         volume: '',
@@ -25,18 +28,30 @@ export default function Manga({auth, mangas, manga, action}) {
 
     useEffect(() => {
         if (manga) {
+            let newMangasItems;
             if (action == "create") {
-                mangas.push(manga);
+                newMangasItems = [...mangasItems, manga];
             } else if (action == "update") {
-                mangas = mangas.map((item) => {
+                newMangasItems = mangasItems.map((item) => {
                     if (item.id == manga.id) {
                         return {...item, ...manga};
                     }
                     return item;
                 });
+
             }
+            setMangasItems(newMangasItems);
         }
     }, [manga, action]);
+
+    const updateSortedMangasItems = (sortedMangas) => {
+        setMangasItems(sortedMangas);
+    }
+
+    const handleDestroyManga = (id) => {
+        let newMangasItems = mangasItems.filter(item => item.id != id);
+        setMangasItems(newMangasItems);
+    }
 
   return (
     <AuthenticatedLayout
@@ -66,14 +81,20 @@ export default function Manga({auth, mangas, manga, action}) {
                         tableRef={tableRef}
                     />
 
+                    <ModelTableSorting
+                        model="mangas"
+                        columns={['title', 'status', 'created_at']}
+                        updateTableItems={updateSortedMangasItems}
+                    />
+
                     <div className="overflow-x-auto">
                         <ModelTable
                             model="manga"
                             columns={["title", "volume", "chapter", "genre", "creators", "comment", "finished", "abandoned"]}
                             ref={tableRef}
                         >
-                            {mangas.map((manga) => (
-                                <RowManga key={manga.id} manga={manga} />
+                            {mangasItems.map((manga) => (
+                                <RowManga key={manga.id} manga={manga} onDelete={handleDestroyManga} />
                             ))}
                         </ModelTable>
                     </div>

@@ -1,12 +1,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FormNewAnime from './FormNewAnime';
 import RowAnime from './RowAnime';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
+import ModelTableSorting from '@/Components/ModelTableSorting';
 
 export default function Anime({auth, animeList, anime, action}) {
+    const [animeItems, setAnimeItems] = useState(animeList);
+
     const { data, setData, post } = useForm({
         title: '',
         season: '',
@@ -26,18 +29,30 @@ export default function Anime({auth, animeList, anime, action}) {
 
     useEffect(() => {
         if (anime) {
+            let newAnimeItems;
             if (action == "create") {
-                animeList.push(anime);
+                newAnimeItems = [...animeItems, anime];
             } else if (action == "update") {
-                animeList = animeList.map((item) => {
+                newAnimeItems = animeItems.map((item) => {
                     if (item.id == anime.id) {
                         return {...item, ...anime};
                     }
                     return item;
                 });
+
             }
+            setAnimeItems(newAnimeItems);
         }
     }, [anime, action]);
+
+    const updateSortedAnimeItems = (sortedAnime) => {
+        setAnimeItems(sortedAnime);
+    }
+
+    const handleDestroyAnime = (id) => {
+        let newAnimeItems = animeItems.filter(item => item.id != id);
+        setAnimeItems(newAnimeItems);
+    }
 
     return (
         <AuthenticatedLayout
@@ -68,14 +83,20 @@ export default function Anime({auth, animeList, anime, action}) {
                         tableRef={tableRef}
                     />
 
+                    <ModelTableSorting
+                        model="anime"
+                        columns={['title', 'status', 'created_at']}
+                        updateTableItems={updateSortedAnimeItems}
+                    />
+
                     <div className="overflow-x-auto">
                         <ModelTable
                             model="anime"
                             columns={["title", "season", "episode", "genre", "publisher", "translator", "comment", "finished", "abandoned"]}
                             ref={tableRef}
                         >
-                            {animeList.map((anime) => (
-                                <RowAnime key={anime.id} anime={anime} />
+                            {animeItems.map((anime) => (
+                                <RowAnime key={anime.id} anime={anime} onDelete={handleDestroyAnime} />
                             ))}
                         </ModelTable>
                     </div>

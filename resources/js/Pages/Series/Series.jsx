@@ -2,11 +2,14 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import FormNewSeries from './FormNewSeries';
 import RowSeries from './RowSeries';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
+import ModelTableSorting from '@/Components/ModelTableSorting';
 
 export default function Series({ auth, series, singleSeries, action }) {
+    const [seriesItems, setSeriesItems] = useState(series);
+
     const { data, setData, post } = useForm({
         title: '',
         season: '',
@@ -23,18 +26,30 @@ export default function Series({ auth, series, singleSeries, action }) {
 
     useEffect(() => {
         if (singleSeries) {
+            let newSeriesItems;
             if (action == "create") {
-                series.push(singleSeries);
+                newSeriesItems = [...seriesItems, singleSeries];
             } else if (action == "update") {
-                series = series.map((item) => {
+                newSeriesItems = seriesItems.map((item) => {
                     if (item.id == singleSeries.id) {
                         return {...item, ...singleSeries};
                     }
                     return item;
                 });
+
             }
+            setSeriesItems(newSeriesItems);
         }
     }, [singleSeries, action]);
+
+    const updateSortedSeriesItems = (sortedSeries) => {
+        setSeriesItems(sortedSeries);
+    }
+
+    const handleDestroySeries = (id) => {
+        let newSeriesItems = seriesItems.filter(item => item.id != id);
+        setSeriesItems(newSeriesItems);
+    }
 
     return (
         <AuthenticatedLayout
@@ -62,14 +77,20 @@ export default function Series({ auth, series, singleSeries, action }) {
                             tableRef={tableRef}
                         />
 
+                        <ModelTableSorting
+                            model="series"
+                            columns={['title', 'status', 'created_at']}
+                            updateTableItems={updateSortedSeriesItems}
+                        />
+
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="series"
                                 columns={["title", "season", "episode", "comment", "finished", "abandoned"]}
                                 ref={tableRef}
                             >
-                                {series.map((singleSeries) => (
-                                    <RowSeries key={singleSeries.id} singleSeries={singleSeries} />
+                                {seriesItems.map((singleSeries) => (
+                                    <RowSeries key={singleSeries.id} singleSeries={singleSeries} onDelete={handleDestroySeries} />
                                 ))}
                             </ModelTable>
                         </div>
