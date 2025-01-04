@@ -3,7 +3,7 @@ import ModelRow from '@/Components/ModelRow';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
-export default function RowMovie ({movie}) {
+export default function RowMovie ({movie, onDelete}) {
 
     const [titleError, setTitleError] = useState(false);
     const [partError, setPartError] = useState(false);
@@ -23,6 +23,7 @@ export default function RowMovie ({movie}) {
         destroy(route('movies.destroy', {id: movie.id}), {
             preserveScroll: true,
         });
+        onDelete(movie.id);
     }
 
     const handleSave = () =>  {

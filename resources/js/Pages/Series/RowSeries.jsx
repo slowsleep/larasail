@@ -3,7 +3,7 @@ import { useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function RowSeries({singleSeries}) {
+export default function RowSeries({singleSeries, onDelete}) {
 
     const [titleError, setTitleError] = useState(false);
     const [seasonError, setSeasonError] = useState(false);
@@ -25,6 +25,7 @@ export default function RowSeries({singleSeries}) {
         destroy(route('series.destroy', {id: singleSeries.id}), {
             preserveScroll: true,
         });
+        onDelete(singleSeries.id);
     }
 
     const handleSave = () =>  {

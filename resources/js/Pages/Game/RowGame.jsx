@@ -3,7 +3,7 @@ import ModelRow from '@/Components/ModelRow';
 import { useState } from 'react';
 import axios from "axios";
 
-export default function RowGame({game}) {
+export default function RowGame({game, onDelete}) {
     const [titleError, setTitleError] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
@@ -21,6 +21,7 @@ export default function RowGame({game}) {
         destroy(route('games.destroy', {id: game.id}), {
             preserveScroll: true,
         });
+        onDelete(game.id);
     }
 
     const handleSave = () =>  {

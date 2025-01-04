@@ -3,7 +3,7 @@ import ModelRow from '@/Components/ModelRow';
 import { useState } from 'react';
 import axios from "axios";
 
-export default function RowBook({book}) {
+export default function RowBook({book, onDelete}) {
     const [titleError, setTitleError] = useState(false);
     const [authorError, setAuthorError] = useState(false);
 
@@ -24,6 +24,7 @@ export default function RowBook({book}) {
         destroy(route('books.destroy', {id: book.id}), {
             preserveScroll: true,
         });
+        onDelete(book.id);
     }
 
     const handleSave = () =>  {

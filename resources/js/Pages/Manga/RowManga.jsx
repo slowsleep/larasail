@@ -3,7 +3,7 @@ import ModelRow from '@/Components/ModelRow';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
-export default function RowManga({ manga }) {
+export default function RowManga({ manga, onDelete }) {
     const [titleError, setTitleError] = useState(false);
     const [volumeError, setVolumeError] = useState(false);
     const [chapterError, setChapterError] = useState(false);
@@ -26,6 +26,7 @@ export default function RowManga({ manga }) {
         destroy(route('mangas.destroy', {id: manga.id}), {
             preserveScroll: true,
         });
+        onDelete(manga.id);
     }
 
     const handleSave = () =>  {

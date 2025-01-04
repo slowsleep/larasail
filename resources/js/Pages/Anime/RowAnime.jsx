@@ -3,7 +3,7 @@ import { useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function RowAnime({anime}) {
+export default function RowAnime({anime, onDelete}) {
 
     const [titleError, setTitleError] = useState(false);
     const [seasonError, setSeasonError] = useState(false);
@@ -28,6 +28,7 @@ export default function RowAnime({anime}) {
         destroy(route('anime.destroy', {id: anime.id}), {
             preserveScroll: true,
         });
+        onDelete(anime.id);
     }
 
     const handleSave = () =>  {
