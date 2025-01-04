@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Traits\SortableTrait;
 use Illuminate\Http\Request;
 use App\Models\Series;
 use App\Http\Controllers\ActivityLogController;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
 {
+    use SortableTrait;
+
     public function update(Request $request)
     {
         $request->validate([
@@ -42,6 +45,21 @@ class SeriesController extends Controller
         ];
 
         return response()->json($response);
-        // return Inertia::render('Series/Series', ['singleSeries' => $singleSeries, 'action' => 'update']);
     }
+
+    public function sort(Request $request)
+    {
+        try {
+            $series = $this->sorting($request, Series::class);
+            $response = [
+                'error' => false,
+                'data' => $series,
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
 }

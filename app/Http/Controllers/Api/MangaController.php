@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Traits\SortableTrait;
 use Illuminate\Http\Request;
 use App\Models\Manga;
 use App\Http\Controllers\ActivityLogController;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class MangaController extends Controller
 {
+    use SortableTrait;
+
     public function update(Request $request) {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -41,7 +44,20 @@ class MangaController extends Controller
         ]];
 
         return response()->json($response);
+    }
 
-        // return Inertia::render('Manga/Manga', ['manga' => $manga, 'action' => 'update']);
+    public function sort(Request $request)
+    {
+        try {
+            $mangas = $this->sorting($request, Manga::class);
+            $response = [
+                'error' => false,
+                'data' => $mangas,
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

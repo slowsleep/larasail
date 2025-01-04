@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Traits\SortableTrait;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Http\Controllers\ActivityLogController;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
+    use SortableTrait;
 
     public function update(Request $request)
     {
@@ -44,7 +46,20 @@ class BookController extends Controller
         ];
 
         return response()->json($response);
+    }
 
-        // return Inertia::render('Book/Books', ['book' => $book, 'action' => 'update']);
+    public function sort(Request $request)
+    {
+        try {
+            $books = $this->sorting($request, Book::class);
+            $response = [
+                'error' => false,
+                'data' => $books,
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

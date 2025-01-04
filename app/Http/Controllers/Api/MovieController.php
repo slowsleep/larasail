@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Traits\SortableTrait;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Http\Controllers\ActivityLogController;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
+    use SortableTrait;
+
     public function update(Request $request)
     {
         $request->validate([
@@ -41,6 +44,20 @@ class MovieController extends Controller
         ];
 
         return response()->json($response);
-        // return Inertia::render('Movie/Movies', ['movie' => $movie, 'action' => 'update']);
+    }
+
+    public function sort(Request $request)
+    {
+        try {
+            $movies = $this->sorting($request, Movie::class);
+            $response = [
+                'error' => false,
+                'data' => $movies,
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

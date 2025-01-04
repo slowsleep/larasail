@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Traits\SortableTrait;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Http\Controllers\ActivityLogController;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
+    use SortableTrait;
+
     public function update(Request $request)
     {
         $request->validate([
@@ -43,6 +46,20 @@ class GameController extends Controller
         ];
 
         return response()->json($response);
-        // return Inertia::render('Game/Games', ['game' => $game, 'action' => 'update']);
+    }
+
+    public function sort(Request $request)
+    {
+        try {
+            $games = $this->sorting($request, Game::class);
+            $response = [
+                'error' => false,
+                'data' => $games,
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }
