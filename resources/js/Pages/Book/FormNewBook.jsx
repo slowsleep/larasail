@@ -37,7 +37,7 @@ export default function FormNewBook({id, data, setData, post, ...props}) {
             required: true,
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('author', e.target.value),
-            classname: "w-full"
+            className: "w-full"
         },
 
         {
@@ -48,7 +48,7 @@ export default function FormNewBook({id, data, setData, post, ...props}) {
             maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('publisher', e.target.value),
-            classname: "w-full"
+            className: "w-full"
         },
         {
             label: "Дата публикации",
@@ -65,7 +65,7 @@ export default function FormNewBook({id, data, setData, post, ...props}) {
             maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange: (e) => setData('genre', e.target.value),
-            classname: "w-full"
+            className: "w-full"
         },
         {
             label: "Комментарий",
