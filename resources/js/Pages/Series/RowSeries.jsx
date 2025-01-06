@@ -57,7 +57,7 @@ export default function RowSeries({singleSeries, onDelete}) {
     }
 
     const episodeDecrement = () => {
-        if (data.episode - 1 > 0) {
+        if (data.episode - 1 >= 0) {
             setData('episode', Number(data.episode) - 1);
             setIsNumberEdit(true);
         }
@@ -110,13 +110,13 @@ export default function RowSeries({singleSeries, onDelete}) {
             name: "episode",
             onChange: (e) => {
                 setData('episode', e.target.value);
-                if (e.target.value > 0) {
+                if (e.target.value >= 0) {
                     setEpisodeError(false);
                 } else {
                     setEpisodeError(true);
                 }
             },
-            min: 1,
+            min: 0,
             error: episodeError,
             onIncrement: episodeIncrement,
             onDecrement: episodeDecrement,

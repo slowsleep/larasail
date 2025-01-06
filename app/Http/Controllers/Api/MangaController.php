@@ -17,7 +17,7 @@ class MangaController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'volume' => 'required|integer|min:1',
-            'chapter' => 'required|integer|min:1',
+            'chapter' => 'required|integer|min:0',
             'genre' => 'string|nullable|max:255',
             'creators' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',

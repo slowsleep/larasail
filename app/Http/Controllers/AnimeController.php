@@ -21,7 +21,7 @@ class AnimeController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'season' => 'required|integer|min:1',
-            'episode' => 'required|integer|min:1',
+            'episode' => 'required|integer|min:0',
             'genre' => 'string|nullable|max:255',
             'publisher' => 'string|nullable|max:255',
             'translator' => 'string|nullable|max:255',

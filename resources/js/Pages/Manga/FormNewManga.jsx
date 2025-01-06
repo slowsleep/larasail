@@ -44,9 +44,9 @@ export default function FormNewManga({id, data, setData, post}) {
             type: "number",
             name: "chapter",
             value: data.chapter,
-            min: 1,
+            min: 0,
             required: true,
-            title: "Минимальное значение 1",
+            title: "Минимальное значение 0",
             onChange: (e) => setData('chapter', e.target.value),
             className: "lg:w-full"
         },

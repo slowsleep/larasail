@@ -25,7 +25,7 @@ class SeriesController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'season' => 'integer|min:1',
-            'episode' => 'integer|min:1',
+            'episode' => 'integer|min:0',
             'comment' => 'string|nullable|max:255',
             'finished' => 'boolean',
             'abandoned' => 'boolean',

@@ -58,7 +58,7 @@ export default function RowManga({ manga, onDelete }) {
     }
 
     const chapterDecrement = () => {
-        if (data.chapter - 1 > 0) {
+        if (data.chapter - 1 >= 0) {
             setData('chapter', Number(data.chapter) - 1);
             setIsNumberEdit(true);
         }
@@ -110,11 +110,11 @@ export default function RowManga({ manga, onDelete }) {
             value: data.chapter,
             type: "number",
             name: "chapter",
-            min: 1,
-            title: "Минимальное значение 1",
+            min: 0,
+            title: "Минимальное значение 0",
             onChange: (e) => {
                 setData('chapter', e.target.value);
-                if (e.target.value > 0) {
+                if (e.target.value >= 0) {
                     setChapterError(false);
                 } else {
                     setChapterError(true);

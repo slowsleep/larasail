@@ -42,7 +42,7 @@ export default function FormNewAnime({id, data, setData, post, ...props}) {
             name: "episode",
             required: true,
             value: data.episode,
-            min: 1,
+            min: 0,
             onChange: (e) => setData('episode', e.target.value)
         },
         {
