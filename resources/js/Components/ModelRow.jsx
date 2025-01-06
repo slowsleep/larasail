@@ -69,7 +69,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                             <input className="bg-transparent" type="checkbox" name={item.name} checked={item.value} onChange={item.onChange} disabled={item.disabled} />
                         }
                     </td>
-                } else if (item.type == "number" && item.value > 0) {
+                } else if (item.type == "number" && item.value >= 0) {
                     return <td
                         className={
                             "dark:text-white" +
