@@ -62,7 +62,13 @@ export default function Movies({ auth, movies, movie, action }) {
 
                         <FormNewMovie className="hidden" id="form-movie" data={data} setData={setData} post={post} />
 
-                        <div className="flex-1 p-2 border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 dark:text-white text-center cursor-pointer" onClick={hideForm}>фильмы</div>
+                        <div
+                            className="flex-1 p-2 border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 dark:text-white text-center cursor-pointer"
+                            onClick={hideForm}
+                            title="Показать форму добавления"
+                        >
+                            фильмы
+                        </div>
 
                         <ShowingTableCol
                             model="movies"
