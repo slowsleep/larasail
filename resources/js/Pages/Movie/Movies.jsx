@@ -60,7 +60,7 @@ export default function Movies({ auth, movies, movie, action }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col gap-y-4">
 
-                        <FormNewMovie id="form-movie" data={data} setData={setData} post={post} />
+                        <FormNewMovie className="hidden" id="form-movie" data={data} setData={setData} post={post} />
 
                         <div className="flex-1 p-2 border-2 border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/40 dark:text-white text-center cursor-pointer" onClick={hideForm}>фильмы</div>
 

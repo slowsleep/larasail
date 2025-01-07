@@ -1,7 +1,7 @@
 import AddModelForm from '@/Components/AddModelForm';
 import { useEffect } from 'react';
 
-export default function FormNewSeries({id, data, setData, post, ...props}) {
+export default function FormNewSeries({ className, id, data, setData, post }) {
     const submit = (e) => {
         e.preventDefault();
         post(route('series.store'), {
@@ -80,6 +80,6 @@ export default function FormNewSeries({id, data, setData, post, ...props}) {
     ]
 
     return (
-        <AddModelForm id={id} listInputs={listInputs} onSubmit={submit} />
+        <AddModelForm className={className} id={id} listInputs={listInputs} onSubmit={submit} />
     )
 }

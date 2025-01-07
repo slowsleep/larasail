@@ -1,7 +1,7 @@
-export default function AddModelForm({id, listInputs, ...props}) {
+export default function AddModelForm({className = '', id, listInputs, ...props}) {
 
     return (
-        <form className="w-full flex flex-col lg:flex-row dark:text-white items-center justify-between" id={id} {...props}>
+        <form className={"w-full flex flex-col lg:flex-row dark:text-white items-center justify-between" + (className ? " " + className : "")} id={id} {...props}>
             {listInputs.map((item) => {
                 let { className, ...filteredItem } = item;
                 return (

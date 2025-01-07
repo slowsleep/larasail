@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import AddModelForm from '@/Components/AddModelForm';
 
-export default function FormNewBook({id, data, setData, post, ...props}) {
+export default function FormNewBook({ className, id, data, setData, post }) {
     const submit = (e) => {
         e.preventDefault();
         post(route('books.store'), {
@@ -100,5 +100,5 @@ export default function FormNewBook({id, data, setData, post, ...props}) {
         }
     ]
 
-    return <AddModelForm id={id} listInputs={listInputs} onSubmit={submit} />
+    return <AddModelForm className={className} id={id} listInputs={listInputs} onSubmit={submit} />
 }

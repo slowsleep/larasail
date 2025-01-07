@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import AddModelForm from '@/Components/AddModelForm';
 
-export default function FormNewManga({id, data, setData, post}) {
+export default function FormNewManga({ className, id, data, setData, post }) {
     const submit = (e) => {
         e.preventDefault();
         post(route('mangas.store'), {
@@ -103,5 +103,5 @@ export default function FormNewManga({id, data, setData, post}) {
         }
     ]
 
-    return <AddModelForm id={id} listInputs={listInputs} onSubmit={submit} />
+    return <AddModelForm className={className} id={id} listInputs={listInputs} onSubmit={submit} />
 }
