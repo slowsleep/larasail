@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
 import ModelTableSorting from '@/Components/ModelTableSorting';
+import TableControls from '@/Components/Table/TableControls';
 
 export default function Series({ auth, series, singleSeries, action }) {
     const [seriesItems, setSeriesItems] = useState(series);
@@ -71,23 +72,25 @@ export default function Series({ auth, series, singleSeries, action }) {
                             сериалы
                         </div>
 
-                        <ShowingTableCol
-                            model="series"
-                            columns={[
-                                {label: 'season', column: 1},
-                                {label: 'episode', column: 2},
-                                {label: 'comment', column: 3},
-                                {label: 'finished', column: 4},
-                                {label: 'abandoned', column: 5}
-                            ]}
-                            tableRef={tableRef}
-                        />
+                        <TableControls>
+                            <ShowingTableCol
+                                model="series"
+                                columns={[
+                                    {label: 'season', column: 1},
+                                    {label: 'episode', column: 2},
+                                    {label: 'comment', column: 3},
+                                    {label: 'finished', column: 4},
+                                    {label: 'abandoned', column: 5}
+                                ]}
+                                tableRef={tableRef}
+                            />
 
-                        <ModelTableSorting
-                            model="series"
-                            columns={['title', 'status', 'created_at']}
-                            updateTableItems={updateSortedSeriesItems}
-                        />
+                            <ModelTableSorting
+                                model="series"
+                                columns={['title', 'status', 'created_at']}
+                                updateTableItems={updateSortedSeriesItems}
+                            />
+                        </TableControls>
 
                         <div className="overflow-x-auto">
                             <ModelTable

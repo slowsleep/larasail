@@ -6,6 +6,7 @@ import RowGame from './RowGame';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
 import ModelTableSorting from '@/Components/ModelTableSorting';
+import TableControls from '@/Components/Table/TableControls';
 
 export default function Games({auth, games, game, action}) {
     const [gamesItems, setGamesItems] = useState(games);
@@ -72,24 +73,26 @@ export default function Games({auth, games, game, action}) {
                             игры
                         </div>
 
-                        <ShowingTableCol
-                            model="games"
-                            columns={[
-                                {label: 'genre', column: 1},
-                                {label: 'developer', column: 2},
-                                {label: 'publisher', column: 3},
-                                {label: 'comment', column: 4},
-                                {label: 'finished', column: 5},
-                                {label: 'abandoned', column: 6}
-                            ]}
-                            tableRef={tableRef}
-                        />
+                        <TableControls>
+                            <ShowingTableCol
+                                model="games"
+                                columns={[
+                                    {label: 'genre', column: 1},
+                                    {label: 'developer', column: 2},
+                                    {label: 'publisher', column: 3},
+                                    {label: 'comment', column: 4},
+                                    {label: 'finished', column: 5},
+                                    {label: 'abandoned', column: 6}
+                                ]}
+                                tableRef={tableRef}
+                            />
 
-                        <ModelTableSorting
-                            model="games"
-                            columns={['title', 'status', 'created_at']}
-                            updateTableItems={updateSortedGamesItems}
-                        />
+                            <ModelTableSorting
+                                model="games"
+                                columns={['title', 'status', 'created_at']}
+                                updateTableItems={updateSortedGamesItems}
+                            />
+                        </TableControls>
 
                         <div className="overflow-x-auto">
                             <ModelTable

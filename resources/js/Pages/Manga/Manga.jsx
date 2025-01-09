@@ -6,6 +6,7 @@ import RowManga from './RowManga';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
 import ModelTableSorting from '@/Components/ModelTableSorting';
+import TableControls from '@/Components/Table/TableControls';
 
 export default function Manga({auth, mangas, manga, action}) {
     const [mangasItems, setMangasItems] = useState(mangas);
@@ -73,25 +74,27 @@ export default function Manga({auth, mangas, manga, action}) {
                         манга
                     </div>
 
-                    <ShowingTableCol
-                        model="manga"
-                        columns={[
-                            {label: 'volume', column: 1},
-                            {label: 'chapter', column: 2},
-                            {label: 'genre', column: 3},
-                            {label: 'creators', column: 4},
-                            {label: 'comment', column: 5},
-                            {label: 'finished', column: 6},
-                            {label: 'abandoned', column: 7}
-                        ]}
-                        tableRef={tableRef}
-                    />
+                    <TableControls>
+                        <ShowingTableCol
+                            model="manga"
+                            columns={[
+                                {label: 'volume', column: 1},
+                                {label: 'chapter', column: 2},
+                                {label: 'genre', column: 3},
+                                {label: 'creators', column: 4},
+                                {label: 'comment', column: 5},
+                                {label: 'finished', column: 6},
+                                {label: 'abandoned', column: 7}
+                            ]}
+                            tableRef={tableRef}
+                        />
 
-                    <ModelTableSorting
-                        model="mangas"
-                        columns={['title', 'status', 'created_at']}
-                        updateTableItems={updateSortedMangasItems}
-                    />
+                        <ModelTableSorting
+                            model="mangas"
+                            columns={['title', 'status', 'created_at']}
+                            updateTableItems={updateSortedMangasItems}
+                        />
+                    </TableControls>
 
                     <div className="overflow-x-auto">
                         <ModelTable

@@ -6,6 +6,7 @@ import FormNewMovie from './FormNewMovie';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
 import ModelTableSorting from '@/Components/ModelTableSorting';
+import TableControls from '@/Components/Table/TableControls';
 
 export default function Movies({ auth, movies, movie, action }) {
     const [moviesItems, setMoviesItems] = useState(movies);
@@ -70,22 +71,24 @@ export default function Movies({ auth, movies, movie, action }) {
                             фильмы
                         </div>
 
-                        <ShowingTableCol
-                            model="movies"
-                            columns={[
-                                {label: 'part', column: 1},
-                                {label: 'comment', column: 2},
-                                {label: 'finished', column: 3},
-                                {label: 'abandoned', column: 4}
-                            ]}
-                            tableRef={tableRef}
-                        />
+                        <TableControls>
+                            <ShowingTableCol
+                                model="movies"
+                                columns={[
+                                    {label: 'part', column: 1},
+                                    {label: 'comment', column: 2},
+                                    {label: 'finished', column: 3},
+                                    {label: 'abandoned', column: 4}
+                                ]}
+                                tableRef={tableRef}
+                            />
 
-                        <ModelTableSorting
-                            model="movies"
-                            columns={['title', 'status', 'created_at']}
-                            updateTableItems={updateSortedMoviesItems}
-                        />
+                            <ModelTableSorting
+                                model="movies"
+                                columns={['title', 'status', 'created_at']}
+                                updateTableItems={updateSortedMoviesItems}
+                            />
+                        </TableControls>
 
                         <div className="overflow-x-auto">
                             <ModelTable

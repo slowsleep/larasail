@@ -6,6 +6,7 @@ import RowBook from './RowBook';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
 import ModelTableSorting from '@/Components/ModelTableSorting';
+import TableControls from '@/Components/Table/TableControls';
 
 export default function Books({auth, books, book, action}) {
     const [booksItems, setBooksItems] = useState(books);
@@ -73,25 +74,27 @@ export default function Books({auth, books, book, action}) {
                         книги
                     </div>
 
-                    <ShowingTableCol
-                        model="books"
-                        columns={[
-                            {label: 'author', column: 1},
-                            {label: 'publisher', column: 2},
-                            {label: 'publication_date', column: 3},
-                            {label: 'genre', column: 4},
-                            {label: 'comment', column: 5},
-                            {label: 'finished', column: 6},
-                            {label: 'abandoned', column: 7}
-                        ]}
-                        tableRef={tableRef}
-                    />
+                    <TableControls>
+                        <ShowingTableCol
+                            model="books"
+                            columns={[
+                                {label: 'author', column: 1},
+                                {label: 'publisher', column: 2},
+                                {label: 'publication_date', column: 3},
+                                {label: 'genre', column: 4},
+                                {label: 'comment', column: 5},
+                                {label: 'finished', column: 6},
+                                {label: 'abandoned', column: 7}
+                            ]}
+                            tableRef={tableRef}
+                        />
 
-                    <ModelTableSorting
-                        model="books"
-                        columns={['title', 'status', 'created_at']}
-                        updateTableItems={updateSortedBooksItems}
-                    />
+                        <ModelTableSorting
+                            model="books"
+                            columns={['title', 'status', 'created_at']}
+                            updateTableItems={updateSortedBooksItems}
+                        />
+                    </TableControls>
 
                     <div className="overflow-x-auto">
                         <ModelTable

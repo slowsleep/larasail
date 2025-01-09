@@ -6,6 +6,7 @@ import RowAnime from './RowAnime';
 import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
 import ModelTableSorting from '@/Components/ModelTableSorting';
+import TableControls from '@/Components/Table/TableControls';
 
 export default function Anime({auth, animeList, anime, action}) {
     const [animeItems, setAnimeItems] = useState(animeList);
@@ -73,26 +74,28 @@ export default function Anime({auth, animeList, anime, action}) {
                         аниме
                     </div>
 
-                    <ShowingTableCol
-                        model="anime"
-                        columns={[
-                            {label: 'season', column: 1},
-                            {label: 'episode', column: 2},
-                            {label: 'genre', column: 3},
-                            {label: 'publisher', column: 4},
-                            {label: 'translator', column: 5},
-                            {label: 'comment', column: 6},
-                            {label: 'finished', column: 7},
-                            {label: 'abandoned', column: 8}
-                        ]}
-                        tableRef={tableRef}
-                    />
+                    <TableControls>
+                        <ShowingTableCol
+                            model="anime"
+                            columns={[
+                                {label: 'season', column: 1},
+                                {label: 'episode', column: 2},
+                                {label: 'genre', column: 3},
+                                {label: 'publisher', column: 4},
+                                {label: 'translator', column: 5},
+                                {label: 'comment', column: 6},
+                                {label: 'finished', column: 7},
+                                {label: 'abandoned', column: 8}
+                            ]}
+                            tableRef={tableRef}
+                        />
 
-                    <ModelTableSorting
-                        model="anime"
-                        columns={['title', 'status', 'created_at']}
-                        updateTableItems={updateSortedAnimeItems}
-                    />
+                        <ModelTableSorting
+                            model="anime"
+                            columns={['title', 'status', 'created_at']}
+                            updateTableItems={updateSortedAnimeItems}
+                        />
+                    </TableControls>
 
                     <div className="overflow-x-auto">
                         <ModelTable
