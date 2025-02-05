@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,9 @@ Route::group(['middleware' => ['auth', 'web', 'auth:sanctum']],function () {
 
     Route::patch('/books', [App\Http\Controllers\Api\BookController::class, 'update'])->name('api.books.update');
     Route::get('/books/sort', [App\Http\Controllers\Api\BookController::class, 'sort'])->name('api.books.sort');
+});
+
+Route::middleware('auth:sanctum')->get('/keep-alive', function (Request $request) {
+    Session::put('last_activity', now()); // Обновление сессии
+    return response()->json(['status' => 'ok']);
 });

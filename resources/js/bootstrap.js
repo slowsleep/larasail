@@ -9,6 +9,22 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+if (document.cookie.includes('XSRF-TOKEN')) {
+    setInterval(() => {
+        fetch('/sanctum/csrf-cookie', {
+            method: 'GET',
+            credentials: 'include' // Чтобы куки передавались
+        });
+    }, 10 * 60 * 1000); // 10 минут
+
+    setInterval(() => {
+        fetch('/api/keep-alive', {
+            method: 'GET',
+            credentials: 'include'
+        });
+    }, 10 * 60 * 1000); // 10 минут
+}
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
