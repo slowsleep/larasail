@@ -5,7 +5,7 @@ import { hideTableColumn } from '@/Utils/tableUtils';
  * @param {array} columns - array of column names
  */
 const ModelTable = forwardRef((props, ref) => {
-    const {children, model, className, columns} = props;
+    const {children, model, className, columns, id} = props;
     const [hiddenColumns, setHiddenColumns] = useState([]);
 
     useEffect(() => {
@@ -25,6 +25,7 @@ const ModelTable = forwardRef((props, ref) => {
         <table
             className={"border-separate border-spacing-2 border border-slate-500 w-full " + (className ?? '')}
             ref={ref}
+            id={id}
         >
             <thead>
                 <tr className="dark:bg-slate-700 bg-slate-200">
