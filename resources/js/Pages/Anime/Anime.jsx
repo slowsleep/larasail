@@ -7,9 +7,12 @@ import ShowingTableCol from '@/Components/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable';
 import ModelTableSorting from '@/Components/ModelTableSorting';
 import TableControls from '@/Components/Table/TableControls';
+import ALAnimeGrid from './Partials/ALAnimeGrid';
+import ALAnime from './Partials/ALAnime';
 
 export default function Anime({auth, animeList, anime, action}) {
     const [animeItems, setAnimeItems] = useState(animeList);
+    const [ALAnimeItems, setALAnimeItems] = useState([]);
 
     const { data, setData, post } = useForm({
         title: '',
@@ -95,13 +98,18 @@ export default function Anime({auth, animeList, anime, action}) {
                             columns={['title', 'status', 'created_at']}
                             updateTableItems={updateSortedAnimeItems}
                         />
+
+                        <ALAnime setALAnimeItems={setALAnimeItems} />
                     </TableControls>
 
                     <div className="overflow-x-auto">
+                        <ALAnimeGrid items={ALAnimeItems} />
+
                         <ModelTable
                             model="anime"
                             columns={["title", "season", "episode", "genre", "publisher", "translator", "comment", "finished", "abandoned"]}
                             ref={tableRef}
+                            id="animeTable"
                         >
                             {animeItems.map((anime) => (
                                 <RowAnime key={anime.id} anime={anime} onDelete={handleDestroyAnime} />
