@@ -5,13 +5,14 @@ export default function LoginAniList({ accessToken, setAccessToken }) {
 
     useEffect(() => {
         if (!accessToken) {
-            const urlParams = new URLSearchParams(window.location.href);
+            const urlParams = new URLSearchParams(window.location.hash.substring(1));
             const accessToken = urlParams.get('access_token');
 
             if (accessToken) {
                 localStorage.setItem('ALAccessToken', accessToken);
                 setAccessToken(accessToken);
                 getAndSetALUserID(accessToken);
+                window.history.replaceState({}, document.title, window.location.pathname);
             }
         }
     }, [accessToken]);
