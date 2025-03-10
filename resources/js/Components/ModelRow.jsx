@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { getStatusColorClass } from '@/Utils/statusUtils.js';
 
 /**
  * @param {object} modelName ru - в единственном числе, винительном падеже; en - как в БД
@@ -118,6 +119,25 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                             />
                         }
                     </td>
+                } else if (item.type == "select") {
+                    const {options, ...filteredItem} = item;
+                    return (<td className={"p-2 text-white text-center " + (item.className ? " " + item.className : "") + (isHidden ? " hidden" : "")} key={item.name}>
+                        <select
+                            {...filteredItem}
+                            className={
+                                "bg-transparent " +
+                                (item.name == "status_id" && (" " + getStatusColorClass(item.value)))
+                            }
+                            value={item.value}
+                            onChange={item.onChange}
+                        >
+                            {Object.keys(options).map((key) => (
+                                <option key={key} value={key}>
+                                    {item.options[key]}
+                                </option>
+                            ))}
+                        </select>
+                    </td>)
                 } else {
                     return <td
                         className={
