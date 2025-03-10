@@ -26,8 +26,7 @@ class AnimeController extends Controller
             'publisher' => 'string|nullable|max:255',
             'translator' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $anime = Anime::create([
@@ -39,8 +38,7 @@ class AnimeController extends Controller
             'publisher' => $request->publisher,
             'translator' => $request->translator,
             'comment' => $request->comment,
-            'finished' => $request->finished,
-            'abandoned' => $request->abandoned,
+            'status_id' => $request->status_id,
         ]);
 
         ActivityLogController::store([

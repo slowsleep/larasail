@@ -20,7 +20,6 @@ class Anime extends Model
         'publisher',
         'translator',
         'comment',
-        'finished',
-        'abandoned',
+        'status_id',
     ];
 }

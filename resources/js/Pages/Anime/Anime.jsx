@@ -22,8 +22,7 @@ export default function Anime({auth, animeList, anime, action}) {
         publisher: '',
         translator: '',
         comment: '',
-        finished: false,
-        abandoned: false,
+        status_id: 1,
     });
     const tableRef = useRef(null);
 
@@ -87,8 +86,7 @@ export default function Anime({auth, animeList, anime, action}) {
                                 {label: 'publisher', column: 4},
                                 {label: 'translator', column: 5},
                                 {label: 'comment', column: 6},
-                                {label: 'finished', column: 7},
-                                {label: 'abandoned', column: 8}
+                                {label: 'status', column: 7}
                             ]}
                             tableRef={tableRef}
                         />
@@ -107,7 +105,7 @@ export default function Anime({auth, animeList, anime, action}) {
 
                         <ModelTable
                             model="anime"
-                            columns={["title", "season", "episode", "genre", "publisher", "translator", "comment", "finished", "abandoned"]}
+                            columns={["title", "season", "episode", "genre", "publisher", "translator", "comment", "status"]}
                             ref={tableRef}
                             id="animeTable"
                         >

@@ -23,8 +23,7 @@ class AnimeController extends Controller
             'publisher' => 'string|nullable|max:255',
             'translator' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $anime = Anime::findOrFail($request->id);

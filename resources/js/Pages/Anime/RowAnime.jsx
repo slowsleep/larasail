@@ -2,6 +2,7 @@ import ModelRow from "@/Components/ModelRow";
 import { useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { STATUSES } from "@/constants.js";
 
 export default function RowAnime({anime, onDelete}) {
 
@@ -10,6 +11,7 @@ export default function RowAnime({anime, onDelete}) {
     const [episodeError, setEpisodeError] = useState(false);
 
     const [isNumberEdit, setIsNumberEdit] = useState(false);
+    const [isStatusEdit, setIsStatusEdit] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: anime.id,
@@ -20,8 +22,7 @@ export default function RowAnime({anime, onDelete}) {
         publisher: anime.publisher,
         translator: anime.translator,
         comment: anime.comment,
-        finished: anime.finished,
-        abandoned: anime.abandoned,
+        status_id: anime.status_id,
     });
 
     const handleDestroy = () => {
@@ -66,12 +67,20 @@ export default function RowAnime({anime, onDelete}) {
         }
     }
 
+    const handleStatusChange = (value) => {
+        setData('status_id', Number(value));
+        setIsStatusEdit(true);
+    }
+
     useEffect(() => {
         if (isNumberEdit) {
             handleSave();
             setIsNumberEdit(false);
+        } else if (isStatusEdit) {
+            handleSave();
+            setIsStatusEdit(false);
         }
-    }, [data.season, data.episode])
+    }, [data.season, data.episode, data.status_id]);
 
     const inputList = [
         {
@@ -157,24 +166,11 @@ export default function RowAnime({anime, onDelete}) {
             onChange: (e) => setData('comment', e.target.value),
         },
         {
-            value: data.finished,
-            type: "checkbox",
-            name: "finished",
-            onChange: (e) => setData('finished', e.target.checked),
-            disabled: data.abandoned
-        },
-        {
-            value: data.abandoned,
-            type: "checkbox",
-            name: "abandoned",
-            onChange: (e) => {
-                if (e.target.checked) {
-                    setData('finished', false)
-                    setData('abandoned', e.target.checked)
-                } else {
-                    setData('abandoned', e.target.checked)
-                }
-            }
+            value: Number(data.status_id),
+            type: "select",
+            name: "status_id",
+            onChange: (e) => handleStatusChange(e.target.value),
+            options: STATUSES,
         }
 
     ]
