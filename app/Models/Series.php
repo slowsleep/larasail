@@ -15,8 +15,7 @@ class Series extends Model
         'season',
         'episode',
         'comment',
-        'finished',
-        'abandoned',
+        'status_id',
     ];
 
 }

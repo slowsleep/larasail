@@ -16,8 +16,7 @@ export default function Series({ auth, series, singleSeries, action }) {
         season: '',
         episode: '',
         comment: '',
-        finished: false,
-        abandoned: false,
+        status_id: 1,
     });
     const tableRef = useRef(null);
 
@@ -79,8 +78,7 @@ export default function Series({ auth, series, singleSeries, action }) {
                                     {label: 'season', column: 1},
                                     {label: 'episode', column: 2},
                                     {label: 'comment', column: 3},
-                                    {label: 'finished', column: 4},
-                                    {label: 'abandoned', column: 5}
+                                    {label: 'status', column: 4},
                                 ]}
                                 tableRef={tableRef}
                             />
@@ -95,7 +93,7 @@ export default function Series({ auth, series, singleSeries, action }) {
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="series"
-                                columns={["title", "season", "episode", "comment", "finished", "abandoned"]}
+                                columns={["title", "season", "episode", "comment", "status"]}
                                 ref={tableRef}
                             >
                                 {seriesItems.map((singleSeries) => (

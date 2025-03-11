@@ -21,8 +21,7 @@ class SeriesController extends Controller
             'season' => 'integer|min:1',
             'episode' => 'integer|min:0',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $singleSeries = Series::findOrFail($request->id);

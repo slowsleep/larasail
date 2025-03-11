@@ -27,8 +27,7 @@ class SeriesController extends Controller
             'season' => 'integer|min:1',
             'episode' => 'integer|min:0',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $singleSeries = Series::create([
@@ -37,8 +36,7 @@ class SeriesController extends Controller
             'season' => $request->season,
             'episode' => $request->episode,
             'comment' => $request->comment,
-            'finished' => $request->finished,
-            'abandoned' => $request->abandoned,
+            'status_id' => $request->status_id,
         ]);
 
         ActivityLogController::store([
