@@ -1,10 +1,13 @@
 import { useForm } from '@inertiajs/react';
 import ModelRow from '@/Components/ModelRow';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
+import { STATUSES } from "@/constants.js";
 
 export default function RowGame({game, onDelete}) {
     const [titleError, setTitleError] = useState(false);
+
+    const [isStatusEdit, setIsStatusEdit] = useState(false);
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: game.id,
@@ -13,8 +16,7 @@ export default function RowGame({game, onDelete}) {
         developer: game.developer,
         publisher: game.publisher,
         comment: game.comment,
-        finished: game.finished,
-        abandoned: game.abandoned,
+        status_id: game.status_id,
     });
 
     const handleDestroy = () => {
@@ -32,6 +34,18 @@ export default function RowGame({game, onDelete}) {
         setTitleError(false);
         reset();
     }
+
+    const handleStatusChange = (value) => {
+        setData('status_id', Number(value));
+        setIsStatusEdit(true);
+    }
+
+    useEffect(() => {
+        if (isStatusEdit) {
+            handleSave();
+            setIsStatusEdit(false);
+        }
+    }, [data.status_id]);
 
     const inputList = [
         {
@@ -83,24 +97,11 @@ export default function RowGame({game, onDelete}) {
             onChange: (e) => setData('comment', e.target.value),
         },
         {
-            value: data.finished,
-            type: "checkbox",
-            name: "finished",
-            onChange: (e) => setData('finished', e.target.checked),
-            disabled: data.abandoned,
-        },
-        {
-            value: data.abandoned,
-            type: "checkbox",
-            name: "abandoned",
-            onChange: (e) => {
-                if (e.target.checked) {
-                    setData('finished', false)
-                    setData('abandoned', e.target.checked)
-                } else {
-                    setData('abandoned', e.target.checked)
-                }
-            },
+            value: Number(data.status_id),
+            type: "select",
+            name: "status_id",
+            onChange: (e) => handleStatusChange(e.target.value),
+            options: STATUSES,
         }
 
     ]

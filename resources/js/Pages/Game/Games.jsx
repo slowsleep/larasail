@@ -17,8 +17,7 @@ export default function Games({auth, games, game, action}) {
         developer: '',
         publisher: '',
         comment: '',
-        finished: false,
-        abandoned: false,
+        'status_id': 1,
     });
     const tableRef = useRef(null);
 
@@ -81,8 +80,7 @@ export default function Games({auth, games, game, action}) {
                                     {label: 'developer', column: 2},
                                     {label: 'publisher', column: 3},
                                     {label: 'comment', column: 4},
-                                    {label: 'finished', column: 5},
-                                    {label: 'abandoned', column: 6}
+                                    {label: 'status', column: 5},
                                 ]}
                                 tableRef={tableRef}
                             />
@@ -97,7 +95,7 @@ export default function Games({auth, games, game, action}) {
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="games"
-                                columns={["title", "genre", "developer", "publisher", "comment", "finished", "abandoned"]}
+                                columns={["title", "genre", "developer", "publisher", "comment", "status"]}
                                 ref={tableRef}
                             >
                                 {gamesItems.map((game) => (

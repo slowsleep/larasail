@@ -27,8 +27,7 @@ class GameController extends Controller
             'developer' => 'string|nullable|max:255',
             'publisher' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $game = Game::create([
@@ -38,8 +37,7 @@ class GameController extends Controller
             'developer' => $request->developer,
             'publisher' => $request->publisher,
             'comment' => $request->comment,
-            'finished' => $request->finished,
-            'abandoned' => $request->abandoned,
+            'status_id' => $request->status_id,
         ]);
 
         ActivityLogController::store([

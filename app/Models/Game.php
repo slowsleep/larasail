@@ -16,7 +16,6 @@ class Game extends Model
         'developer',
         'publisher',
         'comment',
-        'finished',
-        'abandoned',
+        'status_id',
     ];
 }

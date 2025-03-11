@@ -22,8 +22,7 @@ class GameController extends Controller
             'developer' => 'string|nullable|max:255',
             'publisher' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $game = Game::findOrFail($request->id);
