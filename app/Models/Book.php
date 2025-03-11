@@ -17,7 +17,6 @@ class Book extends Model
         'publication_date',
         'genre',
         'comment',
-        'finished',
-        'abandoned',
+        'status_id',
     ];
 }

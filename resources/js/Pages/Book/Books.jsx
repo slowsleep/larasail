@@ -18,8 +18,7 @@ export default function Books({auth, books, book, action}) {
         publication_date: '',
         genre: '',
         comment: '',
-        finished: false,
-        abandoned: false,
+        status_id: 1,
     });
     const tableRef = useRef(null);
 
@@ -83,8 +82,7 @@ export default function Books({auth, books, book, action}) {
                                 {label: 'publication_date', column: 3},
                                 {label: 'genre', column: 4},
                                 {label: 'comment', column: 5},
-                                {label: 'finished', column: 6},
-                                {label: 'abandoned', column: 7}
+                                {label: 'status', column: 6},
                             ]}
                             tableRef={tableRef}
                         />
@@ -99,7 +97,7 @@ export default function Books({auth, books, book, action}) {
                     <div className="overflow-x-auto">
                         <ModelTable
                             model="books"
-                            columns={["title", "author", "publisher", "publication_date", "genre", "comment", "finished", "abandoned"]}
+                            columns={["title", "author", "publisher", "publication_date", "genre", "comment", "status"]}
                             ref={tableRef}
                         >
                             {booksItems.map((book) => (

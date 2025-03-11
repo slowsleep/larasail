@@ -22,8 +22,7 @@ class BookController extends Controller
             'publication_date' => 'date|nullable',
             'genre' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $book = Book::findOrFail($request->id);
