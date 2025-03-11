@@ -121,7 +121,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                     </td>
                 } else if (item.type == "select") {
                     const {options, ...filteredItem} = item;
-                    return (<td className={"p-2 text-white text-center " + (item.className ? " " + item.className : "") + (isHidden ? " hidden" : "")} key={item.name}>
+                    return (<td className={"p-2 text-white text-center w-10 " + (item.className ? " " + item.className : "") + (isHidden ? " hidden" : "")} key={item.name}>
                         <select
                             {...filteredItem}
                             className={
