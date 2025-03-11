@@ -22,8 +22,7 @@ export default {
     plugins: [forms],
 
     safelist: [
-        {
-          pattern: /bg-(stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(400|600|700|800|900)/,
-        },
+          {pattern: /bg-(stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(400|600|700|800|900)/},
+          {pattern: /text-./},
       ],
 };
