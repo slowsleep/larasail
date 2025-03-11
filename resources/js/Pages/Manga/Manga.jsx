@@ -18,8 +18,7 @@ export default function Manga({auth, mangas, manga, action}) {
         genre: '',
         creators: '',
         comment: '',
-        finished: false,
-        abandoned: false,
+        status_id: 1,
     });
     const tableRef = useRef(null);
 
@@ -83,8 +82,7 @@ export default function Manga({auth, mangas, manga, action}) {
                                 {label: 'genre', column: 3},
                                 {label: 'creators', column: 4},
                                 {label: 'comment', column: 5},
-                                {label: 'finished', column: 6},
-                                {label: 'abandoned', column: 7}
+                                {label: 'status', column: 6},
                             ]}
                             tableRef={tableRef}
                         />
@@ -99,7 +97,7 @@ export default function Manga({auth, mangas, manga, action}) {
                     <div className="overflow-x-auto">
                         <ModelTable
                             model="manga"
-                            columns={["title", "volume", "chapter", "genre", "creators", "comment", "finished", "abandoned"]}
+                            columns={["title", "volume", "chapter", "genre", "creators", "comment", "status"]}
                             ref={tableRef}
                         >
                             {mangasItems.map((manga) => (

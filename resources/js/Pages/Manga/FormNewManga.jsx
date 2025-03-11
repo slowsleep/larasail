@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import AddModelForm from '@/Components/AddModelForm';
+import { STATUSES } from '@/constants.js';
 
 export default function FormNewManga({ className, id, data, setData, post }) {
     const submit = (e) => {
@@ -80,26 +81,12 @@ export default function FormNewManga({ className, id, data, setData, post }) {
             onChange: (e) => setData('comment', e.target.value)
         },
         {
-            label: "Завершен",
-            type: "checkbox",
-            name: "finished",
-            checked: data.finished,
-            onChange: (e) => setData('finished', e.target.checked),
-            disabled: data.abandoned
-        },
-        {
-            label: "Заброшен",
-            type: "checkbox",
-            name: "abandoned",
-            checked: data.abandoned,
-            onChange: (e) => {
-                if (e.target.checked) {
-                    setData('finished', false);
-                    setData('abandoned', e.target.checked);
-                } else {
-                    setData('abandoned', e.target.checked)
-                }
-            }
+            label: "Статус",
+            type: "select",
+            name: "status_id",
+            options: STATUSES,
+            value: data.status_id,
+            onChange: (e) => setData('status_id', e.target.value),
         }
     ]
 

@@ -19,7 +19,6 @@ class Manga extends Model
         'volume',
         'chapter',
         'comment',
-        'finished',
-        'abandoned',
+        'status_id',
     ];
 }

@@ -21,8 +21,7 @@ class MangaController extends Controller
             'genre' => 'string|nullable|max:255',
             'creators' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $manga = Manga::findOrFail($request->id);
