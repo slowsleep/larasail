@@ -20,8 +20,7 @@ class MovieController extends Controller
             'title' => 'required|string|max:255',
             'part' => 'integer|nullable|min:1',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $movie = Movie::findOrFail($request->id);

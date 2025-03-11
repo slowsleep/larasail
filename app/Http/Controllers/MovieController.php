@@ -29,8 +29,7 @@ class MovieController extends Controller
             'title' => 'required|string|max:255',
             'part' => 'integer|nullable|min:1',
             'comment' => 'string|nullable|max:255',
-            'finished' => 'boolean',
-            'abandoned' => 'boolean',
+            'status_id' => 'required|integer|min:1|max:4',
         ]);
 
         $movie = Movie::create([
@@ -38,8 +37,7 @@ class MovieController extends Controller
             'title' => $request->title,
             'part' => $request->part,
             'comment' => $request->comment,
-            'finished' => $request->finished,
-            'abandoned' => $request->abandoned,
+            'status_id' => $request->status_id,
         ]);
 
         ActivityLogController::store([

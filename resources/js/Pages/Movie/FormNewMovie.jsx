@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import AddModelForm from '@/Components/AddModelForm';
+import { STATUSES } from '@/constants.js';
 
 export default function FormNewMovie ({ className, id, data, setData, post }) {
 
@@ -55,18 +56,12 @@ export default function FormNewMovie ({ className, id, data, setData, post }) {
             disabled: data.abandoned
         },
         {
-            label: "Заброшен",
-            type: "checkbox",
-            name: "abandoned",
-            checked: data.abandoned,
-            onChange: (e) => {
-                if (e.target.checked) {
-                    setData('finished', false);
-                    setData('abandoned', e.target.checked);
-                } else {
-                    setData('abandoned', e.target.checked)
-                }
-            }
+            label: "Статус",
+            type: "select",
+            name: "status_id",
+            options: STATUSES,
+            value: data.status_id,
+            onChange: (e) => setData('status_id', e.target.value),
         }
     ]
 

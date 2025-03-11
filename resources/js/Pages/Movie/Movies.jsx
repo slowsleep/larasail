@@ -15,8 +15,7 @@ export default function Movies({ auth, movies, movie, action }) {
         title: '',
         part: '',
         comment: '',
-        finished: false,
-        abandoned: false,
+        status_id: 1,
     });
     const tableRef = useRef(null);
 
@@ -77,8 +76,7 @@ export default function Movies({ auth, movies, movie, action }) {
                                 columns={[
                                     {label: 'part', column: 1},
                                     {label: 'comment', column: 2},
-                                    {label: 'finished', column: 3},
-                                    {label: 'abandoned', column: 4}
+                                    {label: 'status', column: 3},
                                 ]}
                                 tableRef={tableRef}
                             />
@@ -93,7 +91,7 @@ export default function Movies({ auth, movies, movie, action }) {
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="movies"
-                                columns={['title', 'part', 'comment', 'finished', 'abandoned']}
+                                columns={['title', 'part', 'comment', 'status']}
                                 ref={tableRef}
                             >
                                 {moviesItems.map((movie) => (

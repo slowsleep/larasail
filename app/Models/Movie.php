@@ -14,8 +14,7 @@ class Movie extends Model
         'title',
         'part',
         'comment',
-        'finished',
-        'abandoned',
+        'status_id',
     ];
 
 }
