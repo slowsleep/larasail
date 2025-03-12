@@ -48,14 +48,6 @@ export default function FormNewMovie ({ className, id, data, setData, post }) {
             onChange: (e) => setData('comment', e.target.value)
         },
         {
-            label: "Завершен",
-            type: "checkbox",
-            name: "finished",
-            checked: data.finished,
-            onChange: (e) => setData('finished', e.target.checked),
-            disabled: data.abandoned
-        },
-        {
             label: "Статус",
             type: "select",
             name: "status_id",
