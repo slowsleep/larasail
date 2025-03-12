@@ -7,7 +7,7 @@ import { STATUSES } from '@/constants.js';
 export default function RowMovie ({movie, onDelete}) {
 
     const [titleError, setTitleError] = useState(false);
-    const [partError, setPartError] = useState(false);
+    const [yearError, setYearError] = useState(false);
 
     const [isNumberEdit, setIsNumberEdit] = useState(false);
     const [isStatusEdit, setIsStatusEdit] = useState(false);
@@ -15,7 +15,7 @@ export default function RowMovie ({movie, onDelete}) {
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: movie.id,
         title: movie.title,
-        part: movie.part,
+        year: movie.year,
         comment: movie.comment,
         status_id: movie.status_id,
     });
@@ -33,23 +33,8 @@ export default function RowMovie ({movie, onDelete}) {
 
     const handleCancle = () => {
         setTitleError(false);
-        setPartError(false);
+        setYearError(false);
         reset();
-    }
-
-    const partIncrement = () => {
-        setData('part', Number(data.part) + 1);
-        setIsNumberEdit(true);
-    }
-
-    const partDecrement = () => {
-        if (data.part - 1 > 0) {
-            setData('part', Number(data.part) - 1);
-            setIsNumberEdit(true);
-        } else if (data.part - 1 == 0) {
-            setData('part', null);
-            setIsNumberEdit(true);
-        }
     }
 
     const handleStatusChange = (value) => {
@@ -65,7 +50,7 @@ export default function RowMovie ({movie, onDelete}) {
             handleSave();
             setIsStatusEdit(false);
         }
-    }, [data.part, data.status_id]);
+    }, [data.year, data.status_id]);
 
     const inputList = [
         {
@@ -85,26 +70,24 @@ export default function RowMovie ({movie, onDelete}) {
             error: titleError,
         },
         {
-            value: data.part ? data.part : "",
+            value: data.year ? data.year : "",
             type: "number",
-            name: "part",
+            name: "year",
             min: 0,
             onChange: (e) => {
-                setData('part', e.target.value);
+                setData('year', e.target.value);
 
                 if (e.target.value >= 0) {
-                    setPartError(false);
+                    setYearError(false);
                 } else {
-                    setPartError(true);
+                    setYearError(true);
                 }
 
                 if (e.target.value == 0) {
-                    setData('part', null);
+                    setData('year', null);
                 }
             },
-            error: partError,
-            onIncrement: partIncrement,
-            onDecrement: partDecrement,
+            error: yearError,
         },
         {
             value: data.comment ? data.comment : "",

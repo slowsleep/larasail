@@ -18,7 +18,7 @@ class MovieController extends Controller
         $request->validate([
             'id' => 'required|integer',
             'title' => 'required|string|max:255',
-            'part' => 'integer|nullable|min:1',
+            'year' => 'integer|nullable|min:1',
             'comment' => 'string|nullable|max:255',
             'status_id' => 'required|integer|min:1|max:4',
         ]);

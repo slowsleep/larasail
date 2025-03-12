@@ -31,12 +31,12 @@ export default function FormNewMovie ({ className, id, data, setData, post }) {
             onChange:(e) => setData('title', e.target.value)
         },
         {
-            label: "Часть",
+            label: "Год",
             type: "number",
-            name: "part",
-            value: data.part,
+            name: "year",
+            value: data.year,
             min: 1,
-            onChange: (e) => setData('part', e.target.value)
+            onChange: (e) => setData('year', e.target.value)
         },
         {
             label: "Комментарий",

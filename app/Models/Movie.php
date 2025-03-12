@@ -12,7 +12,7 @@ class Movie extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'part',
+        'year',
         'comment',
         'status_id',
     ];
