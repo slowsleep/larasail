@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getStatusColorClass } from '@/Utils/statusUtils.js';
+import { WATCHING } from '@/constants.js';
 
 /**
  * @param {object} modelName ru - в единственном числе, винительном падеже; en - как в БД
@@ -85,7 +86,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                                 <p className="w-full break-words">
                                     {item.value}
                                 </p>
-                                {!data.finished && !data.abandoned ?
+                                { (data.status_id == WATCHING) && (onIncrement !== undefined || onDecrement !== undefined) ?
                                     <div className="flex flex-row">
                                         <button
                                             className="text-green-500 hover:scale-150"
