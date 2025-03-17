@@ -28,6 +28,17 @@ export default function ModelTableSorting({ model, columns, updateTableItems }) 
         });
     }
 
+    const handlePlanning = (col) => () => {
+        axios.get(route('api.' + model + '.sort'), {
+            params: {
+                sort_by: col,
+                sort_order: "planning"
+            }
+        }).then(response => {
+            updateTableItems(response.data.data);
+        });
+    }
+
     const handleInProgress = (col) => () => {
         axios.get(route('api.' + model + '.sort'), {
             params: {
@@ -62,18 +73,19 @@ export default function ModelTableSorting({ model, columns, updateTableItems }) 
     }
 
     return (
-        <div className="p-2 border border-gray-600 my-2 overflow-y-auto hidden dark:bg-gray-700/50" id="sorting-menu">
+        <div className="p-2 border border-gray-600 my-2 overflow-y-auto hidden dark:bg-gray-700/50 dark:text-white" id="sorting-menu">
             <h3>Сортировка по:</h3>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-center gap-x-2">
                 {columns.map((col, index) => (
-                    <div className="p-2 border border-gray-600 my-2 w-full" key={index}>
+                    <div className="p-2 border border-gray-600 my-2 w-auto" key={index}>
                         <h4 className="text-center">{col}</h4>
                         <div className="flex flex-row justify-center gap-x-2">
                         {col == "status" ?
                             <>
-                                <button className="hover:bg-gray-300 p-1 rounded" onClick={handleInProgress(col)}>В процессе</button>
-                                <button className="hover:bg-gray-300 p-1 rounded" onClick={handleFinished(col)}>Завершен</button>
-                                <button className="hover:bg-gray-300 p-1 rounded" onClick={handleAbandoned(col)}>Заброшен</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handlePlanning(col)}>Планирую</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleInProgress(col)}>В процессе</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleFinished(col)}>Завершен</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleAbandoned(col)}>Заброшен</button>
                             </>
                                 :
                             <>
