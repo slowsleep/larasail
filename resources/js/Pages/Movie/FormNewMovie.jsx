@@ -9,6 +9,14 @@ export default function FormNewMovie ({ className, id, data, setData, post }) {
         post(route('movies.store'), {
             preserveScroll: true,
             only: ['movie', 'action'],
+            onSuccess: () => {
+                setData({
+                    title: '',
+                    year: '',
+                    comment: '',
+                    status_id: 1,
+                });
+            },
         });
     }
 
