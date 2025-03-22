@@ -8,6 +8,16 @@ export default function FormNewGame({ className, id, data, setData, post }) {
         post(route('games.store'), {
             preserveScroll: true,
             only: ['game', 'action'],
+            onSuccess: () => {
+                setData({
+                    title: '',
+                    genre: '',
+                    developer: '',
+                    publisher: '',
+                    comment: '',
+                    status_id: 1,
+                });
+            },
         });
     }
 
