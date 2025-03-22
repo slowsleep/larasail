@@ -8,6 +8,17 @@ export default function FormNewManga({ className, id, data, setData, post }) {
         post(route('mangas.store'), {
             preserveScroll: true,
             only: ['manga', 'action'],
+            onSuccess: () => {
+                setData({
+                    title: '',
+                    volume: 1,
+                    chapter: 0,
+                    genre: '',
+                    creators: '',
+                    comment: '',
+                    status_id: 1,
+                });
+            },
         });
     }
 

@@ -13,8 +13,8 @@ export default function Manga({auth, mangas, manga, action}) {
 
     const { data, setData, post } = useForm({
         title: '',
-        volume: '',
-        chapter: '',
+        volume: 1,
+        chapter: 0,
         genre: '',
         creators: '',
         comment: '',
