@@ -8,6 +8,18 @@ export default function FormNewAnime({ className, id, data, setData, post }) {
         post(route('anime.store'), {
             preserveScroll: true,
             only: ['anime', 'action'],
+            onSuccess: () => {
+                setData({
+                    title: '',
+                    season: 1,
+                    episode: 0,
+                    genre: '',
+                    publisher: '',
+                    translator: '',
+                    comment: '',
+                    status_id: 1,
+                });
+            },
         });
     }
 

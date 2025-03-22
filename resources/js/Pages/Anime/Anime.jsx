@@ -16,8 +16,8 @@ export default function Anime({auth, animeList, anime, action}) {
 
     const { data, setData, post } = useForm({
         title: '',
-        season: '',
-        episode: '',
+        season: 1,
+        episode: 0,
         genre: '',
         publisher: '',
         translator: '',
