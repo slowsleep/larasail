@@ -13,8 +13,8 @@ export default function Series({ auth, series, singleSeries, action }) {
 
     const { data, setData, post } = useForm({
         title: '',
-        season: '',
-        episode: '',
+        season: 1,
+        episode: 0,
         comment: '',
         status_id: 1,
     });

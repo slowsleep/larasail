@@ -8,6 +8,15 @@ export default function FormNewSeries({ className, id, data, setData, post }) {
         post(route('series.store'), {
             preserveScroll: true,
             only: ['singleSeries', 'action'],
+            onSuccess: () => {
+                setData({
+                    title: '',
+                    season: 1,
+                    episode: 0,
+                    comment: '',
+                    status_id: 1,
+                });
+            },
         });
     }
 
