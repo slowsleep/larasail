@@ -8,6 +8,17 @@ export default function FormNewBook({ className, id, data, setData, post }) {
         post(route('books.store'), {
             preserveScroll: true,
             only: ['book', 'action'],
+            onSuccess: () => {
+                setData({
+                    title: '',
+                    author: '',
+                    publisher: '',
+                    publication_date: '',
+                    genre: '',
+                    comment: '',
+                    status_id: 1,
+                });
+            },
         });
     }
 
