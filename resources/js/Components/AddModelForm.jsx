@@ -3,7 +3,7 @@ export default function AddModelForm({className = '', id, listInputs, ...props})
     return (
         <form className={"w-full flex flex-col lg:flex-row dark:text-white items-center justify-between" + (className ? " " + className : "")} id={id} {...props}>
             {listInputs.map((item) => {
-                let { className, ...filteredItem } = item;
+                let { className, options, ...filteredItem } = item;
                 return (
                 <div className={"flex flex-1 lg:flex-col flex-row items-center justify-between float-left w-full " + (item.type == "checkbox" || item.type == "number" ? "items-center" : "")} key={item.name}>
                     <label>{item.label}</label>
@@ -16,9 +16,9 @@ export default function AddModelForm({className = '', id, listInputs, ...props})
                                 (className ? " " + className : "")
                             }
                         >
-                            {Object.keys(item.options).map((key) => (
-                                <option key={key} value={key}>
-                                    {item.options[key]}
+                            {Object.keys(options).map((key) => (
+                                <option className="text-black" key={key} value={key}>
+                                    {options[key]}
                                 </option>
                             ))}
                         </select>
