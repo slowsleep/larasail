@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Http\Controllers\ActivityLogController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class MovieController extends Controller
 {
@@ -15,34 +16,42 @@ class MovieController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'id' => 'required|integer',
-            'title' => 'required|string|max:255',
-            'year' => 'integer|nullable|min:1',
-            'comment' => 'string|nullable|max:255',
-            'status_id' => 'required|integer|min:1|max:4',
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer',
+                'title' => 'required|string|max:255',
+                'year' => 'integer|nullable|min:1',
+                'comment' => 'string|nullable|max:255',
+                'status_id' => 'required|integer|min:1|max:4',
+            ]);
 
-        $movie = Movie::findOrFail($request->id);
-        $movie->update($request->all());
+            if ($validator->fails()) {
+                return response()->json(['error' => true, 'message' => $validator->errors()], status: 400);
+            }
 
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Movie',
-            'model_id' => $movie->id,
-            'data' => $movie->title,
-        ]);
+            $movie = Movie::findOrFail($request->id);
+            $movie->update($request->all());
 
-        $response = [
-            'error' => false,
-            'data' => [
-                'movie' => $movie,
-                'action' => 'update'
-            ]
-        ];
+            ActivityLogController::store([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'model' => 'App\Models\Movie',
+                'model_id' => $movie->id,
+                'data' => $movie->title,
+            ]);
 
-        return response()->json($response);
+            $response = [
+                'error' => false,
+                'data' => [
+                    'movie' => $movie,
+                    'action' => 'update'
+                ]
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
     }
 
     public function sort(Request $request)

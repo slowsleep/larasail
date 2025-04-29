@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Http\Controllers\ActivityLogController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class GameController extends Controller
@@ -16,35 +17,43 @@ class GameController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'genre' => 'string|nullable|max:255',
-            'developer' => 'string|nullable|max:255',
-            'publisher' => 'string|nullable|max:255',
-            'comment' => 'string|nullable|max:255',
-            'status_id' => 'required|integer|min:1|max:4',
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|string|max:255',
+                'genre' => 'string|nullable|max:255',
+                'developer' => 'string|nullable|max:255',
+                'publisher' => 'string|nullable|max:255',
+                'comment' => 'string|nullable|max:255',
+                'status_id' => 'required|integer|min:1|max:4',
+            ]);
 
-        $game = Game::findOrFail($request->id);
-        $game->update($request->all());
+            if ($validator->fails()) {
+                return response()->json(['error' => true, 'message' => $validator->errors()], status: 400);
+            }
 
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Game',
-            'model_id' => $game->id,
-            'data' => $game->title,
-        ]);
+            $game = Game::findOrFail($request->id);
+            $game->update($request->all());
 
-        $response = [
-            'error' => false,
-            'data' => [
-                'game' => $game,
-                'action' => 'update'
-            ]
-        ];
+            ActivityLogController::store([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'model' => 'App\Models\Game',
+                'model_id' => $game->id,
+                'data' => $game->title,
+            ]);
 
-        return response()->json($response);
+            $response = [
+                'error' => false,
+                'data' => [
+                    'game' => $game,
+                    'action' => 'update'
+                ]
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
     }
 
     public function sort(Request $request)

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Http\Controllers\ActivityLogController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -15,36 +16,45 @@ class BookController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'publisher' => 'string|nullable|max:255',
-            'publication_date' => 'date|nullable',
-            'genre' => 'string|nullable|max:255',
-            'comment' => 'string|nullable|max:255',
-            'status_id' => 'required|integer|min:1|max:4',
-        ]);
+        try {
 
-        $book = Book::findOrFail($request->id);
-        $book->update($request->all());
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|string|max:255',
+                'author' => 'required|string|max:255',
+                'publisher' => 'string|nullable|max:255',
+                'publication_date' => 'date|nullable',
+                'genre' => 'string|nullable|max:255',
+                'comment' => 'string|nullable|max:255',
+                'status_id' => 'required|integer|min:1|max:4',
+            ]);
 
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Game',
-            'model_id' => $book->id,
-            'data' => $book->title,
-        ]);
+            if ($validator->fails()) {
+                return response()->json(['error' => true, 'message' => $validator->errors()], status: 400);
+            }
 
-        $response = [
-            'error' => false,
-            'data' => [
-                'book' => $book,
-                'action' => 'update'
-            ]
-        ];
+            $book = Book::findOrFail($request->id);
+            $book->update($request->all());
 
-        return response()->json($response);
+            ActivityLogController::store([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'model' => 'App\Models\Game',
+                'model_id' => $book->id,
+                'data' => $book->title,
+            ]);
+
+            $response = [
+                'error' => false,
+                'data' => [
+                    'book' => $book,
+                    'action' => 'update'
+                ]
+            ];
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
     }
 
     public function sort(Request $request)

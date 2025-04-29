@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Anime;
 use App\Http\Controllers\ActivityLogController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AnimeController extends Controller
 {
@@ -15,36 +16,44 @@ class AnimeController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'season' => 'required|integer|min:1',
-            'episode' => 'required|integer|min:0',
-            'genre' => 'string|nullable|max:255',
-            'publisher' => 'string|nullable|max:255',
-            'translator' => 'string|nullable|max:255',
-            'comment' => 'string|nullable|max:255',
-            'status_id' => 'required|integer|min:1|max:4',
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|string|max:255',
+                'season' => 'required|integer|min:1',
+                'episode' => 'required|integer|min:0',
+                'genre' => 'string|nullable|max:255',
+                'publisher' => 'string|nullable|max:255',
+                'translator' => 'string|nullable|max:255',
+                'comment' => 'string|nullable|max:255',
+                'status_id' => 'required|integer|min:1|max:4',
+            ]);
 
-        $anime = Anime::findOrFail($request->id);
-        $anime->update($request->all());
+            if ($validator->fails()) {
+                return response()->json(['error' => true, 'message' => $validator->errors()], status: 400);
+            }
 
-        ActivityLogController::store([
-            'user_id' => Auth::user()->id,
-            'action' => 'update',
-            'model' => 'App\Models\Anime',
-            'model_id' => $anime->id,
-            'data' => $anime->title,
-        ]);
+            $anime = Anime::findOrFail($request->id);
+            $anime->update($request->all());
 
-        $response = [
-            'error' => false,
-            'data' => [
-                'anime' => $anime,
-                'action' => 'update'
-            ]
-        ];
-        return response()->json($response, 200);
+            ActivityLogController::store([
+                'user_id' => Auth::user()->id,
+                'action' => 'update',
+                'model' => 'App\Models\Anime',
+                'model_id' => $anime->id,
+                'data' => $anime->title,
+            ]);
+
+            $response = [
+                'error' => false,
+                'data' => [
+                    'anime' => $anime,
+                    'action' => 'update'
+                ],
+            ];
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
     }
 
     public function sort(Request $request)
