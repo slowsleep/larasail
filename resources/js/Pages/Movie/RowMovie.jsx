@@ -3,6 +3,7 @@ import ModelRow from '@/Components/ModelRow';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import { STATUSES } from '@/constants.js';
+import "../../../css/border-anim.css";
 
 export default function RowMovie ({movie, onDelete}) {
 
@@ -12,6 +13,9 @@ export default function RowMovie ({movie, onDelete}) {
     const [isNumberEdit, setIsNumberEdit] = useState(false);
     const [isStatusEdit, setIsStatusEdit] = useState(false);
 
+    const [errorClass, setErrorClass] = useState("");
+    const [successClass, setSuccessClass] = useState("");
+
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: movie.id,
         title: movie.title,
@@ -19,6 +23,8 @@ export default function RowMovie ({movie, onDelete}) {
         comment: movie.comment,
         status_id: movie.status_id,
     });
+
+    const [oldData, setOldData] = useState(data);
 
     const handleDestroy = () => {
         destroy(route('movies.destroy', {id: movie.id}), {
@@ -28,7 +34,22 @@ export default function RowMovie ({movie, onDelete}) {
     }
 
     const handleSave = () =>  {
-        axios.patch(route('api.movies.update'), data);
+        axios.patch(route('api.movies.update'), data)
+        .then((response) => {
+            if (response.status == 200) {
+                setSuccessClass("border-snake-anim");
+                setTimeout(() => {
+                    setSuccessClass("");
+                }, 2000);
+            }
+        })
+        .catch(() => {
+            setData(oldData);
+            setErrorClass("border-pulse-anim");
+            setTimeout(() => {
+                setErrorClass("");
+            }, 2000);
+        });;
     }
 
     const handleCancle = () => {
@@ -73,18 +94,13 @@ export default function RowMovie ({movie, onDelete}) {
             value: data.year ? data.year : "",
             type: "number",
             name: "year",
-            min: 0,
+            min: 1,
             onChange: (e) => {
                 setData('year', e.target.value);
-
-                if (e.target.value >= 0) {
+                if (e.target.value > 0) {
                     setYearError(false);
                 } else {
                     setYearError(true);
-                }
-
-                if (e.target.value == 0) {
-                    setData('year', null);
                 }
             },
             error: yearError,
@@ -109,7 +125,7 @@ export default function RowMovie ({movie, onDelete}) {
 
     return (
         <ModelRow
-            className="odd:bg-cyan-900/40 even:bg-cyan-800/40"
+            className={"odd:bg-cyan-900/40 even:bg-cyan-800/40" + (errorClass ? " " + errorClass : "") + (successClass ? " " + successClass : "")}
             inputs={inputList}
             data={data}
             setData={setData}

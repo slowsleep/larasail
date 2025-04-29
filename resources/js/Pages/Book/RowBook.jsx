@@ -3,12 +3,16 @@ import ModelRow from '@/Components/ModelRow';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { STATUSES } from "@/constants.js";
+import "../../../css/border-anim.css";
 
 export default function RowBook({book, onDelete}) {
     const [titleError, setTitleError] = useState(false);
     const [authorError, setAuthorError] = useState(false);
 
     const [isStatusEdit, setIsStatusEdit] = useState(false);
+
+    const [errorClass, setErrorClass] = useState("");
+    const [successClass, setSuccessClass] = useState("");
 
     const { data, setData, delete: destroy, patch, reset } = useForm({
         id: book.id,
@@ -21,6 +25,8 @@ export default function RowBook({book, onDelete}) {
         status_id: book.status_id,
     });
 
+    const [oldData, setOldData] = useState(data);
+
     const handleDestroy = () => {
         destroy(route('books.destroy', {id: book.id}), {
             preserveScroll: true,
@@ -29,7 +35,22 @@ export default function RowBook({book, onDelete}) {
     }
 
     const handleSave = () =>  {
-        axios.patch(route('api.books.update'), data);
+        axios.patch(route('api.books.update'), data)
+        .then((response) => {
+            if (response.status == 200) {
+                setSuccessClass("border-snake-anim");
+                setTimeout(() => {
+                    setSuccessClass("");
+                }, 2000);
+            }
+        })
+        .catch(() => {
+            setData(oldData);
+            setErrorClass("border-pulse-anim");
+            setTimeout(() => {
+                setErrorClass("");
+            }, 2000);
+        });;
     }
 
     const handleCancle = () => {
@@ -128,7 +149,7 @@ export default function RowBook({book, onDelete}) {
 
     return (
         <ModelRow
-            className="odd:bg-amber-900/40 even:bg-amber-800/40"
+            className={"odd:bg-amber-900/40 even:bg-amber-800/40" + (errorClass ? " " + errorClass : "") + (successClass ? " " + successClass : "")}
             inputs={inputList}
             data={data}
             setData={setData}
