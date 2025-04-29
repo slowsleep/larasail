@@ -23,7 +23,7 @@ const ModelTable = forwardRef((props, ref) => {
 
     return (
         <table
-            className={"border-separate border-spacing-2 border border-slate-500 w-full " + (className ?? '')}
+            className={"border-collapse border border-slate-500 w-full " + (className ?? '')}
             ref={ref}
             id={id}
         >
