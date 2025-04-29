@@ -17,12 +17,6 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
     }, [isEdit]);
 
     useEffect(() => {
-        if (data.abandoned) {
-            setData('finished', false);
-        }
-    }, [data.abandoned]);
-
-    useEffect(() => {
         let hasError = inputs.some(item => item.error);
         setIsFormError(hasError);
     }, [inputs])
@@ -49,8 +43,8 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
     }
 
     return (
-        <tr className={className + " " + (data.abandoned ? "brightness-50 grayscale" : "")
-            + (data.finished ? " -hue-rotate-30" : "")
+        <tr className={className + " " + 
+            (data.finished ? " -hue-rotate-30" : "")
             }
             {...props}
         >
