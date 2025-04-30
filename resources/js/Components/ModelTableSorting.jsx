@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 /**
  *
@@ -6,71 +7,37 @@ import axios from "axios";
  * @returns
  */
 export default function ModelTableSorting({ model, columns, updateTableItems }) {
-    const handleAsc = (col) => () => {
-        axios.get(route('api.' + model + '.sort'), {
-            params: {
-                sort_by: col,
-                sort_order: "asc"
-            }
-        }).then(response => {
-            updateTableItems(response.data.data);
-        });
-    }
 
-    const handleDesc = (col) => () => {
-        axios.get(route('api.' + model + '.sort'), {
-            params: {
-                sort_by: col,
-                sort_order: "desc"
-            }
-        }).then(response => {
-            updateTableItems(response.data.data);
-        });
-    }
+    const [sortingPrefs, setSortingPrefs] = useState(() => {
+        const stored = localStorage.getItem('tableSortingPreferences');
+        return stored ? JSON.parse(stored) : {};
+    });
 
-    const handlePlanning = (col) => () => {
-        axios.get(route('api.' + model + '.sort'), {
-            params: {
-                sort_by: col,
-                sort_order: "planning"
-            }
-        }).then(response => {
-            updateTableItems(response.data.data);
-        });
-    }
+    useEffect(() => {
+        const modelSort = sortingPrefs[model];
+        if (modelSort) {
+            axios.get(route(`api.${model}.sort`), {
+                params: modelSort
+            }).then(res => {
+                updateTableItems(res.data.data);
+            });
+        }
+    }, []);
 
-    const handleInProgress = (col) => () => {
-        axios.get(route('api.' + model + '.sort'), {
-            params: {
-                sort_by: col,
-                sort_order: "in-progress"
-            }
-        }).then(response => {
-            updateTableItems(response.data.data);
-        });
-    }
+    const handleSort = (sort_by, sort_order) => () => {
+        const newPrefs = {
+            ...sortingPrefs,
+            [model]: { sort_by, sort_order }
+        };
+        setSortingPrefs(newPrefs);
+        localStorage.setItem('tableSortingPreferences', JSON.stringify(newPrefs));
 
-    const handleFinished = (col) => () => {
-        axios.get(route('api.' + model + '.sort'), {
-            params: {
-                sort_by: col,
-                sort_order: "finished"
-            }
-        }).then(response => {
-            updateTableItems(response.data.data);
+        axios.get(route(`api.${model}.sort`), {
+            params: { sort_by, sort_order }
+        }).then(res => {
+            updateTableItems(res.data.data);
         });
-    }
-
-    const handleAbandoned = (col) => () => {
-        axios.get(route('api.' + model + '.sort'), {
-            params: {
-                sort_by: col,
-                sort_order: "abandoned"
-            }
-        }).then(response => {
-            updateTableItems(response.data.data);
-        });
-    }
+    };
 
     return (
         <div className="p-2 border border-gray-600 my-2 overflow-y-auto hidden dark:bg-gray-700/50 dark:text-white" id="sorting-menu">
@@ -82,19 +49,19 @@ export default function ModelTableSorting({ model, columns, updateTableItems }) 
                         <div className="flex flex-row justify-center gap-x-2">
                         {col == "status" ?
                             <>
-                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handlePlanning(col)}>Планирую</button>
-                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleInProgress(col)}>В процессе</button>
-                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleFinished(col)}>Завершен</button>
-                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleAbandoned(col)}>Заброшен</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleSort(col, "planning")}>Планирую</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleSort(col, "in-progress")}>В процессе</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleSort(col, "finished")}>Завершен</button>
+                                <button className="hover:bg-gray-300 dark:hover:text-black p-1 rounded" onClick={handleSort(col, "abandoned")}>Заброшен</button>
                             </>
                                 :
                             <>
-                                <button className="hover:bg-gray-300 p-1 rounded" onClick={handleAsc(col)}>
+                                <button className="hover:bg-gray-300 p-1 rounded" onClick={handleSort(col, "asc")}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
                                     </svg>
                                 </button>
-                                <button className="hover:bg-gray-300 p-1 rounded" onClick={handleDesc(col)}>
+                                <button className="hover:bg-gray-300 p-1 rounded" onClick={handleSort(col, "desc")}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
                                     </svg>
