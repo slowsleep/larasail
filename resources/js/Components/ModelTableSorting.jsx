@@ -42,7 +42,7 @@ export default function ModelTableSorting({ model, columns, updateTableItems }) 
     return (
         <div className="p-2 border border-gray-600 my-2 overflow-y-auto hidden dark:bg-gray-700/50 dark:text-white" id="sorting-menu">
             <h3>Сортировка по:</h3>
-            <div className="flex flex-row justify-center gap-x-2">
+            <div className="flex flex-row md:justify-center sm:justify-start gap-x-2">
                 {columns.map((col, index) => (
                     <div className="p-2 border border-gray-600 my-2 w-auto" key={index}>
                         <h4 className="text-center">{col}</h4>
