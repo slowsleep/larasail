@@ -43,7 +43,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
     }
 
     return (
-        <tr className={className + " " + 
+        <tr className={className + " " +
             (data.finished ? " -hue-rotate-30" : "")
             }
             {...props}
@@ -86,7 +86,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                                             className="text-green-500 hover:scale-150"
                                             onClick={onIncrement}
                                             >
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 sm:size-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                             </svg>
                                         </button>
@@ -95,7 +95,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                                             className="text-red-500 hover:scale-150"
                                             onClick={onDecrement}
                                             >
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 sm:size-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                                             </svg>
                                         </button>
@@ -120,7 +120,7 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
                         <select
                             {...filteredItem}
                             className={
-                                "bg-transparent " +
+                                "text-xs sm:text-sm bg-transparent " +
                                 (item.name == "status_id" && (" " + getStatusColorClass(item.value)))
                             }
                             value={item.value}
@@ -164,19 +164,19 @@ export default function ModelRow({className, inputs, data, setData, modelItem, m
             <td className="p-2 flex justify-around">
                 {!isEdit ?
                     <>
-                        <button className="hover:brightness-50 w-10 flex justify-center" onClick={handleEdit}>
+                        <button className="hover:brightness-50 w-5 sm:w-10 flex justify-center" onClick={handleEdit}>
                             <img src="/assets/img/blue-pen.svg" alt="edit" title="edit" />
                         </button>
-                        <button className="hover:brightness-50 w-10 flex justify-center" onClick={() => {handleDestroy(modelItem.id)}}>
+                        <button className="hover:brightness-50 w-5 sm:w-10 flex justify-center" onClick={() => {handleDestroy(modelItem.id)}}>
                             <img src="/assets/img/red-trash.svg" alt="delete" title="delete" />
                         </button>
                     </>
                 :
                     <>
-                        <button className="hover:brightness-50 w-10 flex justify-center" onClick={() => {handleSave()}}>
+                        <button className="hover:brightness-50 w-5 sm:w-10 flex justify-center" onClick={() => {handleSave()}}>
                             <img src="/assets/img/save.svg" alt="save" title="save" />
                         </button>
-                        <button className="hover:brightness-50 w-10 flex justify-center" onClick={() => {handleCancel()}}>
+                        <button className="hover:brightness-50 w-5 sm:w-10 flex justify-center" onClick={() => {handleCancel()}}>
                             <img src="/assets/img/cancel.svg" alt="cancel" title="cancel" />
                         </button>
                     </>
