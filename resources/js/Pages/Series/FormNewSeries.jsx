@@ -1,5 +1,4 @@
 import AddModelForm from '@/Components/AddModelForm';
-import { useEffect } from 'react';
 import { STATUSES } from '@/constants.js';
 
 export default function FormNewSeries({ className, id, data, setData, post }) {
@@ -19,13 +18,6 @@ export default function FormNewSeries({ className, id, data, setData, post }) {
             },
         });
     }
-
-    useEffect(() => {
-        if (data.abandoned) {
-            setData('finished', false);
-        }
-    }, [data.abandoned]);
-
 
     const listInputs = [
         {

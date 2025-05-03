@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import AddModelForm from '@/Components/AddModelForm';
 import { STATUSES } from '@/constants.js';
 
@@ -19,13 +18,6 @@ export default function FormNewMovie ({ className, id, data, setData, post }) {
             },
         });
     }
-
-    useEffect(() => {
-        if (data.abandoned) {
-            setData('finished', false);
-        }
-    }, [data.abandoned]);
-
 
     const listInputs = [
         {
