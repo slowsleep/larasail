@@ -39,6 +39,7 @@ export default function RowSeries({singleSeries, onDelete}) {
         axios.patch(route('api.series.update'), data)
         .then((response) => {
             if (response.status == 200) {
+                setOldData(data);
                 setSuccessClass("border-snake-anim");
                 setTimeout(() => {
                     setSuccessClass("");

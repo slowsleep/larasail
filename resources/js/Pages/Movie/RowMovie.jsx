@@ -37,6 +37,7 @@ export default function RowMovie ({movie, onDelete}) {
         axios.patch(route('api.movies.update'), data)
         .then((response) => {
             if (response.status == 200) {
+                setOldData(data);
                 setSuccessClass("border-snake-anim");
                 setTimeout(() => {
                     setSuccessClass("");

@@ -37,6 +37,7 @@ export default function RowCartoon({cartoon, onDelete}) {
         axios.patch(route('api.cartoons.update'), data)
         .then((response) => {
             if (response.status == 200) {
+                setOldData(data);
                 setSuccessClass("border-snake-anim");
                 setTimeout(() => {
                     setSuccessClass("");

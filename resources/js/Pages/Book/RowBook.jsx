@@ -38,6 +38,7 @@ export default function RowBook({book, onDelete}) {
         axios.patch(route('api.books.update'), data)
         .then((response) => {
             if (response.status == 200) {
+                setOldData(data);
                 setSuccessClass("border-snake-anim");
                 setTimeout(() => {
                     setSuccessClass("");

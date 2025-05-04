@@ -36,6 +36,7 @@ export default function RowGame({game, onDelete}) {
         axios.patch(route('api.games.update'), data)
         .then((response) => {
             if (response.status == 200) {
+                setOldData(data);
                 setSuccessClass("border-snake-anim");
                 setTimeout(() => {
                     setSuccessClass("");
