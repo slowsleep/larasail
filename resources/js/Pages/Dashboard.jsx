@@ -31,6 +31,9 @@ export default function Dashboard({ auth }) {
                             <Link className="p-2 border-2 border-violet-600 bg-violet-600/20 hover:bg-violet-600/40 dark:text-white text-center cursor-pointer" href={route('games.index')}>
                                 игры
                             </Link>
+                            <Link className="p-2 border-2 border-blue-600 bg-blue-600/20 hover:bg-blue-600/40 dark:text-white text-center cursor-pointer" href={route('cartoons.index')}>
+                                мультфильмы
+                            </Link>
                         </div>
                     </div>
                 </div>
