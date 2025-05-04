@@ -6,12 +6,12 @@ export default function TableControls({ children }) {
     const showSortingMenu = () => {
         document.querySelector("#sorting-menu").classList.toggle("hidden");
     }
-    
+
     return (
         <>
             <div className='flex flex-row gap-x-2'>
                 <button
-                    className="border rounded border-gray-600 w-fit p-2"
+                    className="border rounded-lg border-gray-600 w-fit p-2"
                     onClick={showColsControl}
                     title="Видимость колонок"
                 >
@@ -21,7 +21,7 @@ export default function TableControls({ children }) {
                     </svg>
                 </button>
                 <button
-                    className="border rounded border-gray-600 w-fit p-2"
+                    className="border rounded-lg border-gray-600 w-fit p-2"
                     onClick={showSortingMenu}
                     title="Сортировка"
                 >

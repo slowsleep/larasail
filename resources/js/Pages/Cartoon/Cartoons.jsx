@@ -65,7 +65,7 @@ export default function Cartoons({auth, cartoons, cartoon, action}) {
                     <FormNewCartoon className="hidden" id="form-cartoon" data={data} setData={setData} post={post} />
 
                     <div
-                        className="flex-1 p-2 border-2 border-blue-400 bg-blue-400/20 hover:bg-blue-400/40 dark:text-white text-center cursor-pointer"
+                        className="flex-1 p-2 border-2 rounded-lg border-blue-400 bg-blue-400/20 hover:bg-blue-400/40 dark:text-white text-center cursor-pointer"
                         onClick={hideForm}
                         title="Показать форму добавления"
                     >

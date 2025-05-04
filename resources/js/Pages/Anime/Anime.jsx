@@ -70,7 +70,7 @@ export default function Anime({auth, animeList, anime, action}) {
                     <FormNewAnime className="hidden" id="form-anime" data={data} setData={setData} post={post} />
 
                     <div
-                        className="flex-1 p-2 border-2 border-teal-400 bg-teal-400/20 hover:bg-teal-400/40 dark:text-white text-center cursor-pointer" onClick={hideForm}
+                        className="flex-1 p-2 border-2 rounded-lg border-teal-400 bg-teal-400/20 hover:bg-teal-400/40 dark:text-white text-center cursor-pointer" onClick={hideForm}
                         title="Показать форму добавления"
                     >
                         аниме

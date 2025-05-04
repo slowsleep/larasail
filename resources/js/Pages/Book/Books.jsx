@@ -66,7 +66,7 @@ export default function Books({auth, books, book, action}) {
                     <FormNewBook className="hidden" id="form-book" data={data} setData={setData} post={post} />
 
                     <div
-                        className="flex-1 p-2 border-2 border-amber-400 bg-amber-400/20 hover:bg-amber-400/40 dark:text-white text-center cursor-pointer"
+                        className="flex-1 p-2 border-2 rounded-lg border-amber-400 bg-amber-400/20 hover:bg-amber-400/40 dark:text-white text-center cursor-pointer"
                         onClick={hideForm}
                         title="Показать форму добавления"
                     >

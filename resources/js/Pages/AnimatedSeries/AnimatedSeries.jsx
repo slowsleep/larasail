@@ -68,7 +68,7 @@ export default function AnimatedSeries({auth, animatedSeries, singleAnimatedSeri
                     <FormNewAnimatedSeries className="hidden" id="form-animatedSeries" data={data} setData={setData} post={post} />
 
                     <div
-                        className="flex-1 p-2 border-2 border-fuchsia-400 bg-fuchsia-400/20 hover:bg-fuchsia-400/40 dark:text-white text-center cursor-pointer"
+                        className="flex-1 p-2 border-2 rounded-lg border-fuchsia-400 bg-fuchsia-400/20 hover:bg-fuchsia-400/40 dark:text-white text-center cursor-pointer"
                         onClick={hideForm}
                         title="Показать форму добавления"
                     >
