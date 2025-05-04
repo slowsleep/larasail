@@ -8,6 +8,7 @@ use App\Http\Controllers\ {
     MovieController,
     SeriesController,
     CartoonController,
+    AnimatedSeriesController,
     GameController,
     BookController,
     MangaController,
@@ -73,6 +74,7 @@ Route::group(['middleware' => ['auth', 'web']],function () {
     Route::resource('mangas', MangaController::class)->only(['index', 'store', 'destroy']);
     Route::resource('anime', AnimeController::class)->only(['index', 'store', 'destroy']);
     Route::resource('cartoons', CartoonController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('animated-series', AnimatedSeriesController::class)->only(['index', 'store', 'destroy']);
 });
 
 require __DIR__.'/auth.php';
