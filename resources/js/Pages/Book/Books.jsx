@@ -82,7 +82,7 @@ export default function Books({auth, books, book, action}) {
                                 {label: 'publication_date', column: 3},
                                 {label: 'genre', column: 4},
                                 {label: 'comment', column: 5},
-                                {label: 'status', column: 6},
+                                {label: 'status_id', column: 6},
                             ]}
                             tableRef={tableRef}
                         />

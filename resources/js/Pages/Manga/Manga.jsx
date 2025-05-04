@@ -82,7 +82,7 @@ export default function Manga({auth, mangas, manga, action}) {
                                 {label: 'genre', column: 3},
                                 {label: 'creators', column: 4},
                                 {label: 'comment', column: 5},
-                                {label: 'status', column: 6},
+                                {label: 'status_id', column: 6},
                             ]}
                             tableRef={tableRef}
                         />

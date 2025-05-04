@@ -80,7 +80,7 @@ export default function Games({auth, games, game, action}) {
                                     {label: 'developer', column: 2},
                                     {label: 'publisher', column: 3},
                                     {label: 'comment', column: 4},
-                                    {label: 'status', column: 5},
+                                    {label: 'status_id', column: 5},
                                 ]}
                                 tableRef={tableRef}
                             />

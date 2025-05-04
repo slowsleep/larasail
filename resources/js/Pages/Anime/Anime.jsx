@@ -86,7 +86,7 @@ export default function Anime({auth, animeList, anime, action}) {
                                 {label: 'publisher', column: 4},
                                 {label: 'translator', column: 5},
                                 {label: 'comment', column: 6},
-                                {label: 'status', column: 7}
+                                {label: 'status_id', column: 7}
                             ]}
                             tableRef={tableRef}
                         />

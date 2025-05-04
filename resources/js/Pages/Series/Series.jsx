@@ -78,7 +78,7 @@ export default function Series({ auth, series, singleSeries, action }) {
                                     {label: 'season', column: 1},
                                     {label: 'episode', column: 2},
                                     {label: 'comment', column: 3},
-                                    {label: 'status', column: 4},
+                                    {label: 'status_id', column: 4},
                                 ]}
                                 tableRef={tableRef}
                             />

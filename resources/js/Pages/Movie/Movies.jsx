@@ -76,7 +76,7 @@ export default function Movies({ auth, movies, movie, action }) {
                                 columns={[
                                     {label: 'year', column: 1},
                                     {label: 'comment', column: 2},
-                                    {label: 'status', column: 3},
+                                    {label: 'status_id', column: 3},
                                 ]}
                                 tableRef={tableRef}
                             />
