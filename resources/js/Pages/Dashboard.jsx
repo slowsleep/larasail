@@ -5,13 +5,13 @@ export default function Dashboard({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
+            header={<h2 className="font-semibold text-xl text-zinc-800 dark:text-zinc-200 leading-tight">Dashboard</h2>}
         >
             <Head title="Dashboard" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-zinc-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="px-6 md:px-16 lg:px-24 py-6 grid grid-cols-2 gap-4">
                             <Link className="p-2 border-2 rounded-lg border-teal-600 bg-teal-600/20 hover:bg-teal-600/40 dark:text-white text-center cursor-pointer" href={route('anime.index')}>
                                 аниме

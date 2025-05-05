@@ -9,7 +9,7 @@ export const getStatusColorClass = (value) => {
         case FINISHED:
             return "text-green-500";
         case ABANDONED:
-            return "text-gray-500";
+            return "text-zinc-500";
         default:
             return "";
     }

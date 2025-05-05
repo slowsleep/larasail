@@ -71,7 +71,7 @@ export default function TableActivity({activity}) {
             squares.push(
                 <div key={i} className="flex flex-col">
                     {week.map(({date, activity}, index) => (
-                        <Square key={index} title={getFormattedDate(date) + (activity?.length ? ` (${activity.length})` : "")} className={activity?.length ? `bg-${color}-${colorOpacity(activity.length)}00` : 'bg-white dark:bg-gray-800'} />
+                        <Square key={index} title={getFormattedDate(date) + (activity?.length ? ` (${activity.length})` : "")} className={activity?.length ? `bg-${color}-${colorOpacity(activity.length)}00` : 'bg-white dark:bg-zinc-800'} />
                     ))}
                 </div>
             );
@@ -115,10 +115,10 @@ export default function TableActivity({activity}) {
                     <div className="flex flex-row ml-12 items-center mt-2 text-sm justify-around">
                         {renderMonthsRow()}
                     </div>
-                    <div className="flex flex-row self-end items-center mt-2 text-xs text-gray-400">
+                    <div className="flex flex-row self-end items-center mt-2 text-xs text-zinc-400">
                         <p>~ less</p>
                         {paletteHints.map(({num, title}) => (
-                            <Square key={num} className={`w-3.5 h-3.5 bg-${color}-${num}00 cursor-auto hover:border-gray-500`} title={title} />
+                            <Square key={num} className={`w-3.5 h-3.5 bg-${color}-${num}00 cursor-auto hover:border-zinc-500`} title={title} />
                         ))}
                         <p>more ~</p>
                     </div>
@@ -144,6 +144,6 @@ export default function TableActivity({activity}) {
 
 function Square({className, ...props}) {
     return (
-        <div className={"w-4 h-4 m-1 border border-gray-500 cursor-pointer hover:border-violet-500 " + (className ? className : "bg-gray-600")} {...props}></div>
+        <div className={"w-4 h-4 m-1 border border-zinc-500 cursor-pointer hover:border-violet-500 " + (className ? className : "bg-zinc-600")} {...props}></div>
     )
 }

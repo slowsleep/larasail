@@ -25,14 +25,14 @@ export default function Buddies({auth, buddies}) {
                 <NavLink
                     href={route('buddies')}
                     active={route().current('buddies')}
-                    className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mr-5"
+                    className="font-semibold text-xl text-zinc-800 dark:text-zinc-200 leading-tight mr-5"
                 >
                     Друзья
                 </NavLink>
                 <NavLink
                     href={route('buddies.followed')}
                     active={route().current('buddies.followed')}
-                    className="font-semibold text-lg text-gray-700 dark:text-gray-400 leading-tight"
+                    className="font-semibold text-lg text-zinc-700 dark:text-zinc-400 leading-tight"
                 >
                     Подписчики
                 </NavLink>
@@ -43,7 +43,7 @@ export default function Buddies({auth, buddies}) {
 
         <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col gap-y-4">
+                    <div className="bg-white dark:bg-zinc-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col gap-y-4">
 
                         <form className="flex justify-between" onSubmit={submit}>
                             <input className="w-full" type="text" name="search" placeholder="Search" value={data.search} onChange={(e) => setData('search', e.target.value)} />

@@ -34,7 +34,7 @@ export default function ShowingTableCol({model, columns, tableRef}) {
     }
 
     return (
-        <div className="p-2 border border-gray-600 my-2 overflow-y-auto hidden dark:bg-gray-700/50 dark:text-white" id="cols-control">
+        <div className="p-2 border border-zinc-600 my-2 overflow-y-auto hidden dark:bg-zinc-700/50 dark:text-white" id="cols-control">
             <h3>Показ колонок</h3>
             <div className="flex flex-row gap-x-4">
                 {tableCols[model] ? tableCols[model].map((item) => (

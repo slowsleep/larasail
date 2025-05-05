@@ -11,7 +11,7 @@ export default function TableControls({ children }) {
         <>
             <div className='flex flex-row gap-x-2'>
                 <button
-                    className="border rounded-lg border-gray-600 w-fit p-2"
+                    className="border rounded-lg border-zinc-600 w-fit p-2"
                     onClick={showColsControl}
                     title="Видимость колонок"
                 >
@@ -21,7 +21,7 @@ export default function TableControls({ children }) {
                     </svg>
                 </button>
                 <button
-                    className="border rounded-lg border-gray-600 w-fit p-2"
+                    className="border rounded-lg border-zinc-600 w-fit p-2"
                     onClick={showSortingMenu}
                     title="Сортировка"
                 >

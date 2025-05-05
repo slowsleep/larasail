@@ -69,14 +69,14 @@ export default function ChatWindow({ auth, chat }) {
 
     return (
         <div className="container mx-auto p-4 h-full">
-            <div className="flex flex-col p-4 bg-gray-100 rounded w-full h-full overflow-y-auto">
+            <div className="flex flex-col p-4 bg-zinc-100 rounded w-full h-full overflow-y-auto">
                 <h4 className="text-lg font-bold text-center underline">chat name: {chat.name}</h4>
                 <div className="messages mb-4 flex flex-col overflow-y-auto">
                     {messages.map(msg => (
-                        <div key={msg.id} className={"mb-2 p-1 bg-gray-200 p-1 rounded px-2 " + (msg.user.id === auth.user.id ? 'ml-auto' : 'mr-auto')}>
+                        <div key={msg.id} className={"mb-2 p-1 bg-zinc-200 p-1 rounded px-2 " + (msg.user.id === auth.user.id ? 'ml-auto' : 'mr-auto')}>
                             <p className={msg.user.id === auth.user.id ? 'text-right' : ''}><strong>{msg.user.name}</strong></p>
                             <p>{msg.content}</p>
-                            <p className="text-sm text-end text-gray-500" title={formatDate(msg.created_at)}>{formatTime(msg.created_at)}</p>
+                            <p className="text-sm text-end text-zinc-500" title={formatDate(msg.created_at)}>{formatTime(msg.created_at)}</p>
                         </div>
                     ))}
                 </div>

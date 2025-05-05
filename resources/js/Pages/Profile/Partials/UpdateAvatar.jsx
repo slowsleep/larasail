@@ -33,7 +33,7 @@ export default function UpdateAvatar({className = ''}) {
   return (
     <section className={className}>
         <header>
-            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">User avatar</h2>
+            <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">User avatar</h2>
         </header>
         <div className="overflow-hidden content-center" style={{width: "200px", height: "200px"}}>
             <img className='w-full' src={ user.avatar ? '/storage/avatars/1/' + user.avatar : '/assets/img/default.png'} alt='user avatar' />
@@ -71,7 +71,7 @@ export default function UpdateAvatar({className = ''}) {
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400">Saved.</p>
                     </Transition>
             </div>
 

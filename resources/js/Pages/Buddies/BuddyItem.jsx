@@ -94,7 +94,7 @@ export default function BuddyItem({auth, buddy}) {
   return (
     <div className={"flex p-1 justify-between border border-violet-600 " + (relationships === "friends" || relationships === "following" ? "bg-violet-600/20" : "bg-violet-300/20")}>
         <p className="text-lg">
-            <a href={route('profile.show', buddy.name)} className={"hover:pointer " + (relationships === "friends" || relationships === "following" ? "text-emerald-300" : "text-gray-300")}>{buddy.name}</a>
+            <a href={route('profile.show', buddy.name)} className={"hover:pointer " + (relationships === "friends" || relationships === "following" ? "text-emerald-300" : "text-zinc-300")}>{buddy.name}</a>
         </p>
         <div>
             {relationships === "followed" || relationships === "none" ?
