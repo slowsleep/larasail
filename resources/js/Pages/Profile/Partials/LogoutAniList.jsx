@@ -8,7 +8,7 @@ export default function LogoutAniList({ accessToken, setAccessToken }) {
     return (
         <>
             {accessToken ? (
-                <button className="p-4 rounded bg-red-600/50 hover:bg-red-800/50 w-full lg:w-auto" onClick={logoutAniList}>Убрать синхронизацию</button>
+                <button className="p-2 rounded-lg bg-red-600/50 hover:bg-red-800/50 w-full lg:w-auto" onClick={logoutAniList}>Убрать синхронизацию</button>
             ) : ''}
         </>
     )

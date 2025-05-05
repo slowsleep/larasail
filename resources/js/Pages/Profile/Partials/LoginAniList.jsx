@@ -62,7 +62,7 @@ export default function LoginAniList({ accessToken, setAccessToken }) {
                 <p>Вы синхронизировались с AniList</p>
             ) : (
                 <a
-                    className="p-4 rounded bg-emerald-600 hover:bg-emerald-800 w-full lg:w-auto"
+                    className="p-2 rounded-lg bg-emerald-600 hover:bg-emerald-800 w-full lg:w-auto"
                     href={`https://anilist.co/api/v2/oauth/authorize?client_id=${anilClientID}&response_type=token`}
                 >
                     Login with AniList
