@@ -32,7 +32,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                     </div>
 
                     <div className="p-4 sm:p-8 dark:text-white bg-white dark:bg-zinc-800 shadow sm:rounded-lg">
-                        <h2 className='text-2xl mb-4'>Synchronize with AniList</h2>
+                        <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-4">Synchronize with AniList</h2>
                         <LoginAniList accessToken={ALAccessToken} setAccessToken={setALAccessToken} />
                         <LogoutAniList accessToken={ALAccessToken} setAccessToken={setALAccessToken}  />
                     </div>
