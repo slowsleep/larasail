@@ -2,7 +2,7 @@ import { useEffect, useState, forwardRef } from 'react'
 import { hideTableColumn } from '@/Utils/tableUtils';
 
 /**
- * @param {string} model - model name for localStorage (recommended camelCase)
+ * @param {string} model - model name for localStorage (like in DB)
  * @param {array} columns - array of column names
  */
 const ModelTable = forwardRef((props, ref) => {

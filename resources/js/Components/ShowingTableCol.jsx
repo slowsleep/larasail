@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { hideTableColumn } from '@/Utils/tableUtils';
 
 /**
- * @param {string} model - model name for localStorage (recommended camelCase)
- * @param {array} columns - array of objects with column name like in DB and column number, for example [{label: "title", column: 0}]
+ * @param {string} model - model name for localStorage (like in DB)
+ * @param {array} columns - array of objects with column name (like in DB) and column number in table, for example [{label: "title", column: 0}]
  */
 export default function ShowingTableCol({model, columns, tableRef}) {
     const [tableCols, setTableCols] = useState(JSON.parse(localStorage.getItem('tableColumnsVisibility')) ?? {});

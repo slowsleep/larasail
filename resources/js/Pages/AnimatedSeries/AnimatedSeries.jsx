@@ -77,7 +77,7 @@ export default function AnimatedSeries({auth, animatedSeries, singleAnimatedSeri
 
                     <TableControls>
                         <ShowingTableCol
-                            model="animatedSeries"
+                            model="animated_series"
                             columns={[
                                 {label: 'season', column: 1},
                                 {label: 'episode', column: 2},
@@ -99,7 +99,7 @@ export default function AnimatedSeries({auth, animatedSeries, singleAnimatedSeri
 
                     <div className="overflow-x-auto">
                         <ModelTable
-                            model="animatedSeries"
+                            model="animated_series"
                             columns={["title", "season", "episode", "genre", "year", "publisher", "comment", "status"]}
                             ref={tableRef}
                         >
