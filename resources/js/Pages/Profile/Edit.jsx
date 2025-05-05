@@ -37,6 +37,12 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                         <LogoutAniList accessToken={ALAccessToken} setAccessToken={setALAccessToken}  />
                     </div>
 
+                    <div className="p-4 sm:p-8 dark:text-white bg-white dark:bg-zinc-800 shadow sm:rounded-lg">
+                        <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">Очистить кэш</h2>
+                        <p className="mt-1 mb-4 text-sm dark:text-zinc-400 text-zinc-600">Очистка кэша может помочь решить некоторые проблемы с отображением данных.</p>
+                        <button className="p-2 rounded-lg bg-red-600/50 hover:bg-red-800/50 " onClick={() => localStorage.clear()}>Очистить кэш</button>
+                    </div>
+
                     <div className="p-4 sm:p-8 bg-white dark:bg-zinc-800 shadow sm:rounded-lg">
                         <UpdatePasswordForm className="max-w-xl" />
                     </div>
