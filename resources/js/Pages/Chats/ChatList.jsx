@@ -17,7 +17,7 @@ export default function ChatList({auth, chats}) {
                         const otherUser = chat.users.find(u => u.id !== auth.user.id);
                         return (
                             <li key={chat.id}>
-                                <div className="flex mb-2 bg-zinc-600 hover:bg-zinc-900 p-2 justify-between">
+                                <div className="flex mb-2 bg-zinc-600 hover:bg-zinc-900 p-2 justify-between rounded-lg">
                                     <NavLink
                                         href={`/chats/${otherUser.name}`}
                                         className="text-blue-500 hover:underline"
