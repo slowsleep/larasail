@@ -9,7 +9,7 @@ export default function ChatList({auth, chats}) {
     }
 
     return (
-        <div className="container mx-auto p-4 h-full overflow-y-auto">
+        <div className="container mx-auto p-2 h-full overflow-y-auto">
             <div className="flex flex-col h-full">
                 <h4 className="text-lg font-bold">Ваши диалоги</h4>
                 <ul className="list-none">
