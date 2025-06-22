@@ -3,10 +3,10 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewManga from './FormNewManga';
 import RowManga from './RowManga';
-import ShowingTableCol from '@/Components/ShowingTableCol';
-import ModelTable from '@/Components/ModelTable';
-import ModelTableSorting from '@/Components/ModelTableSorting';
-import TableControls from '@/Components/Table/TableControls';
+import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable/ModelTable';
+import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
+import TableControls from '@/Components/ModelTable/TableControls';
 
 export default function Manga({auth, mangas, manga, action}) {
     const [mangasItems, setMangasItems] = useState(mangas);

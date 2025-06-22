@@ -3,10 +3,10 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewAnimatedSeries from './FormNewAnimatedSeries';
 import RowAnimatedSeries from './RowAnimatedSeries';
-import ShowingTableCol from '@/Components/ShowingTableCol';
-import ModelTable from '@/Components/ModelTable';
-import ModelTableSorting from '@/Components/ModelTableSorting';
-import TableControls from '@/Components/Table/TableControls';
+import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable/ModelTable';
+import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
+import TableControls from '@/Components/ModelTable/TableControls';
 
 
 export default function AnimatedSeries({auth, animatedSeries, singleAnimatedSeries, action}) {

@@ -3,10 +3,10 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewAnime from './FormNewAnime';
 import RowAnime from './RowAnime';
-import ShowingTableCol from '@/Components/ShowingTableCol';
-import ModelTable from '@/Components/ModelTable';
-import ModelTableSorting from '@/Components/ModelTableSorting';
-import TableControls from '@/Components/Table/TableControls';
+import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
+import ModelTable from '@/Components/ModelTable/ModelTable';
+import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
+import TableControls from '@/Components/ModelTable/TableControls';
 import ALAnimeGrid from './Partials/ALAnimeGrid';
 import ALAnime from './Partials/ALAnime';
 
