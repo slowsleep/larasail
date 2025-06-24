@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'web', 'auth:sanctum']],function () {
 
     Route::patch('/animated-series', [App\Http\Controllers\Api\AnimatedSeriesController::class, 'update'])->name('api.animated-series.update');
     Route::get('/animated-series/sort', [App\Http\Controllers\Api\AnimatedSeriesController::class, 'sort'])->name('api.animated-series.sort');
+    Route::get('/animated-series/search', [App\Http\Controllers\Api\AnimatedSeriesController::class, 'search'])->name('api.animated-series.search');
 });
 
 Route::middleware('auth:sanctum')->get('/keep-alive', function (Request $request) {
