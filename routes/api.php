@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth', 'web', 'auth:sanctum']],function () {
     Route::patch('/anime', [App\Http\Controllers\Api\AnimeController::class, 'update'])->name('api.anime.update');
     Route::get('/anime/sort', [App\Http\Controllers\Api\AnimeController::class, 'sort'])->name('api.anime.sort');
+    Route::get('/anime/search', [App\Http\Controllers\Api\AnimeController::class, 'search'])->name('api.anime.search');
 
     Route::patch('/movies', [App\Http\Controllers\Api\MovieController::class, 'update'])->name('api.movies.update');
     Route::get('/movies/sort', [App\Http\Controllers\Api\MovieController::class, 'sort'])->name('api.movies.sort');
