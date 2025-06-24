@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewAnimatedSeries from './FormNewAnimatedSeries';
 import RowAnimatedSeries from './RowAnimatedSeries';
+import FormSearchAnimatedSeries from './FormSearchAnimatedSeries';
 import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable/ModelTable';
 import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
@@ -50,6 +51,10 @@ export default function AnimatedSeries({auth, animatedSeries, singleAnimatedSeri
         setAnimatedSeriesItems(sortedAnimatedSeries);
     }
 
+    const updateFoundAnimatedSeriesItems = (foundAnimatedSeries) => {
+        setAnimatedSeriesItems(foundAnimatedSeries);
+    }
+
     const handleDestroyAnimatedSeries = (id) => {
         let newAnimatedSeriesItems = animatedSeriesItems.filter(item => item.id != id);
         setAnimatedSeriesItems(newAnimatedSeriesItems);
@@ -94,6 +99,10 @@ export default function AnimatedSeries({auth, animatedSeries, singleAnimatedSeri
                             model="animated-series"
                             columns={['title', 'status', 'created_at']}
                             updateTableItems={updateSortedAnimatedSeriesItems}
+                        />
+                        <FormSearchAnimatedSeries
+                            model="animated-series"
+                            updateTableItems={updateFoundAnimatedSeriesItems}
                         />
                     </TableControls>
 
