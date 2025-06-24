@@ -72,4 +72,45 @@ class AnimatedSeriesController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function search(Request $request)
+    {
+        try {
+            $query = AnimatedSeries::query();
+
+            if ($request->has('title') && !empty($request->input('title'))) {
+                $search = $request->input('title');
+                $query->where('title', 'like', '%' . $search . '%');
+            }
+
+            if ($request->has('genre') && !empty($request->input('genre'))) {
+                $genre = $request->input('genre');
+                $query->where('genre', 'like', '%' . $genre . '%');
+            }
+
+            if ($request->has('year') && !empty($request->input('year'))) {
+                $year = $request->input('year');
+                $query->where('year', $year);
+            }
+
+            if ($request->has('publisher') && !empty($request->input('publisher'))) {
+                $publisher = $request->input('publisher');
+                $query->where('publisher', 'like', '%' . $publisher . '%');
+            }
+
+            if ($request->has('status_id') && !empty($request->input('status_id'))) {
+                $statusId = $request->input('status_id');
+                $query->where('status_id', $statusId);
+            }
+
+            $animatedSeries = $query->get();
+
+            return response()->json([
+                'error' => false,
+                'data' => $animatedSeries
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
+    }
 }
