@@ -7,6 +7,10 @@ export default function TableControls({ children }) {
         document.querySelector("#sorting-menu").classList.toggle("hidden");
     }
 
+    const showSearch = () => {
+        document.querySelector("#search").classList.toggle("hidden");
+    }
+
     return (
         <>
             <div className='flex flex-row gap-x-2'>
@@ -27,6 +31,15 @@ export default function TableControls({ children }) {
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                    </svg>
+                </button>
+                <button
+                    className="border rounded-lg border-zinc-600 w-fit p-2"
+                    onClick={showSearch}
+                    title="Поиск"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
                 </button>
             </div>
