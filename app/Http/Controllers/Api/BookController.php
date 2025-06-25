@@ -71,4 +71,50 @@ class BookController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function search(Request $request)
+    {
+        try {
+            $query = Book::query();
+
+            if ($request->has('title') && !empty($request->input('title'))) {
+                $search = $request->input('title');
+                $query->where('title', 'like', '%' . $search . '%');
+            }
+
+            if ($request->has('author') && !empty($request->input('author'))) {
+                $author = $request->input('author');
+                $query->where('author', 'like', '%' . $author . '%');
+            }
+
+            if ($request->has('genre') && !empty($request->input('genre'))) {
+                $genre = $request->input('genre');
+                $query->where('genre', 'like', '%' . $genre . '%');
+            }
+
+            if ($request->has('publisher') && !empty($request->input('publisher'))) {
+                $publisher = $request->input('publisher');
+                $query->where('publisher', 'like', '%' . $publisher . '%');
+            }
+
+            if ($request->has('year') && !empty($request->input('year'))) {
+                $year = $request->input('year');
+                $query->whereYear('publication_date', $year);
+            }
+
+            if ($request->has('status_id') && !empty($request->input('status_id'))) {
+                $statusId = $request->input('status_id');
+                $query->where('status_id', $statusId);
+            }
+
+            $books = $query->get();
+
+            return response()->json([
+                'error' => false,
+                'data' => $books
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
+    }
 }

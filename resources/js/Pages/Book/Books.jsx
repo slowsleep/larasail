@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewBook from './FormNewBook';
 import RowBook from './RowBook';
+import FormSearchBooks from './FormSearchBooks';
 import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable/ModelTable';
 import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
@@ -48,6 +49,10 @@ export default function Books({auth, books, book, action}) {
         setBooksItems(sortedBooks);
     }
 
+    const updateFoundBooksItems = (foundBooks) => {
+        setBooksItems(foundBooks);
+    }
+
     const handleDestroyBook = (id) => {
         let newBooksItems = booksItems.filter(item => item.id != id);
         setBooksItems(newBooksItems);
@@ -91,6 +96,11 @@ export default function Books({auth, books, book, action}) {
                             model="books"
                             columns={['title', 'status', 'created_at']}
                             updateTableItems={updateSortedBooksItems}
+                        />
+
+                        <FormSearchBooks
+                            model="books"
+                            updateTableItems={updateFoundBooksItems}
                         />
                     </TableControls>
 
