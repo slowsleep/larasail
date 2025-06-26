@@ -79,8 +79,8 @@ class AnimatedSeriesController extends Controller
             $query = AnimatedSeries::query();
 
             if ($request->has('title') && !empty($request->input('title'))) {
-                $search = $request->input('title');
-                $query->where('title', 'like', '%' . $search . '%');
+                $title = $request->input('title');
+                $query->where('title', 'like', '%' . $title . '%');
             }
 
             if ($request->has('genre') && !empty($request->input('genre'))) {

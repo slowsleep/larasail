@@ -78,8 +78,8 @@ class BookController extends Controller
             $query = Book::query();
 
             if ($request->has('title') && !empty($request->input('title'))) {
-                $search = $request->input('title');
-                $query->where('title', 'like', '%' . $search . '%');
+                $title = $request->input('title');
+                $query->where('title', 'like', '%' . $title . '%');
             }
 
             if ($request->has('author') && !empty($request->input('author'))) {
