@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'web', 'auth:sanctum']],function () {
 
     Route::patch('/mangas', [App\Http\Controllers\Api\MangaController::class, 'update'])->name('api.mangas.update');
     Route::get('/mangas/sort', [App\Http\Controllers\Api\MangaController::class, 'sort'])->name('api.mangas.sort');
+    Route::get('/mangas/search', [App\Http\Controllers\Api\MangaController::class, 'search'])->name('api.mangas.search');
 
     Route::patch('/games', [App\Http\Controllers\Api\GameController::class, 'update'])->name('api.games.update');
     Route::get('/games/sort', [App\Http\Controllers\Api\GameController::class, 'sort'])->name('api.games.sort');

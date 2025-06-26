@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewManga from './FormNewManga';
 import RowManga from './RowManga';
+import FormSearchManga from './FormSearchManga';
 import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable/ModelTable';
 import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
@@ -48,6 +49,10 @@ export default function Manga({auth, mangas, manga, action}) {
         setMangasItems(sortedMangas);
     }
 
+    const updateFoundMangasItems = (foundMangas) => {
+        setMangasItems(foundMangas);
+    }
+
     const handleDestroyManga = (id) => {
         let newMangasItems = mangasItems.filter(item => item.id != id);
         setMangasItems(newMangasItems);
@@ -91,6 +96,11 @@ export default function Manga({auth, mangas, manga, action}) {
                             model="mangas"
                             columns={['title', 'status', 'created_at']}
                             updateTableItems={updateSortedMangasItems}
+                        />
+
+                        <FormSearchManga
+                            model="mangas"
+                            updateTableItems={updateFoundMangasItems}
                         />
                     </TableControls>
 

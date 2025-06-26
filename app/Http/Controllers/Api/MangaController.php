@@ -70,4 +70,40 @@ class MangaController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function search(Request $request)
+    {
+        try {
+            $query = Manga::query();
+
+            if ($request->has('title') && !empty($request->input('title'))) {
+                $title = $request->input('title');
+                $query->where('title', 'like', '%' . $title . '%');
+            }
+
+            if ($request->has('genre') && !empty($request->input('genre'))) {
+                $genre = $request->input('genre');
+                $query->where('genre', 'like', '%' . $genre . '%');
+            }
+
+            if ($request->has('creators') && !empty($request->input('creators'))) {
+                $creators = $request->input('creators');
+                $query->where('creators', 'like', '%' . $creators . '%');
+            }
+
+            if ($request->has('status_id') && !empty($request->input('status_id'))) {
+                $statusId = $request->input('status_id');
+                $query->where('status_id', $statusId);
+            }
+
+            $mangas = $query->get();
+
+            return response()->json([
+                'error' => false,
+                'data' => $mangas,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
+    }
 }
