@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'web', 'auth:sanctum']],function () {
 
     Route::patch('/series', [App\Http\Controllers\Api\SeriesController::class, 'update'])->name('api.series.update');
     Route::get('/series/sort', [App\Http\Controllers\Api\SeriesController::class, 'sort'])->name('api.series.sort');
+    Route::get('/series/search', [App\Http\Controllers\Api\SeriesController::class, 'search'])->name('api.series.search');
 
     Route::patch('/mangas', [App\Http\Controllers\Api\MangaController::class, 'update'])->name('api.mangas.update');
     Route::get('/mangas/sort', [App\Http\Controllers\Api\MangaController::class, 'sort'])->name('api.mangas.sort');

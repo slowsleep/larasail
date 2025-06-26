@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import FormNewSeries from './FormNewSeries';
 import RowSeries from './RowSeries';
+import FormSearchSeries from './FormSearchSeries';
 import { useEffect, useRef, useState } from 'react';
 import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable/ModelTable';
@@ -46,6 +47,10 @@ export default function Series({ auth, series, singleSeries, action }) {
         setSeriesItems(sortedSeries);
     }
 
+    const updateFoundSeriesItems = (foundSeries) => {
+        setSeriesItems(foundSeries);
+    }
+
     const handleDestroySeries = (id) => {
         let newSeriesItems = seriesItems.filter(item => item.id != id);
         setSeriesItems(newSeriesItems);
@@ -87,6 +92,11 @@ export default function Series({ auth, series, singleSeries, action }) {
                                 model="series"
                                 columns={['title', 'status', 'created_at']}
                                 updateTableItems={updateSortedSeriesItems}
+                            />
+
+                            <FormSearchSeries
+                                model="series"
+                                updateTableItems={updateFoundSeriesItems}
                             />
                         </TableControls>
 
