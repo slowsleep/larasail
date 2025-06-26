@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewCartoon from './FormNewCartoon';
 import RowCartoon from './RowCartoon';
+import FormSearchCartoons from './FormSearchCartoons';
 import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable/ModelTable';
 import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
@@ -47,6 +48,10 @@ export default function Cartoons({auth, cartoons, cartoon, action}) {
         setCartoonsItems(sortedCartoons);
     }
 
+    const updateFoundCartoonsItems = (foundCartoons) => {
+        setCartoonsItems(foundCartoons);
+    }
+
     const handleDestroyCartoon = (id) => {
         let newCartoonsItems = cartoonsItems.filter(item => item.id != id);
         setCartoonsItems(newCartoonsItems);
@@ -89,6 +94,11 @@ export default function Cartoons({auth, cartoons, cartoon, action}) {
                             model="cartoons"
                             columns={['title', 'status', 'created_at']}
                             updateTableItems={updateSortedCartoonsItems}
+                        />
+
+                        <FormSearchCartoons
+                            model="cartoons"
+                            updateTableItems={updateFoundCartoonsItems}
                         />
                     </TableControls>
 
