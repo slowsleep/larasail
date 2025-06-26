@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import FormNewGame from './FormNewGame';
 import RowGame from './RowGame';
+import FormSearchGames from './FormSearchGames';
 import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable/ModelTable';
 import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
@@ -47,6 +48,10 @@ export default function Games({auth, games, game, action}) {
         setGamesItems(sortedGames);
     }
 
+    const updateFoundGamesItems = (foundGames) => {
+        setGamesItems(foundGames);
+    }
+
     const handleDestroyGame = (id) => {
         let newGamesItems = gamesItems.filter(item => item.id != id);
         setGamesItems(newGamesItems);
@@ -89,6 +94,11 @@ export default function Games({auth, games, game, action}) {
                                 model="games"
                                 columns={['title', 'status', 'created_at']}
                                 updateTableItems={updateSortedGamesItems}
+                            />
+
+                            <FormSearchGames
+                                model="games"
+                                updateTableItems={updateFoundGamesItems}
                             />
                         </TableControls>
 
