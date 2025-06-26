@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth', 'web', 'auth:sanctum']],function () {
 
     Route::patch('/movies', [App\Http\Controllers\Api\MovieController::class, 'update'])->name('api.movies.update');
     Route::get('/movies/sort', [App\Http\Controllers\Api\MovieController::class, 'sort'])->name('api.movies.sort');
+    Route::get('/movies/search', [App\Http\Controllers\Api\MovieController::class, 'search'])->name('api.movies.search');
 
     Route::patch('/series', [App\Http\Controllers\Api\SeriesController::class, 'update'])->name('api.series.update');
     Route::get('/series/sort', [App\Http\Controllers\Api\SeriesController::class, 'sort'])->name('api.series.sort');

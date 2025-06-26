@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import RowMovie from './RowMovie';
 import FormNewMovie from './FormNewMovie';
+import FormSearchMovies from './FormSearchMovies';
 import ShowingTableCol from '@/Components/ModelTable/ShowingTableCol';
 import ModelTable from '@/Components/ModelTable/ModelTable';
 import ModelTableSorting from '@/Components/ModelTable/ModelTableSorting';
@@ -45,6 +46,10 @@ export default function Movies({ auth, movies, movie, action }) {
         setMoviesItems(sortedMovies);
     }
 
+    const updateFoundMoviesItems = (foundMovies) => {
+        setMoviesItems(foundMovies);
+    }
+
     const handleDestroyMovie = (id) => {
         let newMoviesItems = moviesItems.filter(item => item.id != id);
         setMoviesItems(newMoviesItems);
@@ -85,6 +90,11 @@ export default function Movies({ auth, movies, movie, action }) {
                                 model="movies"
                                 columns={['title', 'status', 'created_at']}
                                 updateTableItems={updateSortedMoviesItems}
+                            />
+
+                            <FormSearchMovies
+                                model="movies"
+                                updateTableItems={updateFoundMoviesItems}
                             />
                         </TableControls>
 

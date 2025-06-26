@@ -68,4 +68,32 @@ class MovieController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function search(Request $request)
+    {
+        try {
+            $query = Movie::query();
+
+            if ($request->has('title') && !empty($request->input('title'))) {
+                $title = $request->input('title');
+                $query->where('title', 'like', '%' . $title . '%');
+            }
+
+            if ($request->has('year') && !empty($request->input('year'))) {
+                $year = $request->input('year');
+                $query->where('year', $year);
+            }
+
+            if ($request->has('status_id') && !empty($request->input('status_id'))) {
+                $statusId = $request->input('status_id');
+                $query->where('status_id', $statusId);
+            }
+
+            $movies = $query->get();
+
+            return response()->json(['error' => false, 'data' => $movies]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], status: 500);
+        }
+    }
 }
