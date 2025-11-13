@@ -28,6 +28,7 @@ class MovieController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'year' => 'integer|nullable|min:1',
+            'genre' => 'string|nullable|max:255',
             'comment' => 'string|nullable|max:255',
             'status_id' => 'required|integer|min:1|max:4',
         ]);
@@ -36,6 +37,7 @@ class MovieController extends Controller
             'user_id' => Auth::user()->id,
             'title' => $request->title,
             'year' => $request->year,
+            'genre' => $request->genre,
             'comment' => $request->comment,
             'status_id' => $request->status_id,
         ]);

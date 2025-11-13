@@ -12,6 +12,7 @@ export default function FormNewMovie ({ className, id, data, setData, post }) {
                 setData({
                     title: '',
                     year: '',
+                    genre: '',
                     comment: '',
                     status_id: 1,
                 });
@@ -37,6 +38,15 @@ export default function FormNewMovie ({ className, id, data, setData, post }) {
             value: data.year,
             min: 1,
             onChange: (e) => setData('year', e.target.value)
+        },
+        {
+            label: "Жанр",
+            type: "text",
+            name: "genre",
+            value: data.genre,
+            maxLength: "255",
+            title: "Максимальная длина 255 символов",
+            onChange: (e) => setData('genre', e.target.value)
         },
         {
             label: "Комментарий",

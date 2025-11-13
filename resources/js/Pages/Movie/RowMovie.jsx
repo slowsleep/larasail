@@ -20,6 +20,7 @@ export default function RowMovie ({movie, onDelete}) {
         id: movie.id,
         title: movie.title,
         year: movie.year,
+        genre: movie.genre,
         comment: movie.comment,
         status_id: movie.status_id,
     });
@@ -105,6 +106,14 @@ export default function RowMovie ({movie, onDelete}) {
                 }
             },
             error: yearError,
+        },
+        {
+            value: data.genre ? data.genre : "",
+            type: "text",
+            name: "genre",
+            maxLength: "255",
+            title: "Максимальная длина 255 символов",
+            onChange: (e) => setData('genre', e.target.value),
         },
         {
             value: data.comment ? data.comment : "",

@@ -21,6 +21,7 @@ class MovieController extends Controller
                 'id' => 'required|integer',
                 'title' => 'required|string|max:255',
                 'year' => 'integer|nullable|min:1',
+                'genre' => 'string|nullable|max:255',
                 'comment' => 'string|nullable|max:255',
                 'status_id' => 'required|integer|min:1|max:4',
             ]);
@@ -82,6 +83,11 @@ class MovieController extends Controller
             if ($request->has('year') && !empty($request->input('year'))) {
                 $year = $request->input('year');
                 $query->where('year', $year);
+            }
+
+            if ($request->has('genre') && !empty($request->input('genre'))) {
+                $genre = $request->input('genre');
+                $query->where('genre', 'like', '%' . $genre . '%');
             }
 
             if ($request->has('status_id') && !empty($request->input('status_id'))) {

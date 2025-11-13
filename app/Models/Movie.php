@@ -13,6 +13,7 @@ class Movie extends Model
         'user_id',
         'title',
         'year',
+        'genre',
         'comment',
         'status_id',
     ];

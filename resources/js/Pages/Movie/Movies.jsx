@@ -15,6 +15,7 @@ export default function Movies({ auth, movies, movie, action }) {
     const { data, setData, post } = useForm({
         title: '',
         year: '',
+        genre: '',
         comment: '',
         status_id: 1,
     });
@@ -80,8 +81,9 @@ export default function Movies({ auth, movies, movie, action }) {
                                 model="movies"
                                 columns={[
                                     {label: 'year', column: 1},
-                                    {label: 'comment', column: 2},
-                                    {label: 'status_id', column: 3},
+                                    {label: 'genre', column: 2},
+                                    {label: 'comment', column: 3},
+                                    {label: 'status_id', column: 4},
                                 ]}
                                 tableRef={tableRef}
                             />
@@ -101,7 +103,7 @@ export default function Movies({ auth, movies, movie, action }) {
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="movies"
-                                columns={['title', 'year', 'comment', 'status']}
+                                columns={['title', 'year', 'genre', 'comment', 'status']}
                                 ref={tableRef}
                             >
                                 {moviesItems.map((movie) => (
