@@ -12,6 +12,8 @@ class Series extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'year',
+        'genre',
         'season',
         'episode',
         'comment',

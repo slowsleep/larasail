@@ -21,6 +21,8 @@ class SeriesController extends Controller
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer',
                 'title' => 'required|string|max:255',
+                'year' => 'integer|nullable|min:1|max:9999',
+                'genre' => 'string|nullable|max:255',
                 'season' => 'integer|min:1',
                 'episode' => 'integer|min:0',
                 'comment' => 'string|nullable|max:255',
@@ -76,9 +78,19 @@ class SeriesController extends Controller
         try {
             $query = Series::query();
 
-            if ($request->has('title') && strlen($request->input('title')) > 0) {
+            if ($request->filled('title')) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
+            }
+
+            if ($request->has('year') && !empty($request->input('year'))) {
+                $year = $request->input('year');
+                $query->where('year', $year);
+            }
+
+            if ($request->filled('genre')) {
+                $genre = $request->input('genre');
+                $query->where('genre', 'like', '%' . $genre . '%');
             }
 
             if ($request->has('status_id') && !empty($request->input('status_id'))) {

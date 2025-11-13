@@ -24,6 +24,8 @@ class SeriesController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'year' => 'integer|nullable|min:1|max:9999',
+            'genre' => 'string|nullable|max:255',
             'season' => 'integer|min:1',
             'episode' => 'integer|min:0',
             'comment' => 'string|nullable|max:255',
@@ -33,6 +35,8 @@ class SeriesController extends Controller
         $singleSeries = Series::create([
             'user_id' => Auth::user()->id,
             'title' => $request->title,
+            'year' => $request->year,
+            'genre' => $request->genre,
             'season' => $request->season,
             'episode' => $request->episode,
             'comment' => $request->comment,

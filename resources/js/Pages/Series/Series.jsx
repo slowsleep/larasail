@@ -14,6 +14,8 @@ export default function Series({ auth, series, singleSeries, action }) {
 
     const { data, setData, post } = useForm({
         title: '',
+        year: '',
+        genre: '',
         season: 1,
         episode: 0,
         comment: '',
@@ -82,8 +84,10 @@ export default function Series({ auth, series, singleSeries, action }) {
                                 columns={[
                                     {label: 'season', column: 1},
                                     {label: 'episode', column: 2},
-                                    {label: 'comment', column: 3},
-                                    {label: 'status_id', column: 4},
+                                    {label: 'year', column: 3},
+                                    {label: 'genre', column: 4},
+                                    {label: 'comment', column: 5},
+                                    {label: 'status_id', column: 6},
                                 ]}
                                 tableRef={tableRef}
                             />
@@ -103,7 +107,7 @@ export default function Series({ auth, series, singleSeries, action }) {
                         <div className="overflow-x-auto">
                             <ModelTable
                                 model="series"
-                                columns={["title", "season", "episode", "comment", "status"]}
+                                columns={["title", "season", "episode", "year", "genre", "comment", "status"]}
                                 ref={tableRef}
                             >
                                 {seriesItems.map((singleSeries) => (

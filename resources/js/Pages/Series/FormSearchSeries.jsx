@@ -5,6 +5,8 @@ import { STATUSES } from '@/constants.js';
 export default function FormSearchSeries({ model, updateTableItems }) {
     const { data, setData } = useForm({
         title: '',
+        year: '',
+        genre: '',
         status_id: '',
     });
 
@@ -17,6 +19,24 @@ export default function FormSearchSeries({ model, updateTableItems }) {
             maxLength: "255",
             title: "Максимальная длина 255 символов",
             onChange:(e) => setData('title', e.target.value),
+            className: "w-full",
+        },
+        {
+            label: "Год",
+            type: "number",
+            name: "year",
+            value: data.year,
+            min: 1,
+            onChange: (e) => setData('year', e.target.value),
+        },
+        {
+            label: "Жанр",
+            type: "text",
+            name: "genre",
+            value: data.genre,
+            maxLength: "255",
+            title: "Максимальная длина 255 символов",
+            onChange: (e) => setData('genre', e.target.value),
             className: "w-full",
         },
         {

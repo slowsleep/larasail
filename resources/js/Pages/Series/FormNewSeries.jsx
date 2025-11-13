@@ -10,6 +10,8 @@ export default function FormNewSeries({ className, id, data, setData, post }) {
             onSuccess: () => {
                 setData({
                     title: '',
+                    genre: '',
+                    year: '',
                     season: 1,
                     episode: 0,
                     comment: '',
@@ -47,6 +49,23 @@ export default function FormNewSeries({ className, id, data, setData, post }) {
             value: data.episode,
             min: 0,
             onChange: (e) => setData('episode', e.target.value)
+        },
+        {
+            label: "Год",
+            type: "number",
+            name: "year",
+            value: data.year,
+            min: 1,
+            onChange: (e) => setData('year', e.target.value)
+        },
+        {
+            label: "Жанр",
+            type: "text",
+            name: "genre",
+            value: data.genre,
+            maxLength: "255",
+            title: "Максимальная длина 255 символов",
+            onChange: (e) => setData('genre', e.target.value)
         },
         {
             label: "Комментарий",

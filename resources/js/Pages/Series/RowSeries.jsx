@@ -22,6 +22,8 @@ export default function RowSeries({singleSeries, onDelete}) {
         title: singleSeries.title,
         season: singleSeries.season,
         episode: singleSeries.episode,
+        year: singleSeries.year,
+        genre: singleSeries.genre,
         comment: singleSeries.comment,
         status_id: singleSeries.status_id,
     });
@@ -151,6 +153,21 @@ export default function RowSeries({singleSeries, onDelete}) {
             error: episodeError,
             onIncrement: episodeIncrement,
             onDecrement: episodeDecrement,
+        },
+        {
+            value: data.year ? data.year : "",
+            type: "number",
+            name: "year",
+            min: 1,
+            onChange: (e) => setData('year', e.target.value),
+        },
+        {
+            value: data.genre ? data.genre : "",
+            type: "text",
+            name: "genre",
+            maxLength: "255",
+            title: "Максимальная длина 255 символов",
+            onChange: (e) => setData('genre', e.target.value),
         },
         {
             value: data.comment ? data.comment : "",
