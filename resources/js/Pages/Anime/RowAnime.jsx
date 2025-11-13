@@ -22,6 +22,7 @@ export default function RowAnime({anime, onDelete}) {
         title: anime.title,
         season: anime.season,
         episode: anime.episode,
+        year: anime.year,
         genre: anime.genre,
         publisher: anime.publisher,
         translator: anime.translator,
@@ -154,6 +155,13 @@ export default function RowAnime({anime, onDelete}) {
             error: episodeError,
             onIncrement: episodeIncrement,
             onDecrement: episodeDecrement,
+        },
+        {
+            value: data.year ? data.year : "",
+            type: "number",
+            name: "year",
+            min: 1,
+            onChange: (e) => setData('year', e.target.value),
         },
         {
             value: data.genre ? data.genre : "",

@@ -14,6 +14,7 @@ class Anime extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'year',
         'season',
         'episode',
         'genre',

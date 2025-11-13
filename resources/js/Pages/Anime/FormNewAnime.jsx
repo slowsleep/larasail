@@ -12,6 +12,7 @@ export default function FormNewAnime({ className, id, data, setData, post }) {
                     title: '',
                     season: 1,
                     episode: 0,
+                    year: '',
                     genre: '',
                     publisher: '',
                     translator: '',
@@ -50,6 +51,15 @@ export default function FormNewAnime({ className, id, data, setData, post }) {
             value: data.episode,
             min: 0,
             onChange: (e) => setData('episode', e.target.value)
+        },
+        {
+            label: "Год",
+            type: "number",
+            name: "year",
+            value: data.year,
+            min: 1900,
+            max: new Date().getFullYear() + 15,
+            onChange: (e) => setData('year', e.target.value)
         },
         {
             label: "Жанр",

@@ -20,6 +20,7 @@ class AnimeController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'year' => 'integer|nullable|min:1900|max:' . strval((intval(date('Y'))) + 15),
             'season' => 'required|integer|min:1',
             'episode' => 'required|integer|min:0',
             'genre' => 'string|nullable|max:255',
@@ -32,6 +33,7 @@ class AnimeController extends Controller
         $anime = Anime::create([
             'user_id' => Auth::user()->id,
             'title' => $request->title,
+            'year' => $request->year,
             'season' => $request->season,
             'episode' => $request->episode,
             'genre' => $request->genre,

@@ -19,6 +19,7 @@ class AnimeController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'title' => 'required|string|max:255',
+                'year' => 'integer|nullable|min:1900|max:' . strval((intval(date('Y'))) + 15),
                 'season' => 'required|integer|min:1',
                 'episode' => 'required|integer|min:0',
                 'genre' => 'string|nullable|max:255',
@@ -86,11 +87,10 @@ class AnimeController extends Controller
                 $query->where('genre', 'like', '%' . $genre . '%');
             }
 
-            // TODO: add year column to anime table and uncomment the following lines
-            // if ($request->has('year') && !empty($request->input('year'))) {
-            //     $year = $request->input('year');
-            //     $query->where('year', $year);
-            // }
+            if ($request->has('year') && !empty($request->input('year'))) {
+                $year = $request->input('year');
+                $query->where('year', $year);
+            }
 
             if ($request->has('publisher') && !empty($request->input('publisher'))) {
                 $publisher = $request->input('publisher');

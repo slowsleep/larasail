@@ -5,8 +5,8 @@ import { STATUSES } from '@/constants.js';
 export default function FormSearchAnime({ model, updateTableItems }) {
     const { data, setData } = useForm({
         title: '',
+        year: '',
         genre: '',
-        // year: '',
         publisher: '',
         status_id: '',
     });
@@ -22,6 +22,14 @@ export default function FormSearchAnime({ model, updateTableItems }) {
             onChange:(e) => setData('title', e.target.value)
         },
         {
+            label: "Год",
+            type: "number",
+            name: "year",
+            value: data.year,
+            min: 1,
+            onChange: (e) => setData('year', e.target.value),
+        },
+        {
             label: "Жанр",
             type: "text",
             name: "genre",
@@ -31,15 +39,6 @@ export default function FormSearchAnime({ model, updateTableItems }) {
             onChange: (e) => setData('genre', e.target.value),
             className: "w-full"
         },
-        // TODO: Uncomment when year column will be added to the anime table
-        // {
-        //     label: "Год",
-        //     type: "number",
-        //     name: "year",
-        //     value: data.year,
-        //     min: 1,
-        //     onChange: (e) => setData('year', e.target.value),
-        // },
         {
             label: "Издатель",
             type: "text",

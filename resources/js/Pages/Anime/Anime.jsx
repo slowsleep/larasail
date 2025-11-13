@@ -19,6 +19,7 @@ export default function Anime({auth, animeList, anime, action}) {
         title: '',
         season: 1,
         episode: 0,
+        year: '',
         genre: '',
         publisher: '',
         translator: '',
@@ -87,11 +88,12 @@ export default function Anime({auth, animeList, anime, action}) {
                             columns={[
                                 {label: 'season', column: 1},
                                 {label: 'episode', column: 2},
-                                {label: 'genre', column: 3},
-                                {label: 'publisher', column: 4},
-                                {label: 'translator', column: 5},
-                                {label: 'comment', column: 6},
-                                {label: 'status_id', column: 7}
+                                {label: 'year', column: 3},
+                                {label: 'genre', column: 4},
+                                {label: 'publisher', column: 5},
+                                {label: 'translator', column: 6},
+                                {label: 'comment', column: 7},
+                                {label: 'status_id', column: 8}
                             ]}
                             tableRef={tableRef}
                         />
@@ -112,7 +114,7 @@ export default function Anime({auth, animeList, anime, action}) {
 
                         <ModelTable
                             model="anime"
-                            columns={["title", "season", "episode", "genre", "publisher", "translator", "comment", "status"]}
+                            columns={["title", "season", "episode", "year", "genre", "publisher", "translator", "comment", "status"]}
                             ref={tableRef}
                             id="animeTable"
                         >
