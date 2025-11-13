@@ -76,13 +76,13 @@ class CartoonController extends Controller
         try {
             $query = Cartoon::query();
 
-            if ($request->has('title') && !empty($request->input('title'))) {
+            if ($request->has('title') && strlen($request->input('title')) > 0) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
             }
 
 
-            if ($request->has('genre') && !empty($request->input('genre'))) {
+            if ($request->has('genre') && strlen($request->input('genre')) > 0) {
                 $genre = $request->input('genre');
                 $query->where('genre', 'like', '%' . $genre . '%');
             }
@@ -92,7 +92,7 @@ class CartoonController extends Controller
                 $query->where('year', $year);
             }
 
-            if ($request->has('publisher') && !empty($request->input('publisher'))) {
+            if ($request->has('publisher') && strlen($request->input('publisher')) > 0) {
                 $publisher = $request->input('publisher');
                 $query->where('publisher', 'like', '%' . $publisher. '%');
             }

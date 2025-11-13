@@ -9,6 +9,7 @@ use App\Models\Series;
 use App\Http\Controllers\ActivityLogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 class SeriesController extends Controller
 {
@@ -75,7 +76,7 @@ class SeriesController extends Controller
         try {
             $query = Series::query();
 
-            if ($request->has('title') && !empty($request->input('title'))) {
+            if ($request->has('title') && strlen($request->input('title')) > 0) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
             }

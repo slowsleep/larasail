@@ -76,22 +76,22 @@ class GameController extends Controller
         try {
             $query = Game::query();
 
-            if ($request->has('title') && !empty($request->input('title'))) {
+            if ($request->has('title') && strlen($request->input('title')) > 0) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
             }
 
-            if ($request->has('genre') && !empty($request->input('genre'))) {
+            if ($request->has('genre') && strlen($request->input('genre')) > 0) {
                 $genre = $request->input('genre');
                 $query->where('genre', 'like', '%' . $genre . '%');
             }
 
-            if ($request->has('developer') && !empty($request->input('developer'))) {
+            if ($request->has('developer') && strlen($request->input('developer')) > 0) {
                 $developer = $request->input('developer');
                 $query->where('developer', 'like', '%' . $developer . '%');
             }
 
-            if ($request->has('publisher') && !empty($request->input('publisher'))) {
+            if ($request->has('publisher') && strlen($request->input('publisher')) > 0) {
                 $publisher = $request->input('publisher');
                 $query->where('publisher', 'like', '%' . $publisher . '%');
             }
