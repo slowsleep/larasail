@@ -75,7 +75,7 @@ class MovieController extends Controller
         try {
             $query = Movie::query();
 
-            if ($request->has('title') && strlen($request->input('title')) > 0) {
+            if ($request->filled('title')) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
             }
@@ -85,7 +85,7 @@ class MovieController extends Controller
                 $query->where('year', $year);
             }
 
-            if ($request->has('genre') && strlen($request->input('genre')) > 0) {
+            if ($request->filled('genre')) {
                 $genre = $request->input('genre');
                 $query->where('genre', 'like', '%' . $genre . '%');
             }

@@ -76,17 +76,17 @@ class MangaController extends Controller
         try {
             $query = Manga::query();
 
-            if ($request->has('title') && strlen($request->input('title')) > 0) {
+            if ($request->filled('title')) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
             }
 
-            if ($request->has('genre') && strlen($request->input('genre')) > 0) {
+            if ($request->filled('genre')) {
                 $genre = $request->input('genre');
                 $query->where('genre', 'like', '%' . $genre . '%');
             }
 
-            if ($request->has('creators') && strlen($request->input('creators')) > 0) {
+            if ($request->filled('creators')) {
                 $creators = $request->input('creators');
                 $query->where('creators', 'like', '%' . $creators . '%');
             }

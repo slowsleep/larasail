@@ -78,12 +78,12 @@ class AnimatedSeriesController extends Controller
         try {
             $query = AnimatedSeries::query();
 
-            if ($request->has('title') && strlen($request->input('title')) > 0) {
+            if ($request->filled('title')) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
             }
 
-            if ($request->has('genre') && strlen($request->input('genre')) > 0) {
+            if ($request->filled('genre')) {
                 $genre = $request->input('genre');
                 $query->where('genre', 'like', '%' . $genre . '%');
             }
@@ -93,7 +93,7 @@ class AnimatedSeriesController extends Controller
                 $query->where('year', $year);
             }
 
-            if ($request->has('publisher') && strlen($request->input('publisher')) > 0) {
+            if ($request->filled('publisher')) {
                 $publisher = $request->input('publisher');
                 $query->where('publisher', 'like', '%' . $publisher . '%');
             }

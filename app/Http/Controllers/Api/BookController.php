@@ -77,22 +77,22 @@ class BookController extends Controller
         try {
             $query = Book::query();
 
-            if ($request->has('title') && strlen($request->input('title')) > 0) {
+            if ($request->filled('title')) {
                 $title = $request->input('title');
                 $query->where('title', 'like', '%' . $title . '%');
             }
 
-            if ($request->has('author') && strlen($request->input('author')) > 0) {
+            if ($request->filled('author')) {
                 $author = $request->input('author');
                 $query->where('author', 'like', '%' . $author . '%');
             }
 
-            if ($request->has('genre') && strlen($request->input('genre')) > 0) {
+            if ($request->filled('genre')) {
                 $genre = $request->input('genre');
                 $query->where('genre', 'like', '%' . $genre . '%');
             }
 
-            if ($request->has('publisher') && strlen($request->input('publisher')) > 0) {
+            if ($request->filled('publisher')) {
                 $publisher = $request->input('publisher');
                 $query->where('publisher', 'like', '%' . $publisher . '%');
             }
